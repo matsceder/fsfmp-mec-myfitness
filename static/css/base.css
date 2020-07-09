@@ -1,0 +1,115 @@
+/* - Gå över all CSS och se att allt behövs
+
+
+Reoccuring css values
+
+colors:
+
+RED - #E63946
+BLACK - #232323 
+GRAY - #8A8A8A
+WHITE - #FFFFFF
+
+font:
+'Roboto', sans-serif;
+
+*/
+
+html {
+    height: 100%;
+}
+
+body {
+    background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center fixed; /* sätt som en egen media query med align left på mindre skärmar? */
+    background-size: cover;
+    height: calc(100vh - 120px);
+    color: #232323;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* From Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1,5rem;
+    width: 1,5rem;
+}
+
+.logo-font {
+    /* från index - ta bort om inte används */
+}
+
+.main-logo-link {
+    width: fit-content;
+}
+
+.index-link {
+    /* från index - ta bort om inte används */
+}
+
+.btn-red {
+    background: #E63946;
+    color: #FFFFFF;
+}
+
+.btn-black {
+    background: #232323;
+    color: #FFFFFF;
+}
+
+.btn-red:active,
+.btn-red:focus,
+.btn-red:hover {
+    background: #E63946;
+    color: #FFFFFF;
+}
+
+.btn-black:active,
+.btn-black:focus,
+.btn-black:hover {
+    background: #404040;
+    color: #FFFFFF;
+}
+
+.text-black {
+    color: #232323 !important;
+}
+
+.text-red {
+    color: #E63946 !important;/* ta bort om inte används */
+}
+
+.border-black {
+    border: 1px solid #232323 !important;
+}
+
+.border-red {
+    border: 1px solid #E63946 !important;/* ta bort om inte används */
+}
+
+/*  --------  Media Queries  --------  */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 80%;/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
+  }
+}
+
+/* fixed top navbar - medium and up */
+@media (min-width: 768px) {
+    .fixed-top-desktop-only {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+
+    .header-container {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
+        padding-top: 164px;
+    }
+}
+
+
