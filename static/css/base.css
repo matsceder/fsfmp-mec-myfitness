@@ -20,11 +20,26 @@ html {
 }
 
 body {
-    background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center fixed; /* sätt som en egen media query med align left på mindre skärmar? */
-    background-size: cover;
-    height: calc(100vh - 120px);
     color: #232323;
     font-family: 'Roboto', sans-serif;
+    display: block;
+    position: relative;
+    height: calc(100vh - 102px);
+}
+
+/* From CSS-tricks */
+body::after {
+    content: "";
+    background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; /* sätt som en egen media query med align left på mindre skärmar? */
+    background-size: cover;
+    height: 100vh;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;   
 }
 
 /* From Bulma */
@@ -34,6 +49,20 @@ body {
     justify-content: center;
     height: 1,5rem;
     width: 1,5rem;
+}
+
+#topnav {
+    height: 72px;
+    background-color: #E63946;
+}
+
+#navbar-large {
+    height: 30px;
+    background-color: #E63946;
+}
+
+#navbar-large > div > a {
+    font-size: 0.9rem;
 }
 
 .logo-font {
@@ -58,6 +87,11 @@ body {
     color: #FFFFFF;
 }
 
+.btn-wht {
+    background: #FFFFFF;
+    color: #232323;
+}
+
 .btn-red:active,
 .btn-red:focus,
 .btn-red:hover {
@@ -70,6 +104,13 @@ body {
 .btn-black:hover {
     background: #404040;
     color: #FFFFFF;
+}
+
+.btn-wht:active,
+.btn-wht:focus,
+.btn-wht:hover {
+    background: #FFFFFF;
+    color: #232323;
 }
 
 .text-black {
@@ -108,8 +149,12 @@ body {
     }
 
     .header-container {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
-        padding-top: 164px;
+        padding-top: 102px;
     }
 }
 
+/* home/index template */
 
+.black-box {
+    background-color: rgba(0, 0, 0, 0.5);
+}

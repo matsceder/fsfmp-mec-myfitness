@@ -41,44 +41,46 @@
     </head>
     <body>
         <header class="container-fluid fixed-top">
-            <div id="topnav" class="row">
-                <div class="col-12 my-auto">
-                    <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <h2 class="logo-font">MyFitness</h2>
+            <div id="topnav" class="row pt-3">
+                <div class="col-12 col-md-4 my-auto">
+                    <a href="{% url 'home' %}" class="nav-link main-logo-link text-white">
+                        <h2 class="logo-font my-auto">MyFitness</h2>
                     </a>
                 </div>
-                <div class="col-12 my-auto">
+                <div class="col-12 pb-1 col-md-4 my-auto">
                     <form method="GET" action="">
                         <div class="input-group w-100">
-                            <input class="form-control border border-red rounded-0" type="text" name="q" placeholder="Search our site">
+                            <input class="form-control border border-white rounded-0" type="text" name="q" placeholder="Search our products">
                             <div class="input-group-append">
-                                <button class="form-control btn btn-red" type="submit">
+                                <button class="form-control border-white rounded-0 btn btn-wht " type="submit">
                                     <span class="icon">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fas fa-search text-red"></i>
                                     </span>
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-12 my-auto">
-                    <ul class="list-inline list-unstyled text-center">
-                        <li class="list-inline-item">
+                <div class="col-12 col-md-4 my-auto">
+                    <ul class="list-inline list-unstyled text-right align-middle my-auto">
+                        <li class="list-inline-item align-middle text-left">
                             <div class="border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
+                                    <a href="{% url 'add_product' %}" class="text-white">Product Management</a>
                                 {% endif %}
-                                <a href="{% url 'profile' %}" class="dropdown-item">Account settings</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                <a href="{% url 'profile' %}" class="text-white">Account settings</a>
+                                <br>
+                                <a href="{% url 'account_logout' %}" class="text-white">Logout</a>
                             {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                <a href="{% url 'account_signup' %}" class="text-white">Sign Up</a>
+                                <br>
+                                <a href="{% url 'account_login' %}" class="text-white">Login</a>
                             {% endif %}
                         </div>
                         </li>
-                        <li class="list-inline-item">
-                            <a class="nav-link" href="">
+                        <li class="list-inline-item align-middle">
+                            <a class="nav-link text-white" href="">
                                 <div class="text-center">
                                     <div><i class="fas fa-shopping-cart fa-lg"></i></div>
                                     <p class="my-0">
@@ -92,6 +94,15 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div id="navbar-large" class="row d-none d-md-block">
+                <div class="col text-center">
+                    <a href="#" class="px-3 text-white">My Profile</a>
+                    <a href="#" class="px-3 text-white">Shop</a>
+                    <a href="#" class="px-3 text-white">Training</a>
+                    <a href="#" class="px-3 text-white">Nutrition</a>
+                    <a href="#" class="px-3 text-white">About</a>
                 </div>
             </div>
         </header>
