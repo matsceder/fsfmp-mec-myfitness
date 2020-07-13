@@ -24,7 +24,7 @@ body {
     font-family: 'Roboto', sans-serif;
     display: block;
     position: relative;
-    height: calc(100vh - 102px);
+    height: calc(100vh + 108px);
 }
 
 /* From CSS-tricks */
@@ -75,6 +75,27 @@ body::after {
 
 .index-link {
     /* från index - ta bort om inte används */
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+/*#bottom-nav {
+    height: 72px;
+    bottom: 0;
+    background-color: #232323;
+}*/
+
+#footer {
+    background-color: #232323;
+    height: 152px;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .btn-red {
@@ -151,10 +172,23 @@ body::after {
     .header-container {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
         padding-top: 102px;
     }
+
+    .footer-container {
+        padding-top: 144px;
+    }
 }
 
 /* home/index template */
 
+.container-index {
+    display: block;
+}
+
 .black-box {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#index-speakout {
+    font-weight: 700;
+    font-style: italic;
 }
