@@ -40,14 +40,14 @@
 
     </head>
     <body>
-        <header class="container-fluid fixed-top">
-            <div id="topnav" class="row pt-3">
-                <div class="col-12 col-md-4 my-auto">
+        <header class="container-fluid fixed-top px-0">
+            <div id="header-large" class="row pt-3 mx-1 d-none d-md-flex">
+                <div class="col-4 my-auto">
                     <a href="{% url 'home' %}" class="nav-link main-logo-link text-white">
                         <h2 class="logo-font my-auto">MyFitness</h2>
                     </a>
                 </div>
-                <div class="col-12 pb-1 col-md-4 my-auto">
+                <div class="col-4 pb-1 my-auto">
                     <form method="GET" action="">
                         <div class="input-group w-100">
                             <input class="form-control border border-white rounded-0" type="text" name="q" placeholder="Search our products">
@@ -61,26 +61,33 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-12 col-md-4 my-auto">
+                <div class="col-md-4 my-auto">
                     <ul class="list-inline list-unstyled text-right align-middle my-auto">
-                        <li class="list-inline-item align-middle text-left">
-                            <div class="border-0" aria-labelledby="user-options">
+                        <li class="list-inline-item align-middle m-0 px-1">
+
+                            <a class="text-white nav-link px-1" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center">
+                                    <div><i class="fas fa-user fa-lg"></i></div>
+                                    <p class="my-0">Account</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border border-white text-center rounded-0 p-1" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="{% url 'add_product' %}" class="text-white">Product Management</a>
+                                    <a href="{% url 'add_product' %}" class="text-black">Product Management</a>
                                 {% endif %}
-                                <a href="{% url 'profile' %}" class="text-white">Account settings</a>
+                                <a href="{% url 'profile' %}" class="text-black">Account</a>
                                 <br>
-                                <a href="{% url 'account_logout' %}" class="text-white">Logout</a>
+                                <a href="{% url 'account_logout' %}" class="text-black">Logout</a>
                             {% else %}
-                                <a href="{% url 'account_signup' %}" class="text-white">Sign Up</a>
+                                <a href="{% url 'account_signup' %}" class="text-black">Sign Up</a>
                                 <br>
-                                <a href="{% url 'account_login' %}" class="text-white">Login</a>
+                                <a href="{% url 'account_login' %}" class="text-black">Login</a>
                             {% endif %}
                         </div>
                         </li>
-                        <li class="list-inline-item align-middle">
-                            <a class="nav-link text-white" href="">
+                        <li class="list-inline-item align-middle px-1">
+                            <a class="nav-link text-white px-1" href="">
                                 <div class="text-center">
                                     <div><i class="fas fa-shopping-cart fa-lg"></i></div>
                                     <p class="my-0">
@@ -96,15 +103,103 @@
                     </ul>
                 </div>
             </div>
-            <div id="navbar-large" class="row d-none d-md-block">
-                <div class="col text-center">
-                    <a href="#" class="px-3 text-white">My Profile</a>
-                    <a href="#" class="px-3 text-white">Shop</a>
-                    <a href="#" class="px-3 text-white">Training</a>
-                    <a href="#" class="px-3 text-white">Nutrition</a>
-                    <a href="#" class="px-3 text-white">About</a>
+
+            <nav class="navbar navbar-expand p-0">
+
+                <div id="navbar-large" class="row d-none d-md-block mx-auto">
+                    <div class="col text-center">
+                        <a href="#" class="px-3 text-white">My Profile</a>
+                        <a href="#" class="px-3 text-white">Shop</a>
+                        <a href="#" class="px-3 text-white">Training</a>
+                        <a href="#" class="px-3 text-white">Nutrition</a>
+                        <a href="#" class="px-3 text-white">About</a>
+                    </div>
                 </div>
-            </div>
+
+                <div id="navbar-small-top" class="row d-md-none mx-auto">
+                    <div class="col mt-1 px-1 d-flex">
+                        <a href="{% url 'home' %}" id="main-logo-link-small" class="nav-link main-logo-link my-auto text-white">
+                            <h2 class="logo-font my-auto">MyFitness</h2>
+                        </a>
+
+                        <ul id="navbar-small-ul" class="navbar-nav">
+
+                            <li id="home-nav-icon" class="list-inline-item">
+                                <a href="{% url 'home' %}" class="text-white nav-link">
+                                    <div class="text-center">
+                                        <i class="fas fa-home fa-lg"></i>
+                                        <br>
+                                        <p class="my-0">Home</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a class="text-white nav-link" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="text-center">
+                                        <i class="fas fa-search fa-lg"></i>
+                                        <br>
+                                        <p class="my-0">Search</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu w-100 px-3 py-2 my-0 border-0 rounded-0" aria-labelledby="mobile-search">
+                                    <form method="GET" action="">
+                                        <div class="input-group w-100">
+                                            <input class="form-control border border-white rounded-0" type="text" name="q" placeholder="Search our products">
+                                            <div class="input-group-append">
+                                                <button class="form-control border-white rounded-0 btn btn-wht " type="submit">
+                                                    <span class="icon">
+                                                        <i class="fas fa-search text-red"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="text-center">
+                                        <div><i class="fas fa-user fa-lg"></i></div>
+                                        <p class="my-0">Account</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu w-100 p-1 my-0 border border-white rounded-0 text-center" aria-labelledby="user-options">
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_superuser %}
+                                            <a href="{% url 'account_logout' %}" class="dropdown-item my-1">Product Management</a>
+                                        {% endif %}
+                                        <a href="{% url 'profile' %}" class="dropdown-item my-1">Settings</a>
+                                        <a href="{% url 'account_logout' %}" class="dropdown-item my-1">Logout</a>
+                                    {% else %}
+                                        <a href="{% url 'account_signup' %}" class="dropdown-item my-1">Register</a>
+                                        <a href="{% url 'account_login' %}" class="dropdown-item my-1">Login</a>
+                                    {% endif %}
+                                </div>
+                            </li>
+
+
+                            <li class="list-inline-item">
+                                <a class="{% if grand_total %}font-weight-bold{% endif %} text-white nav-link" href="#">
+                                    <div class="text-center">
+                                        <div><i class="fas fa-shopping-cart fa-lg"></i></div>
+                                        <p class="my-0">
+                                            {% if grand_total %}
+                                                ${{ grand_total|floatformat:2 }}
+                                            {% else %}
+                                                $0.00
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </nav>
         </header>
 
 
@@ -118,64 +213,62 @@
         {% block content %}
         {% endblock %}
 
-        <div class="container footer-container">
-            <div class="row">
-                <div class="col"></div>
-            </div>
-        </div>
-
-        <footer class="container-fluid px-0 pt-auto">
-            <div id="bottom-nav" class="row d-md-none m-0">
-                <a href="#" class="col-3 text-white my-auto">
-                    <div class="text-center">
+        <div class="container d-md-none m-0">
+            <div id="navbar-small-bottom" class="row w-100">
+                <a href="#" class="col-3 text-white border border-dark">
+                    <div class="text-center my-2">
                         <span class="icon"><i class="fas fa-user-circle"></i></span>
                         <br>
                         <span>Profile</span>
                     </div>
                 </a>
-                <a href="#" class="col-3 text-white my-auto">
-                    <div class="text-center">
+                <a href="#" class="col-3 text-white border border-dark">
+                    <div class="text-center my-2">
                         <span class="icon"><i class="fas fa-store"></i></span>
                         <br>
                         <span>Shop</span>
                     </div>
                 </a>
-                <a href="#" class="col-3 text-white my-auto">
-                    <div class="text-center">
+                <a href="#" class="col-3 text-white border border-dark">
+                    <div class="text-center my-2">
                         <span class="icon"><i class="fas fa-dumbbell"></i></span>
                         <br>
                         <span>Training</span>
                     </div>
                 </a>
-                <a href="#" class="col-3 text-white my-auto">
-                    <div class="text-center">
+                <a href="#" class="col-3 text-white border border-dark">
+                    <div class="text-center my-2">
                         <span class="icon"><i class="fas fa-apple-alt"></i></span>
                         <br>
                         <span>Nutrition</span>
                     </div>
                 </a>
             </div>
-            <div id="footer" class="row m-0 p-2">
-                <div class="col-4 offset-1 text-white pl-4">
+        </div>
+
+        <footer class="container-fluid px-0 pt-auto">
+            <div class="row m-0 p-2">
+                <div class="d-none d-sm-block col-4 offset-1 text-white pl-4">
                     <p class="mb-2"><strong>About</strong></p>
                     <p class="m-0">
                         Short about page
                     </p>
                 </div>
-                <div class="col-2 text-white pl-4">
+                <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Support</strong></p>
+                    <p class="m-0 d-sm-none">About</p>
                     <p class="m-0">Contact</p>
                     <p class="m-0">FAQ</p>
                     <p class="m-0">Terms</p>
                 </div>
-                <div class="col-2 text-white pl-4">
+                <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Navigate</strong></p>
                     <p class="m-0">Profile</p>
                     <p class="m-0">Shop</p>
                     <p class="m-0">Training</p>
                     <p class="m-0">Nutrition</p>
                 </div>
-                <div class="col-2 text-white pl-4">
+                <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Social</strong></p>
                     <p class="m-0">Facebook</p>
                     <p class="m-0">Instagram</p>

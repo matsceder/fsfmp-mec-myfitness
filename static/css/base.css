@@ -24,7 +24,7 @@ body {
     font-family: 'Roboto', sans-serif;
     display: block;
     position: relative;
-    height: calc(100vh + 108px);
+    height: calc(100vh + 102px);
 }
 
 /* From CSS-tricks */
@@ -51,14 +51,20 @@ body::after {
     width: 1,5rem;
 }
 
-#topnav {
-    height: 72px;
+header {
     background-color: #E63946;
+}
+
+.header-container {
+    padding-top: 72px;
+}
+
+#header-large {
+    height: 72px;
 }
 
 #navbar-large {
     height: 30px;
-    background-color: #E63946;
 }
 
 #navbar-large > div > a {
@@ -77,25 +83,35 @@ body::after {
     /* från index - ta bort om inte används */
 }
 
+#home-nav-icon {
+    display: none;
+}
+
+#navbar-small-top {
+    width: 100vw;
+    height: 72px;
+}
+
+#navbar-small-ul {
+    margin-left: auto !important;
+}
+
+#navbar-small-bottom {
+    height: 66px;
+    bottom: -2px;
+    position: fixed;
+    z-index: 2000;
+    background-color: #232323;
+}
+
 footer {
-    position: absolute;
+    position: static;
+    height: 144px;
     width: 100%;
     left: 0;
     bottom: 0;
-}
-
-/*#bottom-nav {
-    height: 72px;
-    bottom: 0;
     background-color: #232323;
-}*/
-
-#footer {
-    background-color: #232323;
-    height: 152px;
-    bottom: 0;
-    width: 100%;
-    overflow: hidden;
+    margin-bottom: 64px;
 }
 
 .btn-red {
@@ -152,29 +168,66 @@ footer {
 
 /*  --------  Media Queries  --------  */
 
-/* Slightly larger container on xl screens */
+/* Larger container on xl screens */
 @media (min-width: 1200px) {
   .container {
-    max-width: 80%;/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
+    max-width: 80%;
   }
 }
 
-/* fixed top navbar - medium and up */
+/* Big tablets and desktop */
 @media (min-width: 768px) {
-    .fixed-top-desktop-only {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1030;
+
+    body {
+        color: #232323;
+        font-family: 'Roboto', sans-serif;
+        display: block;
+        position: relative;
+        height: calc(100vh + 108px);
     }
 
-    .header-container {/* ANPASSA EVENTUELLT FÖR EGET BEHOV! */
+    body::after {
+        content: "";
+        background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; /* sätt som en egen media query med align left på mindre skärmar? */
+        background-size: cover;
+        height: 100vh;
+        opacity: 0.8;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: fixed;
+        z-index: -1;   
+    }
+
+    .header-container {
         padding-top: 102px;
     }
 
-    .footer-container {
-        padding-top: 144px;
+    footer {
+        height: 152px;
+        margin-bottom: 0;
+        position: absolute;
+    }
+}
+
+/* Very small mobile devices */
+@media (max-width: 399.98px) {
+    #main-logo-link-small {
+        display: none;
+    }
+
+    #navbar-small-ul {
+        margin-right: auto !important;
+        width: 100vw;
+    }
+
+    #navbar-small-ul > li {
+        margin: 0 auto;
+    }
+
+    #home-nav-icon {
+        display: block;
     }
 }
 
