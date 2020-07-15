@@ -1,20 +1,3 @@
-/* - Gå över all CSS och se att allt behövs
-
-
-Reoccuring css values
-
-colors:
-
-RED - #E63946
-BLACK - #232323 
-GRAY - #8A8A8A
-WHITE - #FFFFFF
-
-font:
-'Roboto', sans-serif;
-
-*/
-
 html {
     height: 100%;
 }
@@ -24,7 +7,7 @@ body {
     font-family: 'Roboto', sans-serif;
     display: block;
     position: relative;
-    height: calc(100vh + 102px);
+    min-height: calc(100vh + 146px);
 }
 
 /* From CSS-tricks */
@@ -51,6 +34,7 @@ body::after {
     width: 1,5rem;
 }
 
+/* Header */
 header {
     background-color: #E63946;
 }
@@ -63,24 +47,17 @@ header {
     height: 72px;
 }
 
+.main-logo-link {
+    width: fit-content;
+}
+
+/* Navigation */
 #navbar-large {
     height: 30px;
 }
 
 #navbar-large > div > a {
     font-size: 0.9rem;
-}
-
-.logo-font {
-    /* från index - ta bort om inte används */
-}
-
-.main-logo-link {
-    width: fit-content;
-}
-
-.index-link {
-    /* från index - ta bort om inte används */
 }
 
 #home-nav-icon {
@@ -104,8 +81,15 @@ header {
     background-color: #232323;
 }
 
+/* Body Container */
+.body-container,
+.body-container > div.row {
+    min-height: calc(100vh - 134px);
+}
+
+/* Footer */
 footer {
-    position: static;
+    position: inherit;
     height: 144px;
     width: 100%;
     left: 0;
@@ -114,6 +98,13 @@ footer {
     margin-bottom: 64px;
 }
 
+.footer-container {
+    padding-top: 208px;
+    bottom: 0;
+    position: absolute;
+}
+
+/* Colors for text, buttons and other objects */
 .btn-red {
     background: #E63946;
     color: #FFFFFF;
@@ -166,6 +157,24 @@ footer {
     border: 1px solid #E63946 !important;/* ta bort om inte används */
 }
 
+/* -------- Home/Index Template -------- */
+
+.black-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.5rem;
+}
+
+#index-speakout {
+    font-weight: 700;
+    font-style: italic;
+}
+
+.index-link {
+    text-decoration: underline;
+}
+
 /*  --------  Media Queries  --------  */
 
 /* Larger container on xl screens */
@@ -183,7 +192,7 @@ footer {
         font-family: 'Roboto', sans-serif;
         display: block;
         position: relative;
-        height: calc(100vh + 108px);
+        min-height: 100vh;
     }
 
     body::after {
@@ -207,7 +216,29 @@ footer {
     footer {
         height: 152px;
         margin-bottom: 0;
-        position: absolute;
+        position: inherit;
+    }
+
+    .footer-container {
+        padding-top: 152px;
+    }
+
+    #div-speakout {
+        min-height: calc(100vh - 254px);
+    }
+
+    .black-box {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 1rem;
+    }
+
+    .black-box.d-inline-flex {
+        margin-right: auto;
+    }
+
+    #index-speakout {
+        font-size: 3.5rem;
     }
 }
 
@@ -231,17 +262,8 @@ footer {
     }
 }
 
-/* home/index template */
-
-.container-index {
-    display: block;
-}
-
-.black-box {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-#index-speakout {
-    font-weight: 700;
-    font-style: italic;
+@media (max-width: 331.98px) {
+    .xs-screen {
+        display: none;
+    }
 }
