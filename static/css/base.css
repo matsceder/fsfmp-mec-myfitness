@@ -160,7 +160,7 @@ footer {
 /* -------- Home/Index Template -------- */
 
 .black-box {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     margin-top: 0;
     margin-bottom: 0;
     padding: 0.5rem;
@@ -223,10 +223,12 @@ footer {
         padding-top: 152px;
     }
 
-    #div-speakout {
+    .body-container,
+    .body-container > div.row {
         min-height: calc(100vh - 254px);
     }
 
+    /* Index */
     .black-box {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;

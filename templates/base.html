@@ -39,17 +39,14 @@
         <title>MyFitness {% block extra_title %}{% endblock %}</title>
 
     </head>
+
     <body>
+
         <header class="container-fluid fixed-top px-0">
-
             {% include 'includes/large-header.html' %}
-
             <nav class="navbar navbar-expand p-0">
-
                 {% include 'includes/large-header-navbar.html' %}
-
                 {% include 'includes/mobile-header-nav.html' %}
-
             </nav>
         </header>
 
@@ -63,44 +60,10 @@
         {% block content %}
         {% endblock %}
 
-        <div class="container d-md-none m-0">
-            <div id="navbar-small-bottom" class="row w-100">
-                <a href="#" class="col-3 text-white border border-dark">
-                    <div class="text-center my-2">
-                        <span class="icon"><i class="fas fa-user-circle"></i></span>
-                        <br>
-                        <span>Profile</span>
-                    </div>
-                </a>
-                <a href="#" class="col-3 text-white border border-dark">
-                    <div class="text-center my-2">
-                        <span class="icon"><i class="fas fa-store"></i></span>
-                        <br>
-                        <span>Shop</span>
-                    </div>
-                </a>
-                <a href="#" class="col-3 text-white border border-dark">
-                    <div class="text-center my-2">
-                        <span class="icon"><i class="fas fa-dumbbell"></i></span>
-                        <br>
-                        <span>Training</span>
-                    </div>
-                </a>
-                <a href="#" class="col-3 text-white border border-dark">
-                    <div class="text-center my-2">
-                        <span class="icon"><i class="fas fa-apple-alt"></i></span>
-                        <br>
-                        <span>Nutrition</span>
-                    </div>
-                </a>
-            </div>
-        </div>
+        {% include 'includes/mobile-bottom-nav.html' %}
 
-        <div class="container footer-container">
-            <div class="row">
-                <div class="col"></div>
-            </div>
-        </div>
+        {% block page_footer %}
+        {% endblock %}
 
         <footer class="container-fluid px-0 pt-auto">
             <div class="row m-0 p-2">
