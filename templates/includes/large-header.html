@@ -31,15 +31,15 @@
                 <div class="dropdown-menu border border-white text-center rounded-0 p-1" aria-labelledby="user-options">
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                        <a href="{% url 'add_product' %}" class="text-black">Product Management</a>
+                        <a href="#" class="text-black">Product Management</a>
                     {% endif %}
-                    <a href="{% url 'profile' %}" class="text-black">Account</a>
+                    <a href="#" class="text-black">Account</a>
                     <br>
-                    <a href="{% url 'account_logout' %}" class="text-black">Logout</a>
+                    <a href="#" class="text-black">Logout</a>
                 {% else %}
-                    <a href="{% url 'account_signup' %}" class="text-black">Sign Up</a>
+                    <a href="#" class="text-black">Sign Up</a>
                     <br>
-                    <a href="{% url 'account_login' %}" class="text-black">Login</a>
+                    <a href="#" class="text-black">Login</a>
                 {% endif %}
             </div>
             </li>
