@@ -11,10 +11,64 @@
 
 {% block content %}
 
-    <div class="container body-container">
-        <div class="row justify-content-center">
-            <div class="col">
-                {{ products }}
+    <div class="container-fluid body-container">
+        <div class="row body-products justify-content-center mx-0">
+            <div id="products-top" class="row w-100">
+                <div class="col text-center mt-3">
+                    <h3 class="text-muted">Products</h3>
+                    <hr class="w-75 mb-3">
+                </div>
+            </div>
+            <div id="products-content" class="row">
+                <div id="products-q" class="col-products col-12 col-lg-3 col-xl-2">
+                    <div class="row">
+                        <div class="col-11 offset-1 p-3">
+                            <ul class="list-group">
+                                <li class="list-group-item border-0 py-1">
+                                    <h4 class="text-black">Categoreis</h4>
+                                </li>
+                                {% for category in categories %}
+                                    <li class="list-group-item border-0 py-1">
+                                        <a class="text-black" href="#">{{ category.friendly_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="products-field" class="col-products col-12 col-lg-9 col-xl-10">
+                    <div class="row">
+                        <div class="col-10 offset-1">
+                            <div class="row">
+                                {% for product in products %}
+                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                        <div class="card h-100 border-0">
+                                            {% if product.image %}
+                                                <a href="#">
+                                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_product }}">
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_product }}">
+                                                </a>
+                                            {% endif %}
+                                            <div class="card-body pb-0 text-center">
+                                                <p class="lead mb-0">{{ product.friendly_product }}</p>
+                                            </div>
+                                            <div class="card-footer bg-white pt-0 border-0 text-center">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="font-weight-bold">${{ product.price }}</p>
+                                                    </div>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

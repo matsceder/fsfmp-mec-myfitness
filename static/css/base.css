@@ -15,7 +15,7 @@ body::after {
     content: "";
     background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; /* sätt som en egen media query med align left på mindre skärmar? */
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     opacity: 0.8;
     top: 0;
     left: 0;
@@ -41,6 +41,7 @@ header {
 
 .header-container {
     padding-top: 72px;
+    margin-bottom: 1rem;
 }
 
 #header-large {
@@ -84,7 +85,8 @@ header {
 /* Body Container */
 .body-container,
 .body-container > div.row {
-    min-height: calc(100vh - 134px);
+    min-height: calc(100vh - calc(134px + 2rem));
+    margin-bottom: 1rem;
 }
 
 /* Footer */
@@ -157,7 +159,7 @@ footer {
     border: 1px solid #E63946 !important;/* ta bort om inte används */
 }
 
-/* -------- Home/Index Template -------- */
+/* -------- Index Template -------- */
 
 .black-box {
     background-color: rgba(0, 0, 0, 0.5);
@@ -173,6 +175,12 @@ footer {
 
 .index-link {
     text-decoration: underline;
+}
+
+/*  --------  Products Template  --------  */
+
+.body-products {
+    background-color: white;
 }
 
 /*  --------  Media Queries  --------  */
@@ -199,7 +207,7 @@ footer {
         content: "";
         background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; /* sätt som en egen media query med align left på mindre skärmar? */
         background-size: cover;
-        height: 100vh;
+        min-height: 100vh;
         opacity: 0.8;
         top: 0;
         left: 0;
@@ -225,7 +233,7 @@ footer {
 
     .body-container,
     .body-container > div.row {
-        min-height: calc(100vh - 254px);
+        min-height: calc(100vh - calc(254px + 2rem));
     }
 
     /* Index */
