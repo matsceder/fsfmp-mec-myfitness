@@ -83,8 +83,7 @@ header {
 }
 
 /* Body Container */
-.body-container,
-.body-container > div.row {
+.body-container {
     min-height: calc(100vh - calc(134px + 2rem));
     margin-bottom: 1rem;
 }
@@ -161,6 +160,11 @@ footer {
 
 /* -------- Index Template -------- */
 
+#index-body-row {
+    min-height: calc(100vh - calc(134px + 2rem));
+    margin-bottom: 1rem;
+}
+
 .black-box {
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: 0;
@@ -183,13 +187,27 @@ footer {
     background-color: white;
 }
 
+/*  --------  Product Detail Template  --------  */
+
+#prod-categories-lg {
+    position: fixed;
+}
+
+#flavors-dropdown > .active {
+    color: #232323;
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
 /*  --------  Media Queries  --------  */
 
 /* Larger container on xl screens */
 @media (min-width: 1200px) {
-  .container {
-    max-width: 80%;
-  }
+    .container {
+        max-width: 80%;
+    }
+    #prod-categories-lg {
+        transform: translateX(45px);
+    }
 }
 
 /* Big tablets and desktop */
@@ -221,6 +239,10 @@ footer {
         padding-top: 102px;
     }
 
+    .body-container {
+        min-height: calc(100vh - calc(254px + 2rem));
+    }
+
     footer {
         height: 152px;
         margin-bottom: 0;
@@ -231,12 +253,12 @@ footer {
         padding-top: 152px;
     }
 
-    .body-container,
-    .body-container > div.row {
+    /* Index */
+
+    #index-body-row {
         min-height: calc(100vh - calc(254px + 2rem));
     }
 
-    /* Index */
     .black-box {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
@@ -250,6 +272,14 @@ footer {
     #index-speakout {
         font-size: 3.5rem;
     }
+
+    /* Products and Product Details */
+
+    #flavors-dropdown {
+    max-height: 80vh;
+    overflow: scroll;
+    z-index: 1040;
+}
 }
 
 /* Very small mobile devices */
@@ -272,6 +302,7 @@ footer {
     }
 }
 
+/* Hiding objects extremely small devices */
 @media (max-width: 331.98px) {
     .xs-screen {
         display: none;

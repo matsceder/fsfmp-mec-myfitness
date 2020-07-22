@@ -53,10 +53,10 @@
                             <a href="#" class="dropdown-item my-1">Product Management</a>
                         {% endif %}
                         <a href="#" class="dropdown-item my-1">Settings</a>
-                        <a href="#" class="dropdown-item my-1">Logout</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item my-1">Logout</a>
                     {% else %}
-                        <a href="#" class="dropdown-item my-1">Register</a>
-                        <a href="#" class="dropdown-item my-1">Login</a>
+                        <a href="{% url 'account_signup' %}" class="dropdown-item my-1">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item my-1">Login</a>
                     {% endif %}
                 </div>
             </li>

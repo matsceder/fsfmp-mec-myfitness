@@ -19,10 +19,10 @@
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div id="products-content" class="row">
-                <div id="products-q" class="col-products col-12 col-lg-3 col-xl-2">
+            <div id="products-content" class="row pb-4">
+                <div id="products-q" class="col-products col-12 col-lg-2">
                     <div class="row">
-                        <div class="col-11 offset-1 p-3">
+                        <div id="prod-categories-lg" class="d-none d-lg-block ml-4 p-3">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 py-1">
                                     <h4 class="text-black">Categoreis</h4>
@@ -36,19 +36,19 @@
                         </div>
                     </div>
                 </div>
-                <div id="products-field" class="col-products col-12 col-lg-9 col-xl-10">
+                <div id="products-field" class="col-products col-12 col-lg-10">
                     <div class="row">
                         <div class="col-10 offset-1">
                             <div class="row">
                                 {% for product in products %}
-                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                    <div class="col-sm-6 col-md-4 col-xl-3 border-bottom">
                                         <div class="card h-100 border-0">
                                             {% if product.image %}
-                                                <a href="#">
+                                                <a href="{% url 'product_detail' product.id %}">
                                                     <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_product }}">
                                                 </a>
                                             {% else %}
-                                                <a href="#">
+                                                <a href="{% url 'product_detail' product.id %}">
                                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_product }}">
                                                 </a>
                                             {% endif %}
@@ -58,9 +58,10 @@
                                             <div class="card-footer bg-white pt-0 border-0 text-center">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <p class="font-weight-bold">${{ product.price }}</p>
+                                                        <p class="font-weight-bold mb-0">${{ product.price }}</p>
+                                                        {% include 'includes/star-rating.html' %}
                                                     </div>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
