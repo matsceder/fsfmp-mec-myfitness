@@ -29,7 +29,7 @@
                                 </li>
                                 {% for category in categories %}
                                     <li class="list-group-item border-0 py-1">
-                                        <a class="text-black" href="#">{{ category.friendly_name }}</a>
+                                        <a class="text-black" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>

@@ -3,8 +3,6 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category
 
-# Create your views here.
-
 
 def all_products(request):
     """ A view to show, sort and search all products """
@@ -12,21 +10,29 @@ def all_products(request):
     products = Product.objects.all()
     categories = Category.objects.all()
     query = None
+    current_categories = None
 
     if request.GET:
+
+        if 'category' in request.GET:
+            current_categories = request.GET['category'].split(',')
+            products = products.filter(category__name__in=current_categories)
+            current_categories = Category.objects.filter(name__in=current_categories)
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
 
-            queries = Q(product__icontains=query)
+            queries = Q(friendly_brand__icontains=query) | Q(friendly_product__icontains=query) | Q(friendly_color__icontains=query) | Q(friendly_flavor__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
     context = {
         'products': products,
         'search_term': query,
         'categories': categories,
+        'current': current_categories,
     }
 
     return render(request, 'products/products.html', context)
