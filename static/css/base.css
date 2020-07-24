@@ -185,6 +185,7 @@ footer {
 
 .body-products {
     background-color: white;
+    min-height: ;
 }
 
 /*  --------  Product Detail Template  --------  */
@@ -193,9 +194,19 @@ footer {
     position: fixed;
 }
 
+#colors-dropdown > .active,
 #flavors-dropdown > .active {
     color: #232323;
     background-color: rgba(0, 0, 0, 0.1)
+}
+
+.avail-color {
+    width: 60px;
+    height: 60px;
+}
+
+.color-text {
+    font-size: 0.6rem;
 }
 
 /*  --------  Media Queries  --------  */
@@ -275,11 +286,12 @@ footer {
 
     /* Products and Product Details */
 
+    #colors-dropdown,
     #flavors-dropdown {
     max-height: 80vh;
     overflow: scroll;
     z-index: 1040;
-}
+    }
 }
 
 /* Very small mobile devices */

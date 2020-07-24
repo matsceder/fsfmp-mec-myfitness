@@ -18,7 +18,7 @@
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div id="product-info" class="row w-100 mb-4 pb-4 justify-content-center">
+            <div id="product-info" class="row w-100 justify-content-center">
                 <div class="col-12 col-md-5">
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
@@ -30,26 +30,74 @@
                         </a>
                     {% endif %}
                 </div>
-                <div class="col-12 col-md-5">
-                    <p class="lead mb-0">{{ product.friendly_product }}</p>
-                    <p class="font-weight-bold">${{ product.price }}</p>
-                    {% include 'includes/star-rating.html' %}
-                    <div class="dropdown">
-                        <button class="btn border border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ product.friendly_flavor }}
-                        </button>
-                        <div id="flavors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {% for flavor in products %}
-                                {% if flavor.brand == product.brand and flavor.product == product.product %}
-                                    {% if flavor.flavor == product.flavor %}
-                                        <a class="dropdown-item active" href="{% url 'product_detail' flavor.id %}">{{ flavor.friendly_flavor }}</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="{% url 'product_detail' flavor.id %}">{{ flavor.friendly_flavor }}</a>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                <div class="col-12 col-md-5 my-auto">
+                    <div class="col d-md-none text-center">
+                        <hr class="w-75 mb-3">
                     </div>
+                    <p class="lead m-0">{{ product.friendly_product }}</p>
+                    <p class="font-weight-bold mb-0">${{ product.price }}</p>
+                    {% include 'includes/star-rating.html' %}
+                    {% if product.flavor != "" %}
+                        <div class="dropdown mt-2 py-2">
+                            <button class="btn border border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButtonflavor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ product.friendly_flavor }}
+                            </button>
+                            <div id="flavors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonflavor">
+                                {% for flavor in products %}
+                                    {% if flavor.brand == product.brand and flavor.product == product.product %}
+                                        {% if flavor.flavor == product.flavor %}
+                                            <a class="dropdown-item active" href="{% url 'product_detail' flavor.id %}">{{ flavor.friendly_flavor }}</a>
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'product_detail' flavor.id %}">{{ flavor.friendly_flavor }}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% elif product.size != "" %}
+                        <div class="dropdown mt-2 py-2">
+                            <button class="btn border border-black rounded-0 dropdown-toggle text-uppercase" type="button" id="dropdownMenuButtonsize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ product.friendly_size }}
+                            </button>
+                            <div id="colors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonsize">
+                                {% for size in products %}
+                                    {% if size.brand == product.brand and size.product == product.product and size.color == product.color %}
+                                        {% if size.size == product.size %}
+                                            <a class="dropdown-item text-uppercase active" href="{% url 'product_detail' size.id %}">{{ size.friendly_size }}</a>
+                                        {% else %}
+                                            <a class="dropdown-item text-uppercase" href="{% url 'product_detail' size.id %}">{{ size.friendly_size }}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if product.description %}
+                        <p class="py-2">{{ product.description }}</p>
+                    {% endif %}
+                    {% if product.ingredients %}
+                        <p class="py-2">{{ product.ingredients }}</p>
+                    {% endif %}
+                    {% if product.color != "" %}
+                        <p class="py-2 small text-muted mb-0">Also availiable in:</p>
+                        {% for color in products %}
+                            {% if color.color != product.color and color.product == product.product and color.size == product.size %}
+                                <a href="{% url 'product_detail' color.id %}">
+                                    <div class="d-inline-block">
+                                        <img class="img-thumbnail avail-color" src="{{ color.image.url }}" alt="{{ color.friendly_product }}">
+                                        <p class="text-muted color-text">
+                                            {{ color.friendly_color }}
+                                        </p>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div id="product-bottom" class="row w-100">
+                <div class="col text-center mb-2">
+                    <hr class="w-75 mb-3">
                 </div>
             </div>
         </div>
