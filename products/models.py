@@ -18,25 +18,35 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
-    sku = models.CharField(max_length=254, null=True, blank=True)
-    friendly_brand = models.CharField(max_length=254)
-    brand = models.CharField(max_length=254)
-    friendly_product = models.CharField(max_length=254, null=True, blank=True)
-    product = models.CharField(max_length=254)
-    friendly_color = models.CharField(max_length=254, null=True, blank=True)
-    color = models.CharField(max_length=254, null=True, blank=True)
-    friendly_flavor = models.CharField(max_length=254, null=True, blank=True)
-    flavor = models.CharField(max_length=254, null=True, blank=True)
-    friendly_size = models.CharField(max_length=254, null=True, blank=True)
-    unit = models.CharField(max_length=254, null=True, blank=True)
-    size = models.CharField(max_length=254, null=True, blank=True)
-    stock = models.PositiveSmallIntegerField(default=0)
-    description = models.TextField(null=True, blank=True)
-    ingredients = models.TextField(null=True, blank=True)
+    product_num = models.PositiveSmallIntegerField(null=True, blank=True)
+    friendly_brand = models.CharField(max_length=254, null=True, blank=True)
+    brand = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254, null=True, blank=True)
+    spec = models.CharField(max_length=254, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    image_url = models.URLField(max_length=1024, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Product_detail(models.Model):
+
+    class Meta:
+        verbose_name = "Product Detail"
+
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey('Product', null=True, blank=True, on_delete=models.SET_NULL)
+    sku = models.CharField(max_length=254, null=True, blank=True)
+    friendly_type = models.CharField(max_length=254, null=True, blank=True)
+    p_type = models.CharField(max_length=254, null=True, blank=True)
+    stock = models.PositiveSmallIntegerField(null=True, blank=True)
+    desc = models.TextField(null=True, blank=True)
+    ing = models.TextField(null=True, blank=True)
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.product
+        return self.friendly_type

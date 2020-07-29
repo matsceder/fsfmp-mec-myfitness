@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Category
+from .models import Product, Product_detail, Category
 
 
 def all_products(request):
     """ A view to show, sort and search all products """
 
     products = Product.objects.all()
+    product_det = Product_detail.objects.all()
     categories = Category.objects.all()
     query = None
     current_categories = None
@@ -25,11 +26,12 @@ def all_products(request):
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
 
-            queries = Q(friendly_brand__icontains=query) | Q(friendly_product__icontains=query) | Q(friendly_color__icontains=query) | Q(friendly_flavor__icontains=query) | Q(description__icontains=query)
+            queries = Q(friendly_brand__icontains=query) | Q(name__icontains=query) | Q(friendly_type__icontains=query) | Q(desc__icontains=query)
             products = products.filter(queries)
 
     context = {
         'products': products,
+        'product_det': product_det,
         'search_term': query,
         'categories': categories,
         'current': current_categories,
@@ -42,12 +44,12 @@ def product_detail(request, product_id):
     """ A view to show the product details """
 
     product = get_object_or_404(Product, pk=product_id)
-    products = Product.objects.all()
+    product_det = Product_detail.objects.all()
     categories = Category.objects.all()
 
     context = {
         'product': product,
-        'products': products,
+        'products': product_det,
         'categories': categories,
     }
 
