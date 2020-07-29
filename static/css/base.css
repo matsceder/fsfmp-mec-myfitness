@@ -185,14 +185,9 @@ footer {
 
 .body-products {
     background-color: white;
-    min-height: ;
 }
 
 /*  --------  Product Detail Template  --------  */
-
-#prod-categories-lg {
-    position: fixed;
-}
 
 #colors-dropdown > .active,
 #flavors-dropdown > .active {

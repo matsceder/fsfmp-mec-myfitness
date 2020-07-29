@@ -22,7 +22,23 @@
             <div id="products-content" class="row pb-4">
                 <div id="products-q" class="col-products col-12 col-lg-2">
                     <div class="row">
-                        <div id="prod-categories-lg" class="d-none d-lg-block ml-4 p-3">
+
+                        <div id="prod-categories-sm" class="d-lg-none ml-4 p-3">
+                            <div class="dropdown">
+                                <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                                </button>
+                                <div class="dropdown-menu">
+                                        <a class="dropdown-item
+                                        " href="{% url 'products' %}">All Categories</a>
+                                    {% for category in categories %}
+                                        <a class="dropdown-item
+                                        " href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="prod-categories-lg" class="d-none d-lg-block ml-4 mt-5 p-3">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 py-1">
                                     <h4 class="text-black">Categoreis</h4>
@@ -53,9 +69,10 @@
                                                 </a>
                                             {% endif %}
                                             <div class="card-body pb-0 text-center">
+                                                <p class="text-muted mb-0"><small>{{ product.friendly_brand }}</small></p>
                                                 <p class="lead mb-0">{{ product.name }}</p>
-                                                <p class="text-muted mb-0">{{ product.spec }}</p>
-                                                <p class="font-weight-bold mb-0">${{ product.price }}</p>
+                                                <p class="font-weight-bold mb-0 d-inline-block">${{ product.price }}</p>
+                                                <p class="text-muted mb-0 d-inline-block">- {{ product.spec }}</p>
                                             </div>
                                             <div class="card-footer bg-white pt-0 border-0 text-center">
                                                 <div class="row">
