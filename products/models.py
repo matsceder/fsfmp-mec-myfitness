@@ -47,6 +47,7 @@ class Product_detail(models.Model):
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    prod_id = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.friendly_type

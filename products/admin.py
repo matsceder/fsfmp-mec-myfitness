@@ -28,6 +28,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     ordering = (
         'category',
+        'name',
     )
 
 

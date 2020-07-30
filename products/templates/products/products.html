@@ -22,7 +22,6 @@
             <div id="products-content" class="row pb-4">
                 <div id="products-q" class="col-products col-12 col-lg-2">
                     <div class="row">
-
                         <div id="prod-categories-sm" class="d-lg-none ml-4 p-3">
                             <div class="dropdown">
                                 <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
@@ -37,7 +36,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="prod-categories-lg" class="d-none d-lg-block ml-4 mt-5 p-3">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 py-1">
@@ -59,28 +57,32 @@
                                 {% for product in products %}
                                     <div class="col-sm-6 col-md-4 col-xl-3 border-bottom mt-3">
                                         <div class="card h-100 border-0">
-                                            {% if product.image %}
-                                                <a href="{% url 'product_detail' product.id %}">
-                                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_product }}">
-                                                </a>
-                                            {% else %}
-                                                <a href="{% url 'product_detail' product.id %}">
-                                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_product }}">
-                                                </a>
-                                            {% endif %}
-                                            <div class="card-body pb-0 text-center">
-                                                <p class="text-muted mb-0"><small>{{ product.friendly_brand }}</small></p>
-                                                <p class="lead mb-0">{{ product.name }}</p>
-                                                <p class="font-weight-bold mb-0 d-inline-block">${{ product.price }}</p>
-                                                <p class="text-muted mb-0 d-inline-block">- {{ product.spec }}</p>
-                                            </div>
-                                            <div class="card-footer bg-white pt-0 border-0 text-center">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <a href="#" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
+                                            {% for type in product_det %}
+                                                {% if type.prod_id == 1 and type.product.id == product.id %}
+                                                    {% if type.image %}
+                                                        <a href="{% url 'product_detail' product.id type.id %}">
+                                                            <img class="card-img-top img-fluid" src="{{ type.image.url }}" alt="{{ product.friendly_product }}">
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{% url 'product_detail' product.id type.id %}">
+                                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_product }}">
+                                                        </a>
+                                                    {% endif %}
+                                                    <div class="card-body pb-0 text-center">
+                                                        <p class="text-muted mb-0"><small>{{ product.friendly_brand }}</small></p>
+                                                        <p class="lead mb-0">{{ product.name }}</p>
+                                                        <p class="font-weight-bold mb-0 d-inline-block">${{ product.price }}</p>
+                                                        <p class="text-muted mb-0 d-inline-block">- {{ product.spec }}</p>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <div class="card-footer bg-white pt-0 border-0 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="{% url 'product_detail' product.id type.id %}" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -91,7 +93,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block page_footer %}
