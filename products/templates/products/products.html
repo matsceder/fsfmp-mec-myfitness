@@ -27,11 +27,9 @@
                                 <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
                                 </button>
                                 <div class="dropdown-menu">
-                                        <a class="dropdown-item
-                                        " href="{% url 'products' %}">All Categories</a>
+                                    <a class="dropdown-item" href="{% url 'products' %}">All Categories</a>
                                     {% for category in categories %}
-                                        <a class="dropdown-item
-                                        " href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                                        <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
                                     {% endfor %}
                                 </div>
                             </div>

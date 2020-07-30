@@ -37,7 +37,7 @@
                     <p class="lead m-0">{{ product.name }}</p>
                     <p class="font-weight-bold mb-0">${{ product.price }}</p>
                     {% include 'includes/star-rating.html' %}
-                    <p class="small text-muted mt-2 mb-1">Avaliable flavors:</p>
+                    <p class="small text-muted mt-2 mb-1">Avaliable {% if product.category.id >= 5 %}sizes{% else %}flavors{% endif %}:</p>
                     <div class="dropdown">
                         <button class="btn border border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButtonflavor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ details.friendly_type }}</span>
@@ -53,14 +53,15 @@
                     {% if details.desc %}
                         <p class="py-2 mt-2 mb-0">{{ details.desc }}</p>
                     {% endif %}
-                    {% if details.ing %}
-                        <p class="py-2 text-muted small">{{ details.ing }}</p>
-                    {% endif %}
-                    {% if details.category == 5 %}
+                    {% if details.category.id != 5 %}
+                        {% if details.ing %}
+                            <p class="py-2 text-muted small">{{ details.ing }}</p>
+                        {% endif %}
+                    {% elif details.category.id == 5 %}
                         <p class="py-2 small text-muted mb-0">Also availiable in:</p>
-                        {% for color in product_detail %}
-                            {% if color.p_type != product.p_type and color.product == product.product and color.size == product.size %}
-                                <a href="{% url 'product_detail' color.id %}">
+                        {% for color in products_detail %}
+                            {% if color.category.id == 5 and color.id != details.id and color.prod_id == 1 and details.ing == color.ing and details.product != color.product %}
+                                <a href="{% url 'product_detail' product.id color.id %}">
                                     <div class="d-inline-block">
                                         <img class="img-thumbnail avail-color" src="{{ color.image.url }}" alt="{{ color.friendly_product }}">
                                         <p class="text-muted color-text">
