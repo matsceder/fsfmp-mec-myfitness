@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Product_detail, Category
+from .models import Product, Category
 
 
 def all_products(request):
     """ A view to show, sort and search all products """
 
     products = Product.objects.all()
-    product_det = Product_detail.objects.all()
     categories = Category.objects.all()
     query = None
     current_categories = None
@@ -18,20 +17,28 @@ def all_products(request):
         if 'category' in request.GET:
             current_categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=current_categories)
-            current_categories = Category.objects.filter(name__in=current_categories)
+            current_categories = Category.objects.filter(
+                name__in=current_categories)
 
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(
+                    request, "You didn't enter any search criteria!"
+                )
                 return redirect(reverse('products'))
 
-            queries = Q(friendly_brand__icontains=query) | Q(name__icontains=query) | Q(friendly_type__icontains=query) | Q(desc__icontains=query)
+            queries = Q(
+                friendly_name__icontains=query
+            ) | Q(
+                name__icontains=query
+            ) | Q(
+                description__icontains=query
+            )
             products = products.filter(queries)
 
     context = {
         'products': products,
-        'product_det': product_det,
         'search_term': query,
         'categories': categories,
         'current': current_categories,
@@ -40,19 +47,15 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 
-def product_detail(request, product_id, details_id):
+def product(request, product_id):
     """ A view to show the product details """
 
     product = get_object_or_404(Product, pk=product_id)
-    details = get_object_or_404(Product_detail, pk=details_id)
-    products_detail = Product_detail.objects.all()
     categories = Category.objects.all()
 
     context = {
         'product': product,
-        'details': details,
-        'products_detail': products_detail,
         'categories': categories,
     }
 
-    return render(request, 'products/product_detail.html', context)
+    return render(request, 'products/product.html', context)

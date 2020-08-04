@@ -1,34 +1,15 @@
 from django.contrib import admin
-from .models import Product, Category, Product_detail
-
-
-class Product_detailAdmin(admin.ModelAdmin):
-    list_display = (
-        'category',
-        'sku',
-        'product',
-        'friendly_type',
-        'stock',
-    )
-
-    ordering = (
-        'product',
-        'sku',
-    )
+from .models import Product, Category
 
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        'category',
-        'friendly_brand',
+        'friendly_name',
         'name',
-        'spec',
-        'price',
     )
 
     ordering = (
-        'category',
-        'name',
+        'friendly_name',
     )
 
 
@@ -40,5 +21,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Product_detail, Product_detailAdmin)
 admin.site.register(Category, CategoryAdmin)
