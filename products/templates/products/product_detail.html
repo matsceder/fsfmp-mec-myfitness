@@ -14,19 +14,19 @@
         <div class="row body-products justify-content-center mx-0">
             <div id="product-top" class="row w-100">
                 <div class="col text-center mt-3">
-                    <h3 class="text-muted">{{ product.name }} - {{ product.spec }}</h3>
+                    <h3 class="text-muted">{{ product.brand }} - {{ product.friendly_name }}</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div id="product-info" class="row w-100 justify-content-center">
                 <div class="col-12 col-md-5">
-                    {% if details.image %}
-                        <a href="{{ details.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid" src="{{ details.image.url }}" alt="{{ details.friendly_type }}">
+                    {% if product.image %}
+                        <a href="{{ product.image.url }}" target="_blank">
+                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_name }}">
                         </a>
                     {% else %}
                         <a href="#">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ details.friendly_type }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_name }}">
                         </a>
                     {% endif %}
                 </div>
@@ -34,38 +34,38 @@
                     <div class="col d-md-none text-center">
                         <hr class="w-75 mb-3">
                     </div>
-                    <p class="lead m-0">{{ product.name }}</p>
-                    <p class="font-weight-bold mb-0">${{ product.price }}</p>
+                    <p class="lead m-0">{{ product.friendly_name }}</p>
+                    <p class="font-weight-bold mb-0">${{ product.brand.price }}</p>
                     {% include 'includes/star-rating.html' %}
-                    <p class="small text-muted mt-2 mb-1">Avaliable {% if product.category.id >= 5 %}sizes{% else %}flavors{% endif %}:</p>
+                    <p class="small text-muted mt-2 mb-1">Avaliable {% if product.brand.category.id >= 5 %}sizes{% else %}flavors{% endif %}:</p>
                     <div class="dropdown">
                         <button class="btn border border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButtonflavor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span>{{ details.friendly_type }}</span>
+                            <span>{{ product.friendly_name }}</span>
                         </button>
                         <div id="flavors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonflavor">
-                            {% for type in products_detail %}
-                                {% if type.product == product %}
-                                    <a class="dropdown-item" href="{% url 'product_detail' product.id type.id %}">{{ type.friendly_type }}</a>
+                            {% for prod in products %}
+                                {% if prod.brand == product.brand %}
+                                    <a class="dropdown-item" href="{% url 'product' prod.id %}">{{ prod.friendly_name }}</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
                     </div>
-                    {% if details.desc %}
-                        <p class="py-2 mt-2 mb-0">{{ details.desc }}</p>
+                    {% if product.brand.description %}
+                        <p class="py-2 mt-2 mb-0">{{ product.brand.description }}</p>
                     {% endif %}
-                    {% if details.category.id != 5 %}
-                        {% if details.ing %}
-                            <p class="py-2 text-muted small">{{ details.ing }}</p>
+                    {% if product.brand.category.id != 5 %}
+                        {% if product.ingredients %}
+                            <p class="py-2 text-muted small">{{ product.ingredients }}</p>
                         {% endif %}
-                    {% elif details.category.id == 5 %}
+                    {% elif product.brand.category.id == 5 %}
                         <p class="py-2 small text-muted mb-0">Also availiable in:</p>
-                        {% for color in products_detail %}
-                            {% if color.category.id == 5 and color.id != details.id and color.prod_id == 1 and details.ing == color.ing and details.product != color.product %}
-                                <a href="{% url 'product_detail' product.id color.id %}">
+                        {% for color in products %}
+                            {% if color.thumbnail == True and color.brand.friendly_name == product.brand.friendly_name and color.brand != product.brand %}
+                                <a href="{% url 'product' color.id %}">
                                     <div class="d-inline-block">
-                                        <img class="img-thumbnail avail-color" src="{{ color.image.url }}" alt="{{ color.friendly_product }}">
+                                        <img class="img-thumbnail avail-color" src="{{ color.image.url }}" alt="{{ color.friendly_name }}">
                                         <p class="text-muted color-text">
-                                            {{ color.friendly_color }}
+                                            {{ color.brand.spec }}
                                         </p>
                                     </div>
                                 </a>

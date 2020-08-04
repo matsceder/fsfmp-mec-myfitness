@@ -37,7 +37,7 @@
                         <div id="prod-categories-lg" class="d-none d-lg-block ml-4 mt-5 p-3">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 py-1">
-                                    <h4 class="text-black">Categoreis</h4>
+                                    <h4 class="text-black">Categories</h4>
                                 </li>
                                 {% for category in categories %}
                                     <li class="list-group-item border-0 py-1">
@@ -52,37 +52,37 @@
                     <div class="row">
                         <div class="col-10 offset-1">
                             <div class="row">
-                                {% for product in products %}
-                                    <div class="col-sm-6 col-md-4 col-xl-3 border-bottom mt-3">
-                                        <div class="card h-100 border-0">
-                                            {% for type in product_det %}
-                                                {% if type.prod_id == 1 and type.product.id == product.id %}
-                                                    {% if type.image %}
-                                                        <a href="{% url 'product_detail' product.id type.id %}">
-                                                            <img class="card-img-top img-fluid" src="{{ type.image.url }}" alt="{{ product.friendly_product }}">
+                                {% for brand in brands %}
+                                    {% for product in products %}
+                                        {% if brand.id == product.brand.id and product.thumbnail == True %}
+                                            <div class="col-sm-6 col-md-4 col-xl-3 border-bottom mt-3">
+                                                <div class="card h-100 border-0">
+                                                    {% if product.image %}
+                                                        <a href="{% url 'product' product.id %}">
+                                                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_name }}">
                                                         </a>
                                                     {% else %}
-                                                        <a href="{% url 'product_detail' product.id type.id %}">
-                                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_product }}">
+                                                        <a href="{% url 'product' product.id %}">
+                                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_name }}">
                                                         </a>
                                                     {% endif %}
                                                     <div class="card-body pb-0 text-center">
-                                                        <p class="text-muted mb-0"><small>{{ product.friendly_brand }}</small></p>
-                                                        <p class="lead mb-0">{{ product.name }}</p>
-                                                        <p class="font-weight-bold mb-0 d-inline-block">${{ product.price }}</p>
+                                                        <p class="text-muted mb-0"><small>{{ brand.producer }}</small></p>
+                                                        <p class="lead mb-0">{{ brand.friendly_name }}</p>
+                                                        <p class="font-weight-bold mb-0 d-inline-block">${{ product.brand.price }}</p>
                                                         <p class="text-muted mb-0 d-inline-block">- {{ product.spec }}</p>
                                                     </div>
                                                     <div class="card-footer bg-white pt-0 border-0 text-center">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <a href="{% url 'product_detail' product.id type.id %}" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
+                                                                <a href="{% url 'product' product.id %}" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endfor %}
                             </div>
                         </div>

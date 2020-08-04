@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Category
+from .models import Product, Brand, Producer, Category
 
 
 def all_products(request):
     """ A view to show, sort and search all products """
 
-    products = Product.objects.all()
     categories = Category.objects.all()
+    producers = Producer.objects.all()
+    brands = Brand.objects.all()
+    products = Product.objects.all()
     query = None
     current_categories = None
 
@@ -16,7 +18,7 @@ def all_products(request):
 
         if 'category' in request.GET:
             current_categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=current_categories)
+            brands = brands.filter(category__name__in=current_categories)
             current_categories = Category.objects.filter(
                 name__in=current_categories)
 
@@ -39,6 +41,8 @@ def all_products(request):
 
     context = {
         'products': products,
+        'producers': producers,
+        'brands': brands,
         'search_term': query,
         'categories': categories,
         'current': current_categories,
@@ -52,10 +56,16 @@ def product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     categories = Category.objects.all()
+    producers = Producer.objects.all()
+    brands = Brand.objects.all()
+    products = Product.objects.all()
 
     context = {
         'product': product,
+        'products': products,
+        'producers': producers,
+        'brands': brands,
         'categories': categories,
     }
 
-    return render(request, 'products/product.html', context)
+    return render(request, 'products/product_detail.html', context)
