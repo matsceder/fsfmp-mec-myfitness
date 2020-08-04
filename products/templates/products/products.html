@@ -13,37 +13,70 @@
 
     <div class="container-fluid body-container">
         <div class="row body-products justify-content-center mx-0">
-            <div id="products-top" class="row w-100">
-                <div class="col text-center mt-3">
-                    <h3 class="text-muted">Products</h3>
+            <div id="products-top" class="row w-100 pt-2">
+                <div class="col-12 col-sm-4 offset-sm-1 offset-lg-4 text-center mt-3">
+                    <h3 class="text-muted">
+                        {% if current %}
+                            {% for cur in current %}
+                                {% for cat in categories %}
+                                    {% if cat == cur %}
+                                        {{ cat.friendly_name }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            Products
+                        {% endif %}
+                    </h3>
+                </div>
+
+                <div id="prod-categories-sm" class="d-lg-none pt-3 col-12 text-center col-sm-3 order-sm-first">
+                    <div class="dropdown">
+                        <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                        </button>
+                        <div class="dropdown-menu">
+                            {% if current %}
+                                <a class="dropdown-item" href="{% url 'products' %}">All Products</a>
+                            {% endif %}
+                            {% for category in categories %}
+                                <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div id="products-content" class="row pb-4">
                 <div id="products-q" class="col-products col-12 col-lg-2">
                     <div class="row">
-                        <div id="prod-categories-sm" class="d-lg-none ml-4 p-3">
-                            <div class="dropdown">
-                                <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{% url 'products' %}">All Categories</a>
-                                    {% for category in categories %}
-                                        <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
                         <div id="prod-categories-lg" class="d-none d-lg-block ml-4 mt-5 p-3">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 py-1">
                                     <h4 class="text-black">Categories</h4>
                                 </li>
-                                {% for category in categories %}
-                                    <li class="list-group-item border-0 py-1">
-                                        <a class="text-black" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
-                                    </li>
-                                {% endfor %}
+                                {% if current %}
+                                    {% for cur in current %}
+                                        {% for category in categories %}
+                                            {% if category == cur %}
+                                                <li id="category-active" class="active list-group-item border-0 py-1">
+                                                    <a class="text-black" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="list-group-item border-0 py-1">
+                                                    <a class="text-black" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for category in categories %}
+                                        <li class="list-group-item border-0 py-1">
+                                            <a class="text-black" href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

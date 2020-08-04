@@ -10,6 +10,11 @@ body {
     min-height: calc(100vh + 146px);
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* From CSS-tricks */
 body::after {
     content: "";
@@ -187,12 +192,23 @@ footer {
     background-color: white;
 }
 
+#category-active {
+    background-color: white !important;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
 /*  --------  Product Detail Template  --------  */
 
 #colors-dropdown > .active,
 #flavors-dropdown > .active {
     color: #232323;
     background-color: rgba(0, 0, 0, 0.1)
+}
+
+#dropdownMenuButtonselect,
+#buy-btn {
+    width: 120px;
 }
 
 .avail-color {
