@@ -48,7 +48,7 @@
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div id="products-content" class="row pb-4">
+            <div id="products-content" class="row pb-3">
                 <div id="products-q" class="col-products col-12 col-lg-2">
                     <div class="row">
                         <div id="prod-categories-lg" class="d-none d-lg-block ml-4 mt-5 p-3">
@@ -90,8 +90,8 @@
                                         {{ brands|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
                                     </span>
                                 </div>
-                                <div class="sort-select-wrapper col-12 col-sm-6 py-0 pr-3 d-inline-block text-right">
-                                    <select id="sort-selector" class="custom-select custom-select-sm w-100 w-sm-75 rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                                <div class="col-12 col-sm-6 py-0 pr-3 d-inline-block text-right">
+                                    <select id="sort-selector" class="custom-select custom-select-sm w-100 w-sm-75 rounded-0 border border-black">
                                         <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                                         <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                                         <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
@@ -141,6 +141,11 @@
                         {% endfor %}
                     </div>
                 </div>
+                <div class="btt-button shadow-sm rounded-0 border border-black mt-3">
+                    <a class="btt-link d-flex h-100">
+                        <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -152,4 +157,34 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('.btt-link').click(function(e) {
+            window.scrollTo(0,0)
+        })
+
+        $('#sort-selector').change(function() {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if(selectedVal != "reset"){
+                var sort = selectedVal.split("_")[0];
+                var direction = selectedVal.split("_")[1];
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 {% endblock %}

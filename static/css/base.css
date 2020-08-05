@@ -198,6 +198,18 @@ footer {
     text-decoration: underline;
 }
 
+.btt-button {
+    height: 42px;
+    width: 42px;
+    position: sticky;
+    left: calc(100vw - 70px);
+    bottom: 20px;
+}
+
+.btt-link {
+    cursor: pointer;
+}
+
 /*  --------  Product Detail Template  --------  */
 
 #colors-dropdown > .active,
