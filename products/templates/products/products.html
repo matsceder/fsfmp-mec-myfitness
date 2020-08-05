@@ -12,12 +12,12 @@
 {% block content %}
 
     <div class="container-fluid body-container">
-        <div class="row body-products justify-content-center mx-0">
+        <div class="row body-products justify-content-center px-3 mx-0">
             <div id="products-top" class="row w-100 pt-2">
                 <div class="col-12 col-sm-4 offset-sm-1 offset-lg-4 text-center mt-3">
                     <h3 class="text-muted">
-                        {% if current %}
-                            {% for cur in current %}
+                        {% if current_category %}
+                            {% for cur in current_category %}
                                 {% for cat in categories %}
                                     {% if cat == cur %}
                                         {{ cat.friendly_name }}
@@ -30,12 +30,12 @@
                     </h3>
                 </div>
 
-                <div id="prod-categories-sm" class="d-lg-none pt-3 col-12 text-center col-sm-3 order-sm-first">
+                <div id="prod-categories-sm" class="d-lg-none pt-0 pt-sm-3 col-12 text-center col-sm-3 order-sm-first">
                     <div class="dropdown">
                         <button class="btn btn-wht border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
                         </button>
                         <div class="dropdown-menu">
-                            {% if current %}
+                            {% if current_category %}
                                 <a class="dropdown-item" href="{% url 'products' %}">All Products</a>
                             {% endif %}
                             {% for category in categories %}
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 text-center">
+                <div class="col-12 text-center d-none d-sm-block">
                     <hr class="w-75 mb-3">
                 </div>
             </div>
@@ -56,8 +56,8 @@
                                 <li class="list-group-item border-0 py-1">
                                     <h4 class="text-black">Categories</h4>
                                 </li>
-                                {% if current %}
-                                    {% for cur in current %}
+                                {% if current_category %}
+                                    {% for cur in current_category %}
                                         {% for category in categories %}
                                             {% if category == cur %}
                                                 <li id="category-active" class="active list-group-item border-0 py-1">
@@ -81,44 +81,64 @@
                         </div>
                     </div>
                 </div>
-                <div id="products-field" class="col-products col-12 col-lg-10">
+                <div id="products-field" class="col-products px-5 col-12 col-lg-10">
                     <div class="row">
-                        <div class="col-10 offset-1">
+                        <div class="col">
                             <div class="row">
-                                {% for brand in brands %}
-                                    {% for product in products %}
-                                        {% if brand.id == product.brand.id and product.thumbnail == True %}
-                                            <div class="col-sm-6 col-md-4 col-xl-3 border-bottom mt-3">
-                                                <div class="card h-100 border-0">
-                                                    {% if product.image %}
-                                                        <a href="{% url 'product' product.id %}">
-                                                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_name }}">
-                                                        </a>
-                                                    {% else %}
-                                                        <a href="{% url 'product' product.id %}">
-                                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_name }}">
-                                                        </a>
-                                                    {% endif %}
-                                                    <div class="card-body pb-0 text-center">
-                                                        <p class="text-muted mb-0"><small>{{ brand.producer }}</small></p>
-                                                        <p class="lead mb-0">{{ brand.friendly_name }}</p>
-                                                        <p class="font-weight-bold mb-0 d-inline-block">${{ product.brand.price }}</p>
-                                                        <p class="text-muted mb-0 d-inline-block">- {{ product.spec }}</p>
-                                                    </div>
-                                                    <div class="card-footer bg-white pt-0 border-0 text-center">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <a href="{% url 'product' product.id %}" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
+                                <div class="col-12 col-sm-6 text-center py-2 py-sm-1 text-sm-left">
+                                    <span class="text-muted small">
+                                        {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                                    </span>
+                                </div>
+                                <div class="sort-select-wrapper col-12 col-sm-6 py-0 pr-3 d-inline-block text-right">
+                                    <select id="sort-selector" class="custom-select custom-select-sm w-100 w-sm-75 rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                                        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                        <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
+                                        <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+                                        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                        <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                                        <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center d-sm-none">
+                                <hr class="w-75 mb-3">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        {% for brand in brands %}
+                            {% for product in products %}
+                                {% if brand.id == product.brand.id and product.thumbnail == True %}
+                                    <div class="col-sm-6 col-md-4 col-xl-3 border-bottom mt-3">
+                                        <div class="card h-100 border-0 pb-3">
+                                            {% if product.image %}
+                                                <a href="{% url 'product' product.id %}">
+                                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_name }}">
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'product' product.id %}">
+                                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.friendly_name }}">
+                                                </a>
+                                            {% endif %}
+                                            <div class="card-body pb-3 text-center">
+                                                <p class="text-muted mb-0"><small>{{ brand.producer }}</small></p>
+                                                <p class="lead mb-0">{{ brand.friendly_name }}</p>
+                                                {% include 'includes/star-rating.html' %}
+                                                <p class="font-weight-bold mb-0 d-inline-block">${{ product.brand.price }}</p>
+                                                <p class="text-muted mb-0 d-inline-block">- {{ brand.spec }}</p>
+                                                <div class="co">
+                                                    <a href="{% url 'product' product.id %}" class="btn btn-black rounded-0 my-1 py-1"><small>More Info</small></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -12,15 +12,30 @@ def all_products(request):
     brands = Brand.objects.all()
     products = Product.objects.all()
     query = None
-    current_categories = None
+    current_category = None
+    sort = None
+    direction = None
 
     if request.GET:
 
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                brands.annotate(lower_name=Lower('name'))
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            brands = brands.order_by(sortkey)
+
         if 'category' in request.GET:
-            current_categories = request.GET['category'].split(',')
-            brands = brands.filter(category__name__in=current_categories)
-            current_categories = Category.objects.filter(
-                name__in=current_categories)
+            current_category = request.GET['category'].split(',')
+            brands = brands.filter(category__name__in=current_category)
+            current_category = Category.objects.filter(
+                name__in=current_category)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -37,7 +52,9 @@ def all_products(request):
             ) | Q(
                 description__icontains=query
             )
-            products = products.filter(queries)
+            brands = brands.filter(queries)
+
+    current_sorting = f'{sort}_{direction}'
 
     context = {
         'products': products,
@@ -45,7 +62,8 @@ def all_products(request):
         'brands': brands,
         'search_term': query,
         'categories': categories,
-        'current': current_categories,
+        'current_category': current_category,
+        'current_sorting': current_sorting,
     }
 
     return render(request, 'products/products.html', context)
