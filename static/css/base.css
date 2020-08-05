@@ -46,7 +46,6 @@ header {
 
 .header-container {
     padding-top: 72px;
-    margin-bottom: 1rem;
 }
 
 #header-large {
@@ -164,11 +163,6 @@ footer {
 }
 
 /* -------- Index Template -------- */
-
-#index-body-row {
-    min-height: calc(100vh - calc(134px + 2rem));
-    margin-bottom: 1rem;
-}
 
 .black-box {
     background-color: rgba(0, 0, 0, 0.5);
