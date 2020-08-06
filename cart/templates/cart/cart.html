@@ -33,11 +33,13 @@
                                     </tr>
                                 </thead>
                                 {% for item in cart_items %}
-                                    <tr>
+                                    <tr class="my-1">
                                         <td class="w-25">
                                             <img class="img-fluid" src="{{ item.product.image.url }}">
                                         </td>
                                         <td class="">
+                                            <p class="my-0 text-muted small">{{ item.product.brand.producer }}</p>
+                                            <p class="my-0 text-muted small">{{ item.product.brand }}</p>
                                             <p class="my-0 "><strong>{{ item.product.friendly_name }}</strong></p>
                                             <p class="my-0 text-muted small">{{ item.product.sku }}</p>
                                         </td>
@@ -48,7 +50,7 @@
                                             <p class="my-0">{{ item.quantity }}</p>
                                         </td>
                                         <td class="">
-                                            <p class="my-0">{{ item.product. }}</p>
+                                            <p class="my-0"></p>
                                         </td>
                                     </tr>
                                 {% endfor %}
