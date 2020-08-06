@@ -7,7 +7,7 @@ body {
     font-family: 'Roboto', sans-serif;
     display: block;
     position: relative;
-    min-height: calc(100vh + 146px);
+    min-height: calc(100vh + 146px - 1rem);
 }
 
 a {
@@ -88,7 +88,7 @@ header {
 
 /* Body Container */
 .body-container {
-    min-height: calc(100vh - calc(134px + 2rem));
+    min-height: calc(100vh - calc(134px + 1rem));
     margin-bottom: 1rem;
 }
 

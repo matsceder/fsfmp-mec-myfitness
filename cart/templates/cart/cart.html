@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="body-container container-fluid">
+    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
             <div id="cart-top" class="row w-100">
                 <div class="col text-center mt-3">
@@ -22,7 +22,57 @@
                 <div class="col-12 col-md-5">
                     {% if cart_items %}
                         <div class="table-responsive">
-                        
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Info</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                {% for item in cart_items %}
+                                    <tr>
+                                        <td class="w-25">
+                                            <img class="img-fluid" src="{{ item.product.image.url }}">
+                                        </td>
+                                        <td class="">
+                                            <p class="my-0 "><strong>{{ item.product.friendly_name }}</strong></p>
+                                            <p class="my-0 text-muted small">{{ item.product.sku }}</p>
+                                        </td>
+                                        <td class="">
+                                            <p class="my-0">{{ item.product.brand.price }}</p>
+                                        </td>
+                                        <td class="">
+                                            <p class="my-0">{{ item.quantity }}</p>
+                                        </td>
+                                        <td class="">
+                                            <p class="my-0">{{ item.product. }}</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="6">
+                                        <h6>Bag total: ${{ total|floatformat:2 }}</h6>
+                                        <h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
+                                        <h4>Grand total: ${{ grand_total|floatformat:2 }}</h4>
+                                        {% if free_delivery_delta > 0 %}
+                                            <p class="my-1">You're only ${{ free_delivery_delta }} away from getting free delivery!</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <a class="btn btn-black rounded-0 border border-black" href="{% url 'products' %}">
+                                            <span>Keep Shopping</span>
+                                        </a>
+                                        <a class="btn btn-black rounded-0 border border-black" href="#">
+                                            <span>Go to Checkout</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     {% else %}
                         <p class="">Your cart is empty</p>
