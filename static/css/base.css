@@ -123,6 +123,10 @@ footer {
     height: 6px;
 }
 
+.toast-message {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
 /* Colors for text, buttons and other objects */
 .btn-red {
     background: #E63946;

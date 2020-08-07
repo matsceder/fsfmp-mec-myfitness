@@ -1,4 +1,4 @@
-<div class="toast border border-secondary rounded-0" data-delay="10000">
+<div class="toast border border-secondary rounded-0" data-delay="1000000">
     <div class="w-100 toast-capper bg-danger"></div>
     <div class="toast-header">
         <span class="mr-2">
@@ -9,22 +9,60 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="toast-body">
-        <div class="row">
-            <div class="col">
-                <small>{{ message }}</small>
+    <div class="toast-body pt-1 px-0 pb-0">
+        <div class="row w-100 m-0">
+            <div class="col pb-1 toast-message">
+                <small><strong>{{ message }}</strong></small>
             </div>
         </div>
         {% if grand_total %}
-        
-        <div class="row">
-            <div class="col-3">
-                <img class="w-100" src="{{ item.product.image.url }}">
+            <div class="px-3">
+                <p class="text-black pt-2 mb-1">You have {{ product_count }} item{% if product_count > 1 %}s{% endif %} in your cart</p>
             </div>
-            <div class="col-9">
-
+            <div class="bag-content toast-message px-3 pb-2">
+                {% for item in cart_items %}
+                    {% if forloop.counter <= 3 %}
+                    <div class="row">
+                        <div class="col-3">
+                            <img class="w-100" src="{{ item.product.image.url }}">
+                        </div>
+                        <div class="col-9 my-auto">
+                            <p class="my-0"><small><strong>{{ item.product.brand }} - {{ item.product }}</strong></small></p>
+                            <p class="my-0"><small>Qty: {{ item.quantity }}</small></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-        </div>
+            <div class="row w-100 m-0">
+                <div class="col-12 toast-message">
+                    <strong><p class="mt-2 mb-1 text-black">
+                        Cart Total: 
+                        <span class="float-right">${{ total|floatformat:2 }}</span>
+                    </p></strong>
+                </div>
+                <div class="col-12 p-0">
+                    {% if free_delivery_delta > 0 %}
+                        <p class="mb-0 p-1 text-black text-center">
+                            <u>You're only <strong>${{ free_delivery_delta }}</strong> from free delivery!</u>
+                        </p>
+                    {% endif %}
+                    <a href="#" class="btn btn-black btn-block mt-0 rounded-0">
+                        <span class="text-uppercase">Go To Checkout</span>
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </a>
+                    {% if request.get_full_path != "/cart/" %}
+                        <a href="{% url 'cart' %}" class="btn bg-transparent btn-block py-1 rounded-0">
+                            <span class="text-uppercase"><small><strong>View all items in your cart</strong></small></span>
+                            <span class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
     </div>
 </div>
