@@ -109,6 +109,20 @@ footer {
     position: absolute;
 }
 
+/* Message containers */
+/* Bootstrap Toasts */
+.toast {
+    position: fixed;
+    top: 77px;
+    right: 5px;
+    z-index: 99999999;
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
+
 /* Colors for text, buttons and other objects */
 .btn-red {
     background: #E63946;
@@ -278,6 +292,11 @@ footer {
         padding-top: 152px;
     }
 
+    /* Message containers */
+    .toast {
+        top: 117px !important;
+    }
+
     /* Index */
 
     #index-body-row {
@@ -305,6 +324,16 @@ footer {
     max-height: 80vh;
     overflow: scroll;
     z-index: 1040;
+    }
+}
+
+/* Medium tablets and desktop */
+/* Padding around body changes from 5px tp 15px */
+@media (min-width: 576px) {
+    /* Message containers */
+    .toast {
+        right: 15px;
+        top: 87px;
     }
 }
 
