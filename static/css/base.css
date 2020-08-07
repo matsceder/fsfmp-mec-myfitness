@@ -200,7 +200,8 @@ footer {
     bottom: 20px;
 }
 
-.btt-link {
+.btt-link,
+.update-link {
     cursor: pointer;
 }
 

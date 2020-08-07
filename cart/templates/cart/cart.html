@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div id="cart-info" class="row w-100 justify-content-center">
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-10 offset-md-1">
                     {% if cart_items %}
                         <div class="table-responsive">
                             <table class="table table-sm table-borderless">
@@ -28,7 +28,7 @@
                                         <th scope="col">Product Info</th>
                                         <th scope="col"></th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Qty</th>
+                                        <th scope="col">Quantity</th>
                                         <th scope="col">Subtotal</th>
                                     </tr>
                                 </thead>
@@ -47,7 +47,32 @@
                                             <p class="my-0">{{ item.product.brand.price }}</p>
                                         </td>
                                         <td class="">
-                                            <p class="my-0">{{ item.quantity }}</p>
+                                            <p class="my-0">
+                                                <form class="form" action="" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <button class="decrement-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                                    <span>
+                                                                        <i class="fas fa-minus fa-sm"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <input type="number" class="form-control text-center form-control-sm qty_input" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                                            <div class="input-group-append">
+                                                                <button class="increment-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                                    <span>
+                                                                        <i class="fas fa-plus fa-sm"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <a class="update-link text-dark update-link"><small>Update cart</small></a>
+                                                <a class="update-link text-danger remove-item float-right" id="remove_{{ item.item_id }}"><small>Remove item</small></a>
+                                            </p>
                                         </td>
                                         <td class="">
                                             <p class="my-0"></p>
@@ -98,4 +123,30 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'includes/quantity_input_script.html' %}
+
+    <script type="text/javascript">
+        // Update quantity in cart
+        $('.update-link').click(function(e) {
+            var form = $(this).prev('.update-form');
+            form.submit();
+        })
+
+        // Remove item from cart
+        $('.remove-item').click(function(e) {
+            var csrfToken = "{{ csrf_token }}";
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var url = `/cart/remove/${itemId}`;
+            var data = {'csrfmiddlewaretoken': csrfToken};
+
+            $.post(url, data)
+            .done(function() {
+                location.reload();
+            });
+        })
+    </script>
 {% endblock %}
