@@ -24,7 +24,11 @@
                     {% if forloop.counter <= 3 %}
                     <div class="row">
                         <div class="col-3">
-                            <img class="w-100" src="{{ item.product.image.url }}">
+                            {% if item.product.image %}
+                                <img class="w-100" src="{{ item.product.image.url }}">
+                            {% else %}
+                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png">
+                            {% endif %}
                         </div>
                         <div class="col-9 my-auto">
                             <p class="my-0"><small><strong>{{ item.product.brand }} - {{ item.product }}</strong></small></p>
@@ -47,7 +51,7 @@
                             <u>You're only <strong>${{ free_delivery_delta }}</strong> from free delivery!</u>
                         </p>
                     {% endif %}
-                    <a href="#" class="btn btn-black btn-block mt-0 rounded-0">
+                    <a href="{% url 'checkout' %}" class="btn btn-black btn-block mt-0 rounded-0">
                         <span class="text-uppercase">Go To Checkout</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>

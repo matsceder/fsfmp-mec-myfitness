@@ -3,9 +3,7 @@
         <a href="{% url 'home' %}" id="main-logo-link-small" class="nav-link main-logo-link my-auto text-white">
             <h2 class="logo-font my-auto">MyFitness</h2>
         </a>
-
         <ul id="navbar-small-ul" class="navbar-nav">
-
             <li id="home-nav-icon" class="list-inline-item">
                 <a href="{% url 'home' %}" class="text-white nav-link">
                     <div class="text-center">
@@ -15,7 +13,6 @@
                     </div>
                 </a>
             </li>
-
             <li class="list-inline-item">
                 <a class="text-white nav-link" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="text-center">
@@ -39,7 +36,6 @@
                     </form>
                 </div>
             </li>
-
             <li class="list-inline-item">
                 <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="text-center">
@@ -60,8 +56,6 @@
                     {% endif %}
                 </div>
             </li>
-
-
             <li class="list-inline-item">
                 <a class="{% if grand_total %}font-weight-bold{% endif %} text-white nav-link" href="{% url 'cart' %}">
                     <div class="text-center">
@@ -76,7 +70,6 @@
                     </div>
                 </a>
             </li>
-
         </ul>
     </div>
 </div>
