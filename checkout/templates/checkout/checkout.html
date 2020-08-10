@@ -107,7 +107,7 @@
                             <div class="p-2" id="card-element">
                                 <!-- Handles Stripe card payments -->
                             </div>
-                            <div class="p-2" id="cart-error" role="alert">
+                            <div class="p-2" id="card-error" role="alert">
                                 <!-- To display errors in the form -->
                             </div>
                         </fieldset>
@@ -128,12 +128,10 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="col-4 align-self-end">
-                                <button id="submit-form" class="btn btn-black rounded-0 float-right">
-                                    <span class="icon"></span>
-                                    <span>Checkout</span>
-                                </button>
-                            </div>
+                            <button id="submit-button" class="btn btn-black rounded-0 float-right">
+                                <span class="icon"></span>
+                                <span>Checkout</span>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -154,6 +152,6 @@
 {% block postloadjs %}
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ stripe_public_key|json_script:"id_client_secret" }}
+    {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
