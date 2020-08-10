@@ -1,0 +1,14 @@
+#payment-form .form-control,
+#card-element {
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 0;
+}
+
+.form-check.form-check-inline.float-right {
+    margin-right: 0;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
