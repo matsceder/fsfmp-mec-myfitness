@@ -37,7 +37,7 @@
                             <div class="col-2">
                                 <p>Price:</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2 text-right">
                                 <p>Total:</p>
                             </div>
                         </div>
@@ -50,10 +50,10 @@
                                     <p class="my-0">{{ item.quantity }}</p>
                                 </div>
                                 <div class="col-2">
-                                    <p class="my-0">{{ item.product.brand.price }}</p>
+                                    <p class="my-0">${{ item.product.brand.price }}</p>
                                 </div>
-                                <div class="col-2">
-                                    <p class="my-0"><strong>{{ item.product.brand.price | calc_subtotal:item.quantity }}</strong></p>
+                                <div class="col-2 text-right">
+                                    <p class="my-0"><strong>${{ item.product.brand.price | calc_subtotal:item.quantity }}</strong></p>
                                 </div>
                             </div>
                         {% endfor %}
