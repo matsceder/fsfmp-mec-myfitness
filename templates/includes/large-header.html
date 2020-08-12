@@ -37,7 +37,9 @@
                         <a href="#" class="text-black">Product<br>Management</a>
                         <br>
                     {% endif %}
-                    <a href="#" class="text-black">Account</a>
+                    <a href="{% url 'profile' %}" class="text-black">My Profile</a>
+                    <br>
+                    <a href="#" class="text-black">Subscriptions</a>
                     <br>
                     <a href="{% url 'account_logout' %}" class="text-black">Logout</a>
                 {% else %}

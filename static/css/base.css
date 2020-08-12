@@ -86,6 +86,10 @@ header {
     background-color: #232323;
 }
 
+input[name='q']::placeholder {
+    color: #aab7c4;
+}
+
 /* Body Container */
 .body-container {
     min-height: calc(100vh - calc(134px + 1rem));
@@ -135,7 +139,8 @@ footer {
 
 .btn-black {
     background: #232323;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
 }
 
 .btn-wht {
@@ -202,6 +207,7 @@ footer {
 
 .body-products {
     background-color: white;
+    min-height: inherit;
 }
 
 #category-active {
@@ -239,6 +245,27 @@ footer {
 
 .color-text {
     font-size: 0.6rem;
+}
+
+
+/*  --------  Allauth formatting  --------  */
+
+#allauth-content input {
+    border-color: #232323;
+    border-radius: 0;
+}
+
+#allauth-content label:not([for='id_remember']) {
+    display: none;
+}
+
+#allauth-content input::placeholder {
+    color: #aab7c4;
+}
+
+#allauth-content a {
+	color: #232323;
+    text-decoration: underline;
 }
 
 /*  --------  Media Queries  --------  */
