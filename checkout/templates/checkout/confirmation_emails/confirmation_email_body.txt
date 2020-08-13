@@ -1,0 +1,35 @@
+Hello!
+
+Dear {{ order.full_name }}. This is a confirmation of your order at MyFitness. Following is the information on your order:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+Shipping:
+
+{{ order.street_address1 }}
+{{ order.street_address2 }}
+{{ order.postcode }}, {{ order.town_or_city }},
+{{ order.country }}.
+
+Items:
+{% for item in order.lineitems.all %}
+{{ item.product.brand.friendly_name }} - {{ item.product.friendly_name }} x {{ item.quantity }} @ {{ item.product.brand.price }}
+{% endfor %}
+
+
+Order Total: ${{ order.order_total }}
+Delivery: ${{ order.delivery_cost }}
+Grand Total: ${{ order.grand_total }}
+
+
+If there would be any problems we'll reach out to you on the phone number provided: {{ order.phone_number }}.
+
+
+If you have any questions about your order, please contact us at {{ contact_email }}.
+
+Thank you for shopping with us!
+
+Best,
+
+MyFitness
