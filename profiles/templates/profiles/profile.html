@@ -27,13 +27,13 @@
                 <!-- Accordion structure from Bootstrap -->
                 <div id="accordion" class="col-12 col-md-10 col-lg-7 profile-accordion">
                     <div class="card border-0">
-                        <div class="card-header pt-0 px-0" id="headingOne">
+                        <div class="card-header p-0" id="headingOne">
                             <button class="btn btn-wht btn-lg px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Delivery Information
                             </button>
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body px-0">
+                            <div class="card-body p-3 border border-top-0 rounded-0">
                                 <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
                                     {% csrf_token %}
                                     {{ form|crispy }}
@@ -43,25 +43,58 @@
                         </div>
                     </div>
                     <div class="card border-0">
-                        <div class="card-header px-0" id="headingTwo">
+                        <div class="card-header p-0" id="headingTwo">
                             <button class="btn btn-wht btn-lg collapsed px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Order History
                             </button>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="card-body px-0">
-                                {{ orders }}
+                            <div class="card-body p-3 border border-top-0 rounded-0 order-history">
+                                <table class="table table-sm table-borderless">
+                                    <thead>
+                                        <th>Order Number</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Order Total</th>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                                        {{ order.order_number|truncatechars:6 }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{ order.date }}
+                                                </td>
+                                                <td>
+                                                    <ul class="list-unstyled">
+                                                        {% for item in order.lineitems.all %}
+                                                            <li class="small">
+                                                                {{ item.product.friendly_name }} x {{ item.quantity }}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    ${{ order.grand_total }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                     <div class="card border-0">
-                        <div class="card-header px-0" id="headingThree">
+                        <div class="card-header p-0" id="headingThree">
                             <button class="btn btn-wht btn-lg collapsed px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             My Subscriptions
                             </button>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                            <div class="card-body px-0">
+                            <div class="card-body p-3 border border-top-0 rounded-0">
 
                             </div>
                         </div>
