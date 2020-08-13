@@ -1,0 +1,25 @@
+.profile-accordion .form-control {
+    color: #232323;
+}
+
+.profile-accordion .card-header {
+    background: white;
+}
+
+.profile-accordion .form-control:focus,
+.profile-accordion .btn:focus {
+    box-shadow: none;
+}
+
+.profile-accordion input::placeholder {
+    color: #aab7c4;
+}
+
+#id_default_country,
+#id_default_country option:not(:first-child) {
+    color: #232323;
+}
+
+#id_default_country option:first-child {
+    color: #aab7c4;
+}

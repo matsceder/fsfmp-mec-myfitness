@@ -15,7 +15,7 @@
                 <small><strong>{{ message }}</strong></small>
             </div>
         </div>
-        {% if grand_total %}
+        {% if grand_total and not on_profile_page %}
             <div class="px-3">
                 <p class="text-black pt-2 mb-1">You have {{ product_count }} item{% if product_count > 1 %}s{% endif %} in your cart</p>
             </div>

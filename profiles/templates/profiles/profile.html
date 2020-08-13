@@ -16,14 +16,63 @@
 {% block content %}
     <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
-            <div id="cart-top" class="row w-100">
+            <div class="row w-100">
                 <div class="col text-center mt-3">
                     <h3 class="text-muted">My Profile</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div id="cart-info" class="row w-100 m-3 justify-content-center">
-                {{ profile }}
+            <div id="profile-info" class="row w-100 m-3 justify-content-center">
+                
+                <!-- Accordion structure from Bootstrap -->
+                <div id="accordion" class="col-12 col-md-10 col-lg-7 profile-accordion">
+                    <div class="card border-0">
+                        <div class="card-header pt-0 px-0" id="headingOne">
+                            <button class="btn btn-wht btn-lg px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Delivery Information
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body px-0">
+                                <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <button class="btn btn-black rounded-0">Submit Changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0">
+                        <div class="card-header px-0" id="headingTwo">
+                            <button class="btn btn-wht btn-lg collapsed px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Order History
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body px-0">
+                                {{ orders }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0">
+                        <div class="card-header px-0" id="headingThree">
+                            <button class="btn btn-wht btn-lg collapsed px-0 w-100 text-left" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            My Subscriptions
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body px-0">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row w-100">
+                <div class="col text-center mt-3">
+                    <hr class="w-75 mb-3">
+                </div>
             </div>
         </div>
     </div>
@@ -35,4 +84,10 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}">
+    </script>
 {% endblock %}
