@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect, reverse,\
-                             get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -50,6 +49,7 @@ def checkout(request):
             'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
+
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -75,7 +75,7 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('cart'))
-            request.session['save_info'] = 'save_info' in request.POST
+            request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success',
                             args=[order.order_number]))
         else:
