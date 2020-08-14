@@ -92,12 +92,22 @@ def product(request, product_id):
 
 def add_product(request):
     """ Adding new Producers, Brands and Product items to the store """
-    producer_form = ProducerForm()
-    brand_form = BrandForm()
-    product_form = ProductForm()
-    category = Category.objects.all()
-    producer = Producer.objects.all()
-    brand = Brand.objects.all()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product was added successfully")
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request, 'Failed to add product. Ensure all fields are filled in properly')
+    else:
+        producer_form = ProducerForm()
+        brand_form = BrandForm()
+        product_form = ProductForm()
+        category = Category.objects.all()
+        producer = Producer.objects.all()
+        brand = Brand.objects.all()
+
     template = 'products/add_product.html'
     context = {
         'producer_form': producer_form,
