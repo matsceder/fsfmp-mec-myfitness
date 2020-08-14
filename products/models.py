@@ -23,6 +23,9 @@ class Producer(models.Model):
     def __str__(self):
         return self.friendly_name
 
+    def get_friendly_name(self):
+        return self.friendly_name
+
 
 class Brand(models.Model):
     category = models.ForeignKey(
@@ -45,6 +48,9 @@ class Brand(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
 
     def __str__(self):
+        return self.friendly_name
+
+    def get_friendly_name(self):
         return self.friendly_name
 
 

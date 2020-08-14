@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Brand, Producer, Category
+from .forms import ProducerForm, BrandForm, ProductForm
 
 
 def all_products(request):
@@ -87,3 +88,24 @@ def product(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+def add_product(request):
+    """ Adding new Producers, Brands and Product items to the store """
+    producer_form = ProducerForm()
+    brand_form = BrandForm()
+    product_form = ProductForm()
+    category = Category.objects.all()
+    producer = Producer.objects.all()
+    brand = Brand.objects.all()
+    template = 'products/add_product.html'
+    context = {
+        'producer_form': producer_form,
+        'brand_form': brand_form,
+        'product_form': product_form,
+        'category': category,
+        'producer': producer,
+        'brand': brand,
+    }
+
+    return render(request, template, context)
