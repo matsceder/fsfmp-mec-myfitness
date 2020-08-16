@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Brand, Producer, Category
-from .forms import ProducerForm, BrandForm, ProductForm
+from .forms import ProductForm
 
 
 def all_products(request):
@@ -102,7 +102,7 @@ def add_product(request):
         if product_form.is_valid():
             product_form.save()
             messages.success(request, "Product was added successfully")
-            return redirect(reverse('add_product'))
+            return redirect(reverse('product_management'))
         else:
             messages.error(request, 'Failed to add product. Ensure all fields are filled in properly')
     else:
@@ -155,3 +155,9 @@ def load_brands(request):
     return render(request, template, context)
 
 
+def delete_product(request, product_id):
+    """ Deletes a product from the store """
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, 'Product deleted!')
+    return redirect(reverse('products'))
