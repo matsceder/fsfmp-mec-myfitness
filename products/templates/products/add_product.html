@@ -21,7 +21,8 @@
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Add a new product</h5>
-                    <form method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
+                    <p class="text-muted small">Products refer to flavors, sizes or other versions of one brand</p>
+                    <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ product_form|crispy }}
                         <a href="{% url 'products' %}" class="btn btn-black rounded-0">Cancel</a>
@@ -41,4 +42,24 @@
     </div>
 {% endblock %}
 
+{% block postloadjs %}
+    <script type="text/javascript">
 
+    $("#id_producer").change(function () {
+      var url = $("#product-form").attr("data-brands-url");  // get the url of the `load_cities` view
+      var producerId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'producer': producerId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_brand").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+    </script>
+{% endblock %}

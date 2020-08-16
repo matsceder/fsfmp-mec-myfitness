@@ -90,6 +90,11 @@ def product(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
+def product_management(request):
+
+    return render(request, 'products/product_management.html')
+
+
 def add_product(request):
     """ Adding new Producers, Brands and Product items to the store """
     if request.method == 'POST':
@@ -101,8 +106,6 @@ def add_product(request):
         else:
             messages.error(request, 'Failed to add product. Ensure all fields are filled in properly')
     else:
-        producer_form = ProducerForm()
-        brand_form = BrandForm()
         product_form = ProductForm()
         category = Category.objects.all()
         producer = Producer.objects.all()
@@ -110,12 +113,41 @@ def add_product(request):
 
     template = 'products/add_product.html'
     context = {
-        'producer_form': producer_form,
-        'brand_form': brand_form,
         'product_form': product_form,
         'category': category,
         'producer': producer,
         'brand': brand,
     }
 
+    return render(request, template, context)
+
+
+def edit_product(request, product_id):
+    """ Make changes to products in store """
+    product = get_object_or_404(Product, pk=product_id)
+    product_form = ProductForm(instance=product)
+    category = Category.objects.all()
+    producer = Producer.objects.all()
+    brand = Brand.objects.all()
+
+    template = 'products/edit_product.html'
+    context = {
+        'product': product,
+        'product_form': product_form,
+        'category': category,
+        'producer': producer,
+        'brand': brand,
+    }
+
+    return render(request, template, context)
+
+
+def load_brands(request):
+    producer_id = request.GET.get('producer')
+    brands = Brand.objects.filter(producer_id=producer_id).order_by('friendly_name')
+
+    template = 'includes/brands_dropdown_options.html'
+    context = {
+        'brands': brands,
+    }
     return render(request, template, context)

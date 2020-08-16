@@ -43,9 +43,13 @@ class ProductForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        brands = Brand.objects.all()
-        b_friendly_names = [(b.id, b.get_friendly_name()) for b in brands]
+        self.fields['brand'].queryset = Brand.objects.none()
 
-        self.fields['brand'].choices = b_friendly_names
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded-0'
+        if 'producer' in self.data:
+            try:
+                producer_id = int(self.data.get('producer'))
+                self.fields['brand'].queryset = Brand.objects.filter(producer_id=producer_id).order_by('friendly_name')
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            self.fields['brand'].queryset = self.instance.producer.brand_set.order_by('friendly_name')

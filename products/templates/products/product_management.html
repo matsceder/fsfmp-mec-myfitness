@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+        <div class="row body-products justify-content-center mx-0">
+            <div id="cart-top" class="row w-100">
+                <div class="col text-center mt-3">
+                    <h3 class="text-muted">Product Management</h3>
+                    <hr class="w-75 mb-3">
+                </div>
+            </div>
+            <div class="row w-100 m-3 justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <h5>Select option for creating a new Producer, Brand or Product</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="#">Producer</a>
+                            <p class="text-muted small">Producer refers to manufacturer of a brand and products</p>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#">Brand</a>
+                            <p class="text-muted smmal">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'add_product' %}">Product</a>
+                            <p class="text-muted small">New product refers to new flavor, size or other variation for one brand.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_footer %}
+    <div class="container footer-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

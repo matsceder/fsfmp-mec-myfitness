@@ -55,6 +55,12 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
+    producer = models.ForeignKey(
+        'Producer',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     brand = models.ForeignKey(
         'Brand',
         null=True,
@@ -65,10 +71,13 @@ class Product(models.Model):
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
     sku = models.CharField(max_length=254, null=True, blank=True)
     ingredients = models.TextField(null=True, blank=True)
-    stock = models.PositiveSmallIntegerField(blank=True, null=True, default=5)
+    stock = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
     image = models.ImageField(null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     thumbnail = models.BooleanField(default=False)
 
     def __str__(self):
+        return self.friendly_name
+
+    def get_friendly_name(self):
         return self.friendly_name
