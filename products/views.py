@@ -96,27 +96,21 @@ def product_management(request):
 
 
 def add_product(request):
-    """ Adding new Producers, Brands and Product items to the store """
+    """ Adding new Product items to the store """
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        product_form = ProductForm(request.POST, request.FILES)
+        if product_form.is_valid():
+            product_form.save()
             messages.success(request, "Product was added successfully")
             return redirect(reverse('add_product'))
         else:
             messages.error(request, 'Failed to add product. Ensure all fields are filled in properly')
     else:
         product_form = ProductForm()
-        category = Category.objects.all()
-        producer = Producer.objects.all()
-        brand = Brand.objects.all()
 
     template = 'products/add_product.html'
     context = {
         'product_form': product_form,
-        'category': category,
-        'producer': producer,
-        'brand': brand,
     }
 
     return render(request, template, context)
@@ -125,24 +119,32 @@ def add_product(request):
 def edit_product(request, product_id):
     """ Make changes to products in store """
     product = get_object_or_404(Product, pk=product_id)
-    product_form = ProductForm(instance=product)
-    category = Category.objects.all()
-    producer = Producer.objects.all()
-    brand = Brand.objects.all()
+    if request.method == 'POST':
+        product_form = ProductForm(request.POST, request.FILES, instance=product)
+        if product_form.is_valid:
+            product_form.save()
+            messages.success(request, 'Successfully updated')
+            return redirect(reverse('product', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update product. Make sure the form is vaild.')
+    else:
+        product_form = ProductForm(instance=product)
+        messages.info(request, f"You're now making changes to {product.brand} - {product.friendly_name}")
 
     template = 'products/edit_product.html'
     context = {
         'product': product,
         'product_form': product_form,
-        'category': category,
-        'producer': producer,
-        'brand': brand,
     }
 
     return render(request, template, context)
 
 
 def load_brands(request):
+    """
+    A view to return related brands with selected
+    producer when creating a new product
+    """
     producer_id = request.GET.get('producer')
     brands = Brand.objects.filter(producer_id=producer_id).order_by('friendly_name')
 
@@ -151,3 +153,5 @@ def load_brands(request):
         'brands': brands,
     }
     return render(request, template, context)
+
+

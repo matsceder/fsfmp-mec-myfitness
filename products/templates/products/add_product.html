@@ -25,6 +25,7 @@
                     <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ product_form|crispy }}
+                        <p class="text-muted small">Check the "Thumbnail"-checkbox if you want this specific product to be shown in the shop view.</p>
                         <a href="{% url 'products' %}" class="btn btn-black rounded-0">Cancel</a>
                         <button type="submit" class="btn btn-black rounded-0">Add Product</button>
                     </form>
