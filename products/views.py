@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Brand, Producer, Category
-from .forms import ProductForm
+from .forms import ProductForm, BrandForm, ProducerForm
 
 
 def all_products(request):
@@ -161,3 +161,110 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+def add_brand(request):
+    """ Adding new Brand items to the store """
+    if request.method == 'POST':
+        brand_form = BrandForm(request.POST, request.FILES)
+        if brand_form.is_valid():
+            brand_form.save()
+            messages.success(request, "Brand was added successfully")
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to add brand. Ensure all fields are filled in properly')
+    else:
+        brand_form = BrandForm()
+
+    template = 'products/add_brand.html'
+    context = {
+        'brand_form': brand_form,
+    }
+
+    return render(request, template, context)
+
+
+def edit_brand(request, brand_id):
+    """ Make changes to a brand """
+    brand = get_object_or_404(Brand, pk=brand_id)
+    if request.method == 'POST':
+        brand_form = BrandForm(request.POST, request.FILES, instance=brand)
+        if brand_form.is_valid:
+            brand_form.save()
+            messages.success(request, 'Successfully updated')
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to update brand. Make sure the form is vaild.')
+    else:
+        brand_form = BrandForm(instance=brand)
+        messages.info(request, f"You're now making changes to {brand.friendly_name}")
+
+    template = 'products/edit_brand.html'
+    context = {
+        'brand': brand,
+        'brand_form': brand_form,
+    }
+
+    return render(request, template, context)
+
+
+def delete_brand(request, brand_id):
+    """ Deletes a brand from the store """
+    brand = get_object_or_404(Brand, pk=brand_id)
+    brand.delete()
+    messages.success(request, 'Brand deleted!')
+    return redirect(reverse('product_management'))
+
+
+def add_producer(request):
+    """ Adding new Producer items to the store """
+    if request.method == 'POST':
+        producer_form = ProducerForm(request.POST, request.FILES)
+        if producer_form.is_valid():
+            producer_form.save()
+            messages.success(request, "Producer was added successfully")
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to add producer. Ensure all fields are filled in properly')
+    else:
+        producer_form = ProducerForm()
+
+    template = 'products/add_producer.html'
+    context = {
+        'producer_form': producer_form,
+    }
+
+    return render(request, template, context)
+
+
+def edit_producer(request, producer_id):
+    """ Make changes to a producer """
+    producer = get_object_or_404(Producer, pk=producer_id)
+    if request.method == 'POST':
+        producer_form = ProducerForm(request.POST, request.FILES, instance=producer)
+        if producer_form.is_valid:
+            producer_form.save()
+            messages.success(request, 'Successfully updated')
+            return redirect(reverse('product_management'))
+        else:
+            messages.error(request, 'Failed to update producer. Make sure the form is vaild.')
+    else:
+        producer_form = ProducerForm(instance=producer)
+        messages.info(request, f"You're now making changes to {producer.friendly_name}")
+
+    template = 'products/edit_brand.html'
+    context = {
+        'producer': producer,
+        'producer_form': producer_form,
+    }
+
+    return render(request, template, context)
+
+
+def delete_producer(request, producer_id):
+    """ Deletes a brand from the store """
+    producer = get_object_or_404(Producer, pk=producer_id)
+    producer.delete()
+    messages.success(request, 'Producer deleted!')
+    return redirect(reverse('product_management'))
+
