@@ -293,7 +293,7 @@ def edit_producer(request, producer_id):
         producer_form = ProducerForm(instance=producer)
         messages.info(request, f"You're now making changes to {producer.friendly_name}")
 
-    template = 'products/edit_brand.html'
+    template = 'products/edit_producer.html'
     context = {
         'producer': producer,
         'producer_form': producer_form,

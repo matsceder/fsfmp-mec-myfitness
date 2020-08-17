@@ -12,7 +12,7 @@
 {% block content %}
     <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
-            <div id="cart-top" class="row w-100">
+            <div class="row w-100">
                 <div class="col text-center mt-3">
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
@@ -31,8 +31,13 @@
                             {% endif %}
                         {% endfor %}
                         <a href="{% url 'products' %}" class="btn btn-black rounded-0">Cancel</a>
-                        <button type="submit" class="btn btn-black rounded-0">Save Update</button>
+                        <button type="submit" class="btn btn-black rounded-0 flaot-right">Save Update</button>
                     </form>
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col text-center mt-3">
+                    <hr class="w-75 mb-3">
                 </div>
             </div>
         </div>
