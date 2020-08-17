@@ -30,6 +30,7 @@ class BrandAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
+        'producer',
         'brand',
         'friendly_name',
         'sku',

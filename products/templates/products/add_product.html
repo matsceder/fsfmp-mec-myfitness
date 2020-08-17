@@ -12,7 +12,7 @@
 {% block content %}
     <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
-            <div id="cart-top" class="row w-100">
+            <div class="row w-100">
                 <div class="col text-center mt-3">
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
@@ -21,7 +21,7 @@
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Add a new product</h5>
-                    <p class="text-muted small">Products refer to flavors, sizes or other versions of one brand</p>
+                    <p class="text-muted small">New product refers to new flavor, size or other variation for one brand.</p>
                     <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% for field in product_form %}
@@ -32,9 +32,14 @@
                             {% endif %}
                         {% endfor %}
                         <p class="text-muted small">Check the "Thumbnail"-checkbox if you want this specific product to be shown in the shop view.</p>
-                        <a href="{% url 'products' %}" class="btn btn-black rounded-0">Cancel</a>
-                        <button type="submit" class="btn btn-black rounded-0">Add Product</button>
+                        <a href="{% url 'product_management' %}" class="btn btn-black rounded-0">Cancel</a>
+                        <button type="submit" class="btn btn-black rounded-0 float-right">Add Product</button>
                     </form>
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col text-center mt-3">
+                    <hr class="w-75 mb-3">
                 </div>
             </div>
         </div>
