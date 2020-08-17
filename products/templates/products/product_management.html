@@ -12,7 +12,7 @@
 {% block content %}
     <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
-            <div id="cart-top" class="row w-100">
+            <div class="row w-100">
                 <div class="col text-center mt-3">
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
@@ -20,21 +20,32 @@
             </div>
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
-                    <h5>Select option for creating a new Producer, Brand or Product</h5>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="#">Producer</a>
-                            <p class="text-muted small">Producer refers to manufacturer of a brand and products</p>
+                    <h5 class="ml-2">Select your option:</h5>
+                    <ul class="list-group border border-black rounded-0">
+                        <li class="list-group-item border-0">
+                            <a href="#" class="management-link">
+                                <h6 class="mb-1">Producer</h6>
+                                <p class="text-muted small m-0">Producer refers to manufacturer of a brand and products</p>
+                            </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="#">Brand</a>
-                            <p class="text-muted smmal">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
+                        <li class="list-group-item border-0">
+                            <a href="#" class="management-link">
+                                <h6 class="mb-1">Brand</h6>
+                                <p class="text-muted small m-0">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
+                            </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="{% url 'add_product' %}">Product</a>
-                            <p class="text-muted small">New product refers to new flavor, size or other variation for one brand.</p>
+                        <li class="list-group-item border-0">
+                            <a href="{% url 'add_product' %}" class="management-link">
+                                <h6 class="mb-1">Product</h6>
+                                <p class="text-muted small m-0">New product refers to new flavor, size or other variation for one brand.</p>
+                            </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col text-center mt-3">
+                    <hr class="w-75 mb-3">
                 </div>
             </div>
         </div>

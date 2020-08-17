@@ -247,6 +247,13 @@ footer {
     font-size: 0.6rem;
 }
 
+/*  --------  Product Management template  --------  */
+
+.management-link:hover {
+    text-decoration: inherit;
+    color: inherit;
+}
+
 /*  --------  Add/Edit Product templates  --------  */
 
 .btn-file {
