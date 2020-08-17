@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Product, Brand, Producer, Category
 from .forms import ProductForm, BrandForm, ProducerForm
@@ -95,8 +96,13 @@ def product_management(request):
     return render(request, 'products/product_management.html')
 
 
+@login_required
 def add_product(request):
     """ Adding new Product items to the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES)
         if product_form.is_valid():
@@ -116,8 +122,13 @@ def add_product(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_product(request, product_id):
     """ Make changes to products in store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES, instance=product)
@@ -155,16 +166,26 @@ def load_brands(request):
     return render(request, template, context)
 
 
+@login_required
 def delete_product(request, product_id):
     """ Deletes a product from the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
 
 
+@login_required
 def add_brand(request):
     """ Adding new Brand items to the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         brand_form = BrandForm(request.POST, request.FILES)
         if brand_form.is_valid():
@@ -184,8 +205,13 @@ def add_brand(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_brand(request, brand_id):
     """ Make changes to a brand """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     brand = get_object_or_404(Brand, pk=brand_id)
     if request.method == 'POST':
         brand_form = BrandForm(request.POST, request.FILES, instance=brand)
@@ -208,16 +234,26 @@ def edit_brand(request, brand_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_brand(request, brand_id):
     """ Deletes a brand from the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     brand = get_object_or_404(Brand, pk=brand_id)
     brand.delete()
     messages.success(request, 'Brand deleted!')
     return redirect(reverse('product_management'))
 
 
+@login_required
 def add_producer(request):
     """ Adding new Producer items to the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         producer_form = ProducerForm(request.POST, request.FILES)
         if producer_form.is_valid():
@@ -237,8 +273,13 @@ def add_producer(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_producer(request, producer_id):
     """ Make changes to a producer """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     producer = get_object_or_404(Producer, pk=producer_id)
     if request.method == 'POST':
         producer_form = ProducerForm(request.POST, request.FILES, instance=producer)
@@ -261,10 +302,14 @@ def edit_producer(request, producer_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_producer(request, producer_id):
     """ Deletes a brand from the store """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
+
     producer = get_object_or_404(Producer, pk=producer_id)
     producer.delete()
     messages.success(request, 'Producer deleted!')
     return redirect(reverse('product_management'))
-
