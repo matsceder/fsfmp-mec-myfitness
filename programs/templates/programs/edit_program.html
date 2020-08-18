@@ -20,8 +20,8 @@
             </div>
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-10">
-                    <h5>Create a new program post</h5>
-                    <form id="programs-form" method="POST" action="{% url 'add_program' %}" class="form m-2" enctype="multipart/form-data">
+                    <h5>Edit a program post</h5>
+                    <form id="programs-form" method="POST" action="{% url 'edit_program' program.id %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ programs_form | crispy }}
                         <a href="{% url 'programs' %}" class="btn btn-black rounded-0">Cancel</a>
