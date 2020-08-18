@@ -20,15 +20,9 @@
             </div>
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-10">
-                    {% for program in programs %}
-                        <ul>
-                            <li>
-                                <a href="{% url 'program' program.id %}">{{ program.title }} - {{ program.author }}</a>
-                                <br>
-                                {{ program.body }}
-                            </li>
-                        </ul>
-                    {% endfor %}
+                    {{ program.title }} - {{ program.author }}
+                    <br>
+                    {{ program.body }}
                 </div>
             </div>
             <div class="row w-100">
