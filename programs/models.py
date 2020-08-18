@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, date
 
 
 class Category(models.Model):
@@ -27,6 +28,7 @@ class Programs(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
+    post_date = models.DateField(auto_now_add=True)
     is_free = models.BooleanField(default=False)
     title = models.CharField(max_length=254, null=True, blank=True)
     body = models.TextField()
