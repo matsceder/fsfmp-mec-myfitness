@@ -10,13 +10,15 @@ def programs(request):
     categories = Category.objects.all()
     programs = Programs.objects.all()
 
+    ordering = ['-post_date']
+
     template = 'programs/programs.html'
     context = {
         'categories': categories,
         'programs': programs,
     }
 
-    return render(request, template, context)
+    return render(request, template, context, ordering)
 
 
 def program(request, program_id):

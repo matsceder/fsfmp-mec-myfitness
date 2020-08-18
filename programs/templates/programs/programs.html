@@ -25,6 +25,10 @@
                             <li>
                                 <a href="{% url 'program' program.id %}">{{ program.title }} - {{ program.author }}</a>
                                 <br>
+                                <p class="text-muted small">
+                                    {{ program.post_date }}
+                                </p>
+                                <br>
                                 {{ program.body }}
                             </li>
                         </ul>

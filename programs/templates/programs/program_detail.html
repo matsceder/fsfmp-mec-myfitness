@@ -22,6 +22,10 @@
                 <div class="col-10">
                     {{ program.title }} - {{ program.author }}
                     <br>
+                    <p class="text-muted small">
+                        {{ program.post_date }}
+                    </p>
+                    <br>
                     {{ program.body }}
                     <br>
                     <a href="{% url 'programs' %}" class="btn btn-black rounded-0">Back</a>
