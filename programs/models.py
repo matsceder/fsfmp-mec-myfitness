@@ -36,6 +36,8 @@ class Programs(models.Model):
     is_free = models.BooleanField(default=False)
     title = models.CharField(max_length=254, null=True, blank=True)
     snippet = models.CharField(max_length=254, null=True, blank=True)
+    header_image = models.ImageField(null=True, blank=True)
+    header_image_url = models.URLField(max_length=1024, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
 
     def __str__(self):
