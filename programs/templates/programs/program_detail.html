@@ -20,15 +20,27 @@
             </div>
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-10">
-                    {{ program.title }} - {{ program.author }}
+                    {{ program.title }} - {{ program.author.first_name }} {{ program.author.last_name }}
                     <br>
-                    <p class="text-muted small">
+                    <p class="text-muted small"><u>
                         {{ program.post_date }}
-                    </p>
-                    <br>
+                    </u></p>
                     {{ program.body }}
                     <br>
-                    <a href="{% url 'programs' %}" class="btn btn-black rounded-0">Back</a>
+                    <a href="{% url 'programs' %}" class="btn btn-black rounded-0">Back</a>                    
+                    {% if user.is_superuser %}
+                        {% if user == program.author %}
+                            <p>
+                                <a class="small" href="{% url 'edit_program' program.id %}">Edit post</a> | 
+                                <a class="small" href="{% url 'delete_program' program.id %}">Delete post</a>
+                            </p>
+                        {% elif user.id == 1 %}
+                            <p>
+                                <a class="small" href="{% url 'edit_program' program.id %}">Edit post</a> | 
+                                <a class="small" href="{% url 'delete_program' program.id %}">Delete post</a>
+                            </p>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
             <div class="row w-100">

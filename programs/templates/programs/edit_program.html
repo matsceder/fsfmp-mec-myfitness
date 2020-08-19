@@ -23,7 +23,13 @@
                     <h5>Edit a program post</h5>
                     <form id="programs-form" method="POST" action="{% url 'edit_program' program.id %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ programs_form | crispy }}
+                        {% for field in programs_form %}
+                            {% if field.name != 'is_free' %}
+                                {{ field | as_crispy_field }}
+                            {% else %}
+                                {% include 'programs/includes/checkbox.html' %}
+                            {% endif %}
+                        {% endfor %}
                         <a href="{% url 'programs' %}" class="btn btn-black rounded-0">Cancel</a>
                         <button class="btn btn-black rounded-0 float-right" type="submit" value="Submit">Send</button>
                     </form>

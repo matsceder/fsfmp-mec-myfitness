@@ -24,14 +24,16 @@
                     <form method="POST" action="{% url 'edit_product' product.id %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% for field in product_form %}
-                            {% if field.name != 'image' %}
+                            {% if field.name == 'thumbnail' %}
+                                {% include 'includes/checkbox.html' %}
+                            {% elif field.name != 'image' %}
                                 {{ field | as_crispy_field }}
                             {% else %}
                                 {{ field }}
                             {% endif %}
                         {% endfor %}
                         <a href="{% url 'products' %}" class="btn btn-black rounded-0">Cancel</a>
-                        <button type="submit" class="btn btn-black rounded-0 flaot-right">Save Update</button>
+                        <button type="submit" class="btn btn-black rounded-0 float-right">Save Update</button>
                     </form>
                 </div>
             </div>
