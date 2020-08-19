@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+    <div class="body-container container-fluid px-1 px-sm-3 my-1 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
@@ -19,10 +19,11 @@
                 </div>
             </div>
             <div class="row w-100 m-3 justify-content-center">
-                <div class="col-10">
+                <div class="col-12 col-md-10 col-lg-8">
                     <h5>Edit a program post</h5>
                     <form id="programs-form" method="POST" action="{% url 'edit_program' program.id %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
+                        <p class="mb-2">Author</p>
                         {% for field in programs_form %}
                             {% if field.name != 'is_free' %}
                                 {{ field | as_crispy_field }}
@@ -36,7 +37,7 @@
                 </div>
             </div>
             <div class="row w-100">
-                <div class="col text-center mt-3">
+                <div class="col text-center m-0">
                     <hr class="w-75 mb-3">
                 </div>
             </div>
@@ -50,4 +51,16 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script type="text/javascript">
+        var userId = "{{ user.id }}";
+        var userName = "{{ user.first_name }} {{ user.last_name }}";
+        $('#id_author').attr({value:userId, placeholder:userName, type:'hidden'});
+        $('#div_id_author').attr({class:'border-black rounded-0 mb-3'});
+        $('#div_id_author').children('label').html(userName).attr({class:'m-0'}).css({"padding": ".375rem .75rem", "color": "#"});
+
+        $('#id_category').prepend('<option value="0" disabled>---------</option>');
+</script>
 {% endblock %}
