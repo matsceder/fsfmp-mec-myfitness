@@ -23,6 +23,7 @@ class Programs(models.Model):
 
     class Meta:
         verbose_name_plural = "Programs"
+        ordering = ('-post_date',)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(
