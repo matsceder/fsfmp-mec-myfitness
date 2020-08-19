@@ -17,10 +17,11 @@ class ProgramsAdmin(admin.ModelAdmin):
     list_display = (
         'author',
         'title',
+        'post_date',
     )
 
     ordering = (
-        'title',
+        '-pk',
     )
 
 

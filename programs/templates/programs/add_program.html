@@ -24,6 +24,7 @@
                     <form id="programs-form" method="POST" action="{% url 'add_program' %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
                         <p class="mb-2">Author</p>
+                        {{ programs_form.media }}
                         {% for field in programs_form %}
                             {% if field.name != 'is_free' %}
                                 {{ field | as_crispy_field }}
