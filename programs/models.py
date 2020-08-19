@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime, date
 
 
 class Category(models.Model):
@@ -23,7 +22,7 @@ class Programs(models.Model):
 
     class Meta:
         verbose_name_plural = "Programs"
-        ordering = ('-post_date',)
+        ordering = ('-pk',)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(

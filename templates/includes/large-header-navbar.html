@@ -2,8 +2,8 @@
     <div class="col text-center">
         <a href="{% url 'profile' %}" class="px-3 text-white">My Profile</a>
         <a href="{% url 'products' %}" class="px-3 text-white">Shop</a>
-        <a href="#" class="px-3 text-white">Training</a>
-        <a href="#" class="px-3 text-white">Nutrition</a>
-        <a href="#" class="px-3 text-white">About</a>
+        <a href="{% url 'programs' %}?category=workouts" class="px-3 text-white">Training</a>
+        <a href="{% url 'programs' %}?category=diets" class="px-3 text-white">Nutrition</a>
+        <a href="{% url 'about' %}" class="px-3 text-white">About</a>
     </div>
 </div>

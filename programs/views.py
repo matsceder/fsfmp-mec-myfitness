@@ -9,11 +9,20 @@ def programs(request):
     """ A view to display the different workout and diet-programs """
     categories = Category.objects.all()
     programs = Programs.objects.all()
+    current_category = None
+
+    if request.GET:
+        if 'category' in request.GET:
+            current_category = request.GET['category'].split(',')
+            programs = programs.filter(category__name__in=current_category)
+            current_category = Category.objects.filter(
+                name__in=current_category)
 
     template = 'programs/programs.html'
     context = {
         'categories': categories,
         'programs': programs,
+        'current_category': current_category,
         'on_programs_page': True,
     }
 
