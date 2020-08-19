@@ -162,4 +162,18 @@
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
+    {% if user.is_authenticated %}
+        <script type="text/javascript">
+            {% if order_form.full_name.value == None %}
+                var fullName = "{{ user.first_name }} {{ user.last_name }}";
+                $('#id_full_name').val(fullName);
+            {% endif %}
+            {% if order_form.email.value == None %}
+                var userEmail = "{{ user.email }}";
+                $('#id_email').val(userEmail);
+            {% endif %}
+        </script>
+    {% endif %}
+
 {% endblock %}
