@@ -61,9 +61,6 @@
         $('#id_author').attr({value:userId, placeholder:userName, type:'hidden'});
         $('#div_id_author').attr({class:'border-black rounded-0 mb-3'});
         $('#div_id_author').children('label').html(userName).attr({class:'m-0'}).css({"padding": ".375rem .75rem", "color": "#"});
-        $(document).ready(function () {
-            $(".django-ckeditor-widget").css("display", "flex !important");
-        });
 
         $('#id_category').prepend('<option value="0" selected disabled>---------</option>');
     </script>
