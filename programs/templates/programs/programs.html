@@ -25,8 +25,8 @@
                         </div>
                     {% endif %}
                 <div class="col-12 col-md-10 col-lg-8 border-black rounded-0">
-                    {% for program in programs %}
-                        <ul class="list-unstyled mb-0">
+                    <ul class="list-unstyled mb-0">
+                        {% for program in programs %}
                             <li class="mt-2 pb-2 border-bottom rounded-0">
                                 <a href="{% url 'program' program.id %}">{{ program.title }} - {{ program.author.first_name }} {{ program.author.last_name }}</a>
                                 <br>
@@ -35,21 +35,16 @@
                                 </u></p>
                                 {{ program.body }}
                                 {% if user.is_superuser %}
-                                    {% if user == program.author %}
-                                        <p>
-                                            <a class="small" href="{% url 'edit_program' program.id %}">Edit post</a> | 
-                                            <a class="small" href="{% url 'delete_program' program.id %}">Delete post</a>
-                                        </p>
-                                    {% elif user.id == 1 %}
-                                        <p>
+                                    {% if user == program.author or user.id == 1 %}
+                                        <p class="m-0">
                                             <a class="small" href="{% url 'edit_program' program.id %}">Edit post</a> | 
                                             <a class="small" href="{% url 'delete_program' program.id %}">Delete post</a>
                                         </p>
                                     {% endif %}
                                 {% endif %}
                             </li>
-                        </ul>
-                    {% endfor %}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <div class="row w-100">
