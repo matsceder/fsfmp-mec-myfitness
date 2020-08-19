@@ -284,7 +284,9 @@ footer {
 
 /*  --------  Add/Edit Programs templates  --------  */
 
-
+div.django-ckeditor-widget {
+    display: flex !important;
+}
 
 /*  --------  Allauth formatting  --------  */
 

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Programs, Category
+from ckeditor.fields import RichTextField
 
 
 class ProgramsForm(forms.ModelForm):
