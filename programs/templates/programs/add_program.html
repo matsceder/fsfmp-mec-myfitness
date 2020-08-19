@@ -23,6 +23,7 @@
                     <h5>Create a new program post</h5>
                     <form id="programs-form" method="POST" action="{% url 'add_program' %}" class="form m-2" enctype="multipart/form-data">
                         {% csrf_token %}
+                        <p class="mb-2">Author</p>
                         {% for field in programs_form %}
                             {% if field.name != 'is_free' %}
                                 {{ field | as_crispy_field }}
@@ -50,4 +51,16 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script type="text/javascript">
+        var userId = "{{ user.id }}";
+        var userName = "{{ user.first_name }} {{ user.last_name }}";
+        $('#id_author').attr({value:userId, placeholder:userName, type:'hidden'});
+        $('#div_id_author').attr({class:'border-black rounded-0 mb-3'});
+        $('#div_id_author').children('label').html(userName).attr({class:'m-0'}).css({"padding": ".375rem .75rem"});
+
+        $('#id_category').prepend('<option value="0" selected disabled>---------</option>');
+</script>
 {% endblock %}
