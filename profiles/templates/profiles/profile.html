@@ -123,4 +123,12 @@
     {{ block.super }}
     <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}">
     </script>
+    {% if user.is_authenticated %}
+    <script type="text/javascript">
+        var fullName = "{{ user.first_name }} {{ user.last_name }}";
+        $('#id_default_full_name').val(fullName);
+        var userEmail = "{{ user.email }}";
+        $('#id_default_email').val(userEmail);
+    </script>
+    {% endif %}
 {% endblock %}
