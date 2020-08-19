@@ -90,23 +90,23 @@
                 </div>
                 <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Support</strong></p>
-                    <p class="m-0 d-sm-none">About</p>
-                    <p class="m-0">Contact</p>
-                    <p class="m-0">FAQ</p>
-                    <p class="m-0">Terms</p>
+                    <a href="{% url 'about' %}" class="d-sm-none"><p class="m-0">About</p></a>
+                    <a href="{% url 'about' %}"><p class="m-0">Contact</p></a>
+                    <a href="{% url 'about' %}"><p class="m-0">FAQ</p></a>
+                    <a href="{% url 'about' %}"><p class="m-0">Terms</p></a>
                 </div>
                 <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Navigate</strong></p>
-                    <p class="m-0">Profile</p>
-                    <p class="m-0">Shop</p>
-                    <p class="m-0">Training</p>
-                    <p class="m-0">Nutrition</p>
+                    <a href="{% url 'profile' %}"><p class="m-0">Profile</p></a>
+                    <a href="{% url 'products' %}"><p class="m-0">Shop</p></a>
+                    <a href="{% url 'programs' %}?category=workouts"><p class="m-0">Training</p></a>
+                    <a href="{% url 'programs' %}?category=diets"><p class="m-0">Nutrition</p></a>
                 </div>
                 <div class="col-4 col-sm-2 text-white pl-4">
                     <p class="mb-2"><strong>Social</strong></p>
-                    <p class="m-0">Facebook</p>
-                    <p class="m-0">Instagram</p>
-                    <p class="m-0">YouTube</p>
+                    <a href="https://www.facebook.com/"><p class="m-0">Facebook</p></a>
+                    <a href="https://www.instagram.com/"><p class="m-0">Instagram</p></a>
+                    <a href="https://www.youtube.com/"><p class="m-0">YouTube</p></a>
                 </div>
             </div>
         </footer>
