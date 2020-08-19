@@ -14,6 +14,7 @@ def programs(request):
     context = {
         'categories': categories,
         'programs': programs,
+        'on_programs_page': True,
     }
 
     return render(request, template, context)
@@ -26,6 +27,7 @@ def program(request, program_id):
     template = 'programs/program_detail.html'
     context = {
         'program': program,
+        'on_programs_page': True,
     }
 
     return render(request, template, context)
