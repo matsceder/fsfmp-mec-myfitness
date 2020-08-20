@@ -172,11 +172,12 @@ def checkout_success(request, order_number):
 
 
 @login_required
-def checkout_subscripion(request):
+def checkout_subscription(request):
+    """ A view to handle subsctiption sign up """
 
     template = 'checkout/checkout_subscription.html'
     context = {
-
+        'category': category,
     }
 
     return render(request, template, context)

@@ -1,4 +1,5 @@
 import datetime
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -27,9 +28,24 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def has_payed(self, current_date=datetime.date.today()):
+    def set_paid_until(self, date_or_timestamp):
+        # the input date is a integer
+        if isinstance(date_or_timestamp, int):
+            paid_until = date.fromtimestamp(date_or_timestamp)
+        # the input date is a string
+        elif isinstance(date_or_timestamp, str):
+            paid_until = date.fromtimestamp(date_or_timestamp)
+        else:
+            paid_until = date_or_timestamp
 
-        return current_date < self.paid_until
+        self.paid_until = paid_until
+        self.save()
+
+    def has_payed(self, current_date=datetime.date.today()):
+        if self.paid_until is None:
+            return False
+        else:
+            return current_date < self.paid_until
 
 
 @receiver(post_save, sender=User)

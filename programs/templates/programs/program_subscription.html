@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+        <div class="row body-products justify-content-center mx-0">
+            <div class="row w-100">
+                <div class="col text-center mt-3">
+                    <h3 class="text-muted">Program Subscription</h3>
+                    <hr class="w-75 mb-3">
+                </div>
+            </div>
+            <div class="row w-100 m-3 justify-content-center">
+                <div class="col-12">
+                    <h5 class="ml-3 mb-3">Avaliable Subscriptions</h5>
+                    <div class="row">
+                        {% for c in category %}
+                            <div class="col-12 col-md-6 col-lg-4 px-0 py-3 px-lg-3 py-lg-0">
+                                <div class="card mx-2 rounded-0">
+                                    <div class="card-header">
+                                        <h5 class="card-title m-0">{{ c.friendly_name }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <img class="card-img-top" src="{{ c.image_url }}">
+                                        <p class="card-text small mt-2 mb-3">{{ c.description }}</p>
+                                        <div class="p-0">
+                                            <p class="card-text text-muted d-inline-block m-0"><small>${{ c.price }} /Month or</small></p>
+                                            <br>
+                                            <p class="card-text d-inline-block mt-1 mb-0"><strong>${{ c.price_annual }}</strong> <small>/Year</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-12 col-md-6 col-lg-8 offset-lg-2 px-0 py-3">
+                            <div class="card mx-2 rounded-0">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">Register for our programs!</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="subscription">Choose the plan for you!</label>
+                                            <select class="form-control border-black rounded-0" id="subscription" name="subscribe">
+                                                <option value="" disabled selected>---------</option>
+                                                {% for cat in category %}
+                                                    <option value="{{ cat.id }}">{{ cat.friendly_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="paymentplan">Select payment plan</label>
+                                            <select class="form-control border-black rounded-0" id="paymentplan" name="plan">
+                                                <option value="" disabled selected>---------</option>
+                                                <option value="month">Monthly</option>
+                                                <option value="annual">Annual</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group form-check custom-control custom-checkbox">
+                                            <input class="custom-control-input border-black rounded-0 checkboxinput form-check-input" type="checkbox" name="automatic" checked />
+                                            <label class="form-check-label custom-control-label" for="automatic">Automatic renewal</label>
+                                            <small class="form-text text-muted">
+                                                The subscription can be cancelled at anytime.
+                                            </small>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="hidden" id="card-pay" name="payment_method" value="card" class="form-check-input">
+                                        </div>
+                                        <button type="submit" class="btn btn-black rounded-0 border-0">Go to Checkout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 justify-content-center">
+                <div class="col text-center">
+                    <hr class="w-75 mb-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block page_footer %}
+    <div class="container footer-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

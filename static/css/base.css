@@ -282,6 +282,11 @@ footer {
     border-radius: 0;
 }
 
+.custom-control-input {
+    left: auto !important;
+    z-index: 1;
+}
+
 /*  --------  Add/Edit Programs templates  --------  */
 
 div.django-ckeditor-widget {
