@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from .forms import OrderForm
@@ -165,6 +166,17 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def checkout_subscripion(request):
+
+    template = 'checkout/checkout_subscription.html'
+    context = {
+
     }
 
     return render(request, template, context)

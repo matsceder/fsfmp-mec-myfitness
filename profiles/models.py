@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -21,9 +22,14 @@ class UserProfile(models.Model):
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
     default_county = models.CharField(max_length=80, null=True, blank=True)
     default_country = CountryField(blank_label='Country', null=True, blank=True)
+    paid_until = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
+
+    def has_payed(self, current_date=datetime.date.today()):
+
+        return current_date < self.paid_until
 
 
 @receiver(post_save, sender=User)
