@@ -16,7 +16,12 @@ urlpatterns = [
         name='cache_checkout_data',
     ),
     path(
-        'checkout_subscription/<int:category_id>/',
+        'select_subscription/<int:category_id>/',
+        views.select_subscription,
+        name='select_subscription',
+    ),
+    path(
+        'checkout_subscription/',
         views.checkout_subscription,
         name='checkout_subscription',
     ),
