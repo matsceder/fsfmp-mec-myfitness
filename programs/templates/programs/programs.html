@@ -19,11 +19,12 @@
                 </div>
             </div>
             <div class="row w-100 m-3 justify-content-center">
-                {% if user.is_superuser %}
-                    <div class="col-12 col-md-10 px-0 pb-3">
+                <div class="col-12 col-md-10 px-0 pb-3">
+                    {% if user.is_superuser %}
                         <a class="btn btn-black rounded-0" href="{% url 'add_program' %}">Add a new program post</a>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                    <a href="{% url 'program_subscribe' %}" class="btn btn-white border-black rounded-0">Subscribe to our premium program!</a>
+                </div>
                 <div class="col-12 col-md-10 border-black rounded-0">
                     <ul class="list-unstyled mb-0">
                         {% for program in programs %}

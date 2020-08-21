@@ -63,5 +63,6 @@
         $('#div_id_author').children('label').html(userName).attr({class:'m-0'}).css({"padding": ".375rem .75rem", "color": "#"});
 
         $('#id_category').prepend('<option value="0" disabled>---------</option>');
+        $('#id_category').children('option').filter(':last').attr({class:'d-none'});
 </script>
 {% endblock %}
