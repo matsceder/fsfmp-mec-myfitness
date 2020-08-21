@@ -14,18 +14,30 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
-                    <h3 class="text-muted">Programs</h3>
+                    <h3 class="text-muted">Programs
+                    {% for current in current_category %}
+                        {% for c in categories %}
+                            {% if current.name == c.name %}
+                                 - {{ c.friendly_name }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %} </h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div class="row w-100 m-3 justify-content-center">
-                <div class="col-12 col-md-10 px-0 pb-3">
+                <div class="col-12 col-md-10 col-lg-8 px-0 pb-3">
                     {% if user.is_superuser %}
                         <a class="btn btn-black rounded-0" href="{% url 'add_program' %}">Add a new program post</a>
+                    {% else %}
+                        <a href="{% url 'program_subscribe' %}" class="text-black">
+                            <p class="mb-0 mx-2">
+                                <strong><u>Start your subsciption today!</u></strong> Get access to all of our programs and articles
+                            </p>
+                        </a>
                     {% endif %}
-                    <a href="{% url 'program_subscribe' %}" class="btn btn-white border-black rounded-0">Subscribe to our premium program!</a>
                 </div>
-                <div class="col-12 col-md-10 border-black rounded-0">
+                <div class="col-12 col-md-10 col-lg-8 border-black rounded-0">
                     <ul class="list-unstyled mb-0">
                         {% for program in programs %}
                             <li class="mt-2 pb-2 border-bottom rounded-0">
