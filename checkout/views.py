@@ -175,24 +175,19 @@ def checkout_success(request, order_number):
 
 @require_POST
 @login_required
-def select_subscription(request):
+def checkout_subscription(request):
     """ A view to handle subsctiption sign up """
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    subscription = request.POST.get('subscription')
-    paymentplan = request.POST.get('paymentplan')
+    plan = request.POST.get('program')
     automatic = request.POST.get('automatic')
-    payment_method = 'card'
 
-    plan_inst = SubscriptionPlan(
-        subscription=subscription,
-        paymentplan=paymentplan,
-    )
+    plan_inst = SubscriptionPlan(plan_id=plan)
 
     payment_intent = stripe.PaymentIntent.create(
         amount=plan_inst.amount,
         currency=plan_inst.currency,
-        payment_method_types=['card'],
+        payment_method_types=plan_inst.payment_method,
     )
 
     context = {
@@ -210,6 +205,9 @@ def select_subscription(request):
 
 
 @login_required
-def checkout_subscription(request):
+def checkout_s_success(request):
 
-    return render(request)
+
+    template = 'checkout/checkout_s_success.html'
+
+    return render(request, template)

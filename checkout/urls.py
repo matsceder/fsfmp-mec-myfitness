@@ -16,14 +16,14 @@ urlpatterns = [
         name='cache_checkout_data',
     ),
     path(
-        'select_subscription/<int:category_id>/',
-        views.select_subscription,
-        name='select_subscription',
-    ),
-    path(
         'checkout_subscription/',
         views.checkout_subscription,
         name='checkout_subscription',
+    ),
+    path(
+        'checkout_s_success/<order_number>/',
+        views.checkout_s_success,
+        name='checkout_s_success',
     ),
     path('wh/', webhook, name='webhook'),
 ]

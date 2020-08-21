@@ -4,11 +4,12 @@ from profiles.models import UserProfile
 from django.conf import settings
 
 
-WORKOUT = 1
-DIET = 2
-FULL = 3
-MONTH = 'month'
-ANNUAL = 'annual'
+WORK_M = 11
+WORK_A = 12
+DIET_M = 21
+DIET_A = 22
+FULL_M = 31
+FULL_A = 32
 
 API_KEY = settings.STRIPE_SECRET_KEY
 
@@ -53,31 +54,37 @@ class SubscriptionPlan:
     """
     Targeting correct program and paymentplan
     """
-    def __init__(self, subscription, paymentplan):
+    def __init__(self, plan_id):
 
-        if subscription == WORKOUT:
-            if paymentplan == MONTH:
-                self.plan = WorkoutMonthPlan()
-                self.id = 11
-            elif paymentplan == ANNUAL:
-                self.plan = WorkoutAnnualPlan()
-                self.id = 12
-        elif subscription == DIET:
-            if paymentplan == MONTH:
-                self.plan = DietMonthPlan()
-                self.id = 21
-            elif paymentplan == ANNUAL:
-                self.plan = DietAnnualPlan()
-                self.id = 22
-        elif subscription == WORKOUT:
-            if paymentplan == MONTH:
-                self.plan = FullMonthPlan()
-                self.id = 31
-            elif paymentplan == ANNUAL:
-                self.plan = FullAnnualPlan()
-                self.id = 32
+        if plan_id == WORK_M:
+            self.plan = WorkoutMonthPlan()
+            self.id = WORK_M
+        elif plan_id == WORK_A:
+            self.plan = WorkoutAnnualPlan()
+            self.id = WORK_A
+        elif plan_id == DIET_M:
+            self.plan = DietMonthPlan()
+            self.id = DIET_M
+        elif plan_id == DIET_A:
+            self.plan = DietAnnualPlan()
+            self.id = DIET_A
+        elif plan_id == FULL_M:
+            self.plan = FullMonthPlan()
+            self.id = FULL_M
+        elif plan_id == FULL_A:
+            self.plan = FullAnnualPlan()
+            self.id = FULL_A
 
         self.currency = 'usd'
+        self.payment_method = 'card'
+
+    @property
+    def stripe_plan_id(self):
+        return self.plan.stripe_plan_id
+
+    @property
+    def amount(self):
+        return self.plan.amount
 
 
 def set_paid_until(charge):

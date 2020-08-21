@@ -47,11 +47,11 @@
                                     <p class="mt-1 mb-0 small">Get access to information about training and healthy nutrition</p>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="">
+                                    <form method="POST" action="{% url 'checkout_subscription' %}">
                                         {% csrf_token %}
                                         <div class="form-group">
-                                            <label for="subscription">Choose the plan for you!</label>
-                                            <select class="form-control border-black rounded-0" id="subscription" name="subscription">
+                                            <label for="plan">Choose the plan for you!</label>
+                                            <select class="form-control border-black rounded-0" id="subscription" name="plan">
                                                 <option value="" disabled selected>---------</option>
                                                 {% for cat in category %}
                                                     <option value="{{ cat.id }}">{{ cat.friendly_name }}</option>
@@ -60,10 +60,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="paymentplan">Select payment plan</label>
-                                            <select class="form-control border-black rounded-0" id="paymentplan" name="plan">
+                                            <select class="form-control border-black rounded-0" id="paymentplan" name="paymentplan">
                                                 <option value="" disabled selected>---------</option>
-                                                <option value="month">Monthly</option>
-                                                <option value="annual">Annual</option>
+                                                <option value="1">Monthly</option>
+                                                <option value="2">Annual</option>
                                             </select>
                                         </div>
                                         <div class="form-group form-check custom-control custom-checkbox">
@@ -72,8 +72,9 @@
                                             <small class="form-text text-muted">
                                                 The subscription can be cancelled at anytime.
                                             </small>
+                                            <input type="hidden" name="program" value="" id="subscription-plan" />
                                         </div>
-                                        <button type="submit" class="btn btn-black rounded-0 border-0">Go to Checkout</button>
+                                        <button type="submit" id="plan-submit" class="btn btn-black rounded-0 border-0">Go to Checkout</button>
                                     </form>
                                 </div>
                             </div>
@@ -97,4 +98,28 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        var subscriptionVal;
+        var paymentplanVal;
+        $('#subscription').change(function() {
+            var subscriptionVal = $(this).val();
+            $('#subscription-plan').val(`${subscriptionVal}${paymentplanVal}`);
+            $('#paymentplan').change(function() {
+                var paymentplanVal = $(this).val();
+                $('#subscription-plan').val(`${subscriptionVal}${paymentplanVal}`);
+            });
+        });
+        $('#paymentplan').change(function() {
+            var paymentplanVal = $(this).val();
+            $('#subscription-plan').val(`${subscriptionVal}${paymentplanVal}`);
+            $('#subscription').change(function() {
+                var subscriptionVal = $(this).val();
+                $('#subscription-plan').val(`${subscriptionVal}${paymentplanVal}`);
+            });
+        });
+    </script>
 {% endblock %}
