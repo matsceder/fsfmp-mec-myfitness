@@ -244,7 +244,7 @@ def delete_brand(request, brand_id):
     brand = get_object_or_404(Brand, pk=brand_id)
     brand.delete()
     messages.success(request, 'Brand deleted!')
-    return redirect(reverse('product_management'))
+    return redirect('products')
 
 
 @login_required
