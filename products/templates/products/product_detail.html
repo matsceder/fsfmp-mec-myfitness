@@ -34,7 +34,21 @@
                     <div class="col d-md-none text-center">
                         <hr class="w-75 mb-3">
                     </div>
-                    <p class="text-muted small "><a href="{% url 'products' %}"><u>Products</u></a> > <a href="{% url 'products' %}?category={{ product.brand.category }}"><u>{{ product.brand.category.friendly_name }}</u></a> > <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u></p>
+                    <p class="text-muted small ">
+                        <a href="{% url 'products' %}">
+                            <u>Products</u>
+                        </a> > 
+                        <a href="{% url 'products' %}?category={{ product.brand.category }}">
+                            <u>{{ product.brand.category.friendly_name }}</u>
+                        </a> > 
+                        <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
+                    </p>
+                    {% if request.user.is_superuser %}
+                        <div class="px-0 py-3">
+                            <a class="btn btn-wht border-black rounded-0 btn-sm mr-2" href="{% url 'edit_product' product.id %}">Edit product</a>
+                            <button type="button" class="btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#deleteProduct">Delete product</button>
+                        </div>
+                    {% endif %}
                     <p class="lead m-0">{{ product.friendly_name }}</p>
                     <p class="font-weight-bold mb-0">${{ product.brand.price }}</p>
                     {% include 'includes/star_rating.html' %}
@@ -116,6 +130,8 @@
             </div>
         </div>
     </div>
+
+    {% include 'includes/delete_product_modal.html' %}
 
 {% endblock %}
 

@@ -1,0 +1,28 @@
+<!--  Modal snippet from Bootstrap  -->
+<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0 border-black">
+        <div class="modal-header row border-0">
+            <div class="col-4 offset-4 text-center">
+                <h5 class="modal-title" id="deleteProductTitle">Delete product</h5>
+            </div>
+            <div class="col-4">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="modal-body text-center p-0">
+            <p class="m-1">Are you sure you want to remove this product?</p>
+            <p class="m-1">Removing a product is permanent and it can't be restored.</p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+            <button type="button" class="btn btn-wht border-black rounded-0 mx-2" data-dismiss="modal">Cancel</button>
+            <a href="{% url 'delete_product' product.id %}" class="btn btn-danger rounded-0 mx-2">Delete</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+    <!--  Button code  -->
+<!-- <button type="button" class="btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#deleteProduct">Delete product</button> -->
