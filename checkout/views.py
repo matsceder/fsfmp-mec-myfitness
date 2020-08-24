@@ -11,8 +11,6 @@ from cart.contexts import cart_contents
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 
-from checkout.subscriptions.stripe import (SubscriptionPlan, set_paid_until)
-
 import stripe
 import json
 
@@ -171,43 +169,3 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
-
-
-@require_POST
-@login_required
-def checkout_subscription(request):
-    """ A view to handle subsctiption sign up """
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-
-    plan = request.POST.get('program')
-    automatic = request.POST.get('automatic')
-
-    plan_inst = SubscriptionPlan(plan_id=plan)
-
-    payment_intent = stripe.PaymentIntent.create(
-        amount=plan_inst.amount,
-        currency=plan_inst.currency,
-        payment_method_types=plan_inst.payment_method,
-    )
-
-    context = {
-        'secret_key': payment_intent.client_secret,
-        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
-        'customer_email': request.user.email,
-        'payment_intent_id': payment_intent.id,
-        'automatic': automatic,
-        'stripe_plan_id': plan_inst.stripe_plan_id,
-    }
-
-    template = 'checkout/checkout_subscription.html'
-
-    return render(request, template, context)
-
-
-@login_required
-def checkout_s_success(request):
-
-
-    template = 'checkout/checkout_s_success.html'
-
-    return render(request, template)

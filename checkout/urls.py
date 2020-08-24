@@ -15,15 +15,5 @@ urlpatterns = [
         views.cache_checkout_data,
         name='cache_checkout_data',
     ),
-    path(
-        'checkout_subscription/',
-        views.checkout_subscription,
-        name='checkout_subscription',
-    ),
-    path(
-        'checkout_s_success/<order_number>/',
-        views.checkout_s_success,
-        name='checkout_s_success',
-    ),
     path('wh/', webhook, name='webhook'),
 ]

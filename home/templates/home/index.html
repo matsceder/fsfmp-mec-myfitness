@@ -65,7 +65,7 @@
                             <hr class="w-75">
                             <h3 class="m-0">Newest articles:</h3>
                         </div>
-                        {% for prog in programs reversed %}
+                        {% for prog in programs %}
                             {% if forloop.counter <= 2 %}
                                 <div class="col-12 border-black rounded-0 p-2 mt-3">
                                     <a href="{% url 'program' prog.id %}">

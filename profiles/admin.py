@@ -23,4 +23,5 @@ class UserProfileAdmin(admin.ModelAdmin):
         'default_email',
     )
 
+
 admin.site.register(UserProfile, UserProfileAdmin)
