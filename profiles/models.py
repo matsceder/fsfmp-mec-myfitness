@@ -23,29 +23,9 @@ class UserProfile(models.Model):
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
     default_county = models.CharField(max_length=80, null=True, blank=True)
     default_country = CountryField(blank_label='Country', null=True, blank=True)
-    paid_until = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-
-    def set_paid_until(self, date_or_timestamp):
-        # the input date is a integer
-        if isinstance(date_or_timestamp, int):
-            paid_until = date.fromtimestamp(date_or_timestamp)
-        # the input date is a string
-        elif isinstance(date_or_timestamp, str):
-            paid_until = date.fromtimestamp(date_or_timestamp)
-        else:
-            paid_until = date_or_timestamp
-
-        self.paid_until = paid_until
-        self.save()
-
-    def has_payed(self, current_date=datetime.date.today()):
-        if self.paid_until is None:
-            return False
-        else:
-            return current_date < self.paid_until
 
 
 @receiver(post_save, sender=User)
