@@ -108,15 +108,3 @@ def delete_program(request, program_id):
     program.delete()
     messages.success(request, 'Program post deleted!')
     return redirect(reverse('programs'))
-
-
-def program_subscribe(request):
-
-    category = Category.objects.all()
-
-    template = 'programs/program_subscription.html'
-    context = {
-        'category': category
-    }
-
-    return render(request, template, context)

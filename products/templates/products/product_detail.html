@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-1 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
             <div id="product-top" class="row w-100">
                 <div class="col text-center mt-3">
@@ -20,6 +20,26 @@
             </div>
             <div id="product-info" class="row w-100 justify-content-center">
                 <div class="col-12 col-md-5">
+                    <div class="col p-0 d-md-none">
+                        <p class="text-muted small mb-1">
+                            <a href="{% url 'products' %}">
+                                <u>Products</u>
+                            </a> > 
+                            <a href="{% url 'products' %}?category={{ product.brand.category }}">
+                                <u>{{ product.brand.category.friendly_name }}</u>
+                            </a> > 
+                            <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
+                        </p>
+                    </div>
+                    <a href="{% url 'products' %}">
+                        <p class="mb-0 small d-inline"><i class="fa fa-arrow-left"></i> <strong><u>Back to products page</u></strong></p>
+                    </a>
+                    {% if request.user.is_superuser %}
+                        <div class="px-0 py-3 d-md-none text-center">
+                            <a class="btn btn-wht border-black rounded-0 btn-sm mr-2" href="{% url 'edit_product' product.id %}">Edit product</a>
+                            <button type="button" class="btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#deleteProduct">Delete product</button>
+                        </div>
+                    {% endif %}
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
                             <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.friendly_name }}">
@@ -34,17 +54,19 @@
                     <div class="col d-md-none text-center">
                         <hr class="w-75 mb-3">
                     </div>
-                    <p class="text-muted small ">
-                        <a href="{% url 'products' %}">
-                            <u>Products</u>
-                        </a> > 
-                        <a href="{% url 'products' %}?category={{ product.brand.category }}">
-                            <u>{{ product.brand.category.friendly_name }}</u>
-                        </a> > 
-                        <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
-                    </p>
+                    <div class="col p-0 d-none d-md-block">
+                        <p class="text-muted small ">
+                            <a href="{% url 'products' %}">
+                                <u>Products</u>
+                            </a> > 
+                            <a href="{% url 'products' %}?category={{ product.brand.category }}">
+                                <u>{{ product.brand.category.friendly_name }}</u>
+                            </a> > 
+                            <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
+                        </p>
+                    </div>
                     {% if request.user.is_superuser %}
-                        <div class="px-0 py-3">
+                        <div class="px-0 py-3 d-none d-md-block">
                             <a class="btn btn-wht border-black rounded-0 btn-sm mr-2" href="{% url 'edit_product' product.id %}">Edit product</a>
                             <button type="button" class="btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#deleteProduct">Delete product</button>
                         </div>
@@ -65,11 +87,11 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <form class="form" action="{% url 'add_to_cart' product.id %}" method="POST">
+                    <form class="form mb-3" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="col-12">
-                                <p class="small text-muted my-1">Quantity:</p>
+                                <p class="small text-muted mt-2 mb-1">Quantity:</p>
                                 <div class="form-group w-50">
                                     <div class="input-group">
                                         <div class="input-group-append">
@@ -92,21 +114,25 @@
                             </div>
                             <div class="col-12">
                                 <input type="submit" class="btn btn-black rounded-0 border-black" value="Add to cart">
-                                <a href="{% url 'products' %}">
-                                    <p class="small mb-0 mt-2">Back to products page</p>
-                                </a>
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </div>
                     </form>
-                    {% if product.brand.description %}
-                        <p class="py-2 mt-2 mb-0">{{ product.brand.description }}</p>
-                    {% endif %}
-                    {% if product.brand.category.id != 5 %}
-                        {% if product.ingredients %}
-                            <p class="py-2 text-muted small">{{ product.ingredients }}</p>
+                    <div class="col p-0">
+                        {% if product.brand.description %}
+                            <button class="btn btn-white border border-bottom-0 border-muted btn-sm rounded-0" type="button" id="descToggle"><u>Description</u></button>
                         {% endif %}
-                    {% elif product.brand.category.id == 5 %}
+                        {% if product.brand.category.id != 5 %}
+                            {% if product.ingredients %}
+                                <button class="btn btn-white border border-bottom-0 border-muted btn-sm rounded-0" type="button" id="ingToggle"><u>Ingredients</u></button>
+                            {% endif %}
+                        {% endif %}
+                        <div class="p-0 border border-muted rounded-0">
+                            <p id="ingInfo" class="small my-2 mx-3">{{ product.ingredients }}</p>
+                            <p id="descInfo" class="small my-2 mx-3">{{ product.brand.description }}</p>
+                        </div>
+                    </div>
+                    {% if product.brand.category.id == 5 %}
                         <p class="py-2 small text-muted mb-0">Also availiable in:</p>
                         {% for color in products %}
                             {% if color.thumbnail == True and color.brand.friendly_name == product.brand.friendly_name and color.brand != product.brand %}
@@ -146,4 +172,19 @@
 {% block postloadjs %}
     {{ block.super }}
     {% include 'includes/quantity_input_script.html' %}
+
+    <script>
+        $(function() {
+            $("#descInfo").hide();
+        });
+        $("#ingToggle").click(function(){
+            $("#ingInfo").toggle();
+            $("#descInfo").hide();
+        });
+        $("#descToggle").click(function(){
+            $("#descInfo").toggle();
+            $("#ingInfo").hide();
+        });
+    </script>
+
 {% endblock %}
