@@ -15,6 +15,11 @@ a {
     color: inherit;
 }
 
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* From CSS-tricks */
 body::after {
     content: "";
@@ -187,11 +192,8 @@ footer {
 
 /* -------- Index Template -------- */
 
-.black-box {
-    background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0.5rem;
+#index-img {
+  transform: scaleX(-1);
 }
 
 #index-speakout {
@@ -201,6 +203,11 @@ footer {
 
 .index-link {
     text-decoration: underline;
+}
+
+.article-links {
+    width: 40%;
+    margin: 0.3rem;
 }
 
 /*  --------  Products Template  --------  */
