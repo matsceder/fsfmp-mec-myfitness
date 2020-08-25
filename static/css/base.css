@@ -307,6 +307,10 @@ div.django-ckeditor-widget {
     display: flex !important;
 }
 
+#cke_id_body {
+    width: 100% !important;
+}
+
 /*  --------  Allauth formatting  --------  */
 
 #allauth-content input {
