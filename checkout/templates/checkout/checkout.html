@@ -15,65 +15,86 @@
 {% endblock %}
 
 {% block content %}
-    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+    <div class="body-container container-fluid px-1 px-sm-3 my-1 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
-            <div id="cart-top" class="row w-100">
+            <div class="row w-100">
                 <div class="col text-center mt-3">
                     <h3 class="text-muted">Checkout</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div id="cart-info" class="row w-100 m-3 justify-content-center">
-                <div class="col-12 col-md-10 col-lg-6 order-lg-last pb-3">
-                    <p>Order Summary - <strong>{{ product_count }} item{% if product_count > 1 %}s{% endif %}</strong></p>
-                    <div class="col order-summary border border-black rounded-0 py-3">
+            <div class="row w-100 justify-content-center mt-3 px-1 px-md-3">
+                <div class="col-12 col-md-10 col-lg-6 order-lg-last px-0 pb-3 pl-lg-2">
+                    <p class="mb-1 mb-md-3">Order Summary - <strong>{{ product_count }} item{% if product_count > 1 %}s{% endif %}</strong></p>
+                    <div class="col order-summary border border-black rounded-0 pt-3 pb-2 pb-md-3">
                         <div class="row">
-                            <div class="col-7">
-                                <p>Product:</p>
+                            <div class="col-6 col-md-7">
+                                <p class="mb-1 d-none d-md-block">Product:</p>
+                                <p class="mb-1 d-md-none"><small>Product:</small></p>
                             </div>
-                            <div class="col-1 text-right">
-                                <p>Qty:</p>
+                            <div class="col-1 p-0">
+                                <p class="mb-1 d-none d-md-block">Qty:</p>
+                                <p class="mb-1 d-md-none"><small>Qty:</small></p>
                             </div>
-                            <div class="col-2 text-right">
-                                <p>Price:</p>
+                            <div class="col-2 pl-2">
+                                <p class="mb-1 d-none d-md-block">Price:</p>
+                                <p class="mb-1 d-md-none"><small>Price:</small></p>
                             </div>
-                            <div class="col-2 text-right">
-                                <p>Total:</p>
+                            <div class="col-3 col-md-2 pl-0 text-right">
+                                <p class="mb-1 d-none d-md-block">Total:</p>
+                                <p class="mb-1 d-md-none"><small>Total:</small></p>
                             </div>
                         </div>
                         {% for item in cart_items %}
                             <div class="row py-1">
-                                <div class="col-7">
-                                    <p class="my-0">{{ item.product.brand }} - {{ item.product }}</p>
+                                <div class="col-6 col-md-7">
+                                    <p class="my-0 d-none d-md-block">{{ item.product.brand }} - {{ item.product }}</p>
+                                    <p class="my-0 d-md-none"><small>{{ item.product.brand }} - {{ item.product }}</small></p>
                                 </div>
-                                <div class="col-1 text-right">
-                                    <p class="my-0">{{ item.quantity }}</p>
+                                <div class="col-1 p-0">
+                                    <p class="my-0 d-none d-md-block">{{ item.quantity }}</p>
+                                    <p class="my-0 d-md-none"><small>{{ item.quantity }}</small></p>
                                 </div>
-                                <div class="col-2 text-right">
-                                    <p class="my-0">${{ item.product.brand.price }}</p>
+                                <div class="col-2 pl-2">
+                                    <p class="my-0 d-none d-md-block">${{ item.product.brand.price }}</p>
+                                    <p class="my-0 d-md-none"><small>${{ item.product.brand.price }}</small></p>
                                 </div>
-                                <div class="col-2 text-right">
-                                    <p class="my-0"><strong>${{ item.product.brand.price | calc_subtotal:item.quantity }}</strong></p>
+                                <div class="col-3 col-md-2 pl-0 text-right">
+                                    <p class="my-0 d-none d-md-block"><strong>${{ item.product.brand.price | calc_subtotal:item.quantity }}</strong></p>
+                                    <p class="my-0 d-md-none"><small><strong>${{ item.product.brand.price | calc_subtotal:item.quantity }}</strong></small></p>
                                 </div>
                             </div>
                         {% endfor %}
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="mt-3 mb-1"><strong>Order Total:</strong></p>
+                        <div class="row m-0">
+                            <div class="col-8 border-top border-muted rounded-0 p-0 d-none d-md-block">
+                                <p class="my-1"><strong>Order Total:</strong></p>
                                 <p class="my-1"><strong>Delivery:</strong></p>
                                 <p class="my-1"><strong>Grand Total:</strong></p>
                             </div>
-                            <div class="col-4 text-right">
-                                <p class="mt-3 mb-1">${{ total | floatformat:2 }}</p>
+                            <div class="col-8 border-top border-muted rounded-0 p-0 d-md-none">
+                                <p class="my-1"><strong><small>Total:</small></strong></p>
+                                <p class="my-1"><strong><small>Delivery:</small></strong></p>
+                                <p class="my-1"><strong><small>Grand Total:</small></strong></p>
+                            </div>
+                            <div class="col-4 border-top border-muted rounded-0 p-0 text-right d-none d-md-block">
+                                <p class="my-1">${{ total | floatformat:2 }}</p>
                                 <p class="my-1">${{ delivery | floatformat:2 }}</p>
                                 <p class="my-1"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+                            </div>
+                            <div class="col-4 border-top border-muted rounded-0 p-0 text-right d-md-none">
+                                <p class="my-1"><small>${{ total | floatformat:2 }}</small></p>
+                                <p class="my-1"><small>${{ delivery | floatformat:2 }}</small></p>
+                                <p class="my-1"><strong><small>${{ grand_total | floatformat:2 }}</small></strong></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-10 col-lg-6">
-                    <p class="mb-1">Please fill out the form to complete your order</p>
+                <div class="col-12 col-md-10 col-lg-6 px-0 pr-lg-2">
+                    <p class="mb-1 d-none d-md-block">Please fill out the form to complete your order</p>
+                    <div class="col-12 d-md-none p-0 m-0 text-center">
+                        <p class="mb-2 small"><strong>Please fill out the form to complete your order</strong></p>
+                    </div>
                     <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                         {% csrf_token %}
                         <fieldset class="rounded-0">
@@ -113,15 +134,23 @@
                             <!-- Pass the client secret to the view, to get the payment intent id -->
                             <input type="hidden" value="{{ client_secret }}" name="client_secret">
                         </fieldset>
-                        <div class="submit-button pb-3 row">
-                            <div class="col-12">
-                                <span class="icon">
-                                    &nbsp;&nbsp;<i class="fas fa-exclamation"></i>
-                                </span>
-                                <span>&nbsp;<u>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></u></span>
+                        <div class="row w-100 m-0 pb-3">
+                            <div class="col-8 p-0 d-md-none">
+                                <span class="ml-1"><small><i class="fas fa-exclamation"></i> <u>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></u></small></span>
+                                <br>
+                                <a href="{% url 'cart' %}">
+                                    <span>
+                                        <small><i class="fa fa-shopping-cart"></i><strong> Make changes to your cart</strong></small>
+                                    </span>
+                                </a>
                             </div>
-                            <div class="col-8 align-self-end">
-                                <a href="{% url 'cart' %}" class="mt-1">
+                            <div class="col-8 p-0 d-none d-md-block">
+                                <span class="icon mx-2">
+                                    <i class="fas fa-exclamation"></i>
+                                </span>
+                                <span><u>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></u></span>
+                                <br>
+                                <a href="{% url 'cart' %}" class="mx-1">
                                     <span class="icon">
                                         <i class="fa fa-shopping-cart"></i>
                                     </span>
@@ -130,12 +159,18 @@
                                     </span>
                                 </a>
                             </div>
-                            <button id="submit-button" class="btn btn-black rounded-0 float-right">
-                                <span class="icon"></span>
-                                <span>Checkout</span>
-                            </button>
+                            <div class="col-4 p-0">
+                                <button id="submit-button" class="btn btn-black rounded-0 float-right my-1">
+                                    <span>Checkout</span>
+                                </button>
+                            </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col text-center">
+                    <hr class="w-75 mb-3">
                 </div>
             </div>
         </div>
