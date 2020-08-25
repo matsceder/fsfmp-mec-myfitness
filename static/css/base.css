@@ -254,6 +254,12 @@ footer {
     font-size: 0.6rem;
 }
 
+/*  --------  Checkout template  --------  */
+
+.checkout-img {
+    height: 100px;
+}
+
 /*  --------  Product Management template  --------  */
 
 .management-link:hover {
