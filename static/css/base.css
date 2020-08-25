@@ -97,7 +97,7 @@ input[name='q']::placeholder {
 
 /* Body Container */
 .body-container {
-    min-height: calc(100vh - calc(134px + 1rem));
+    min-height: calc(100vh - calc(134px + 0.6rem));
     margin-bottom: 1rem;
 }
 
@@ -254,10 +254,11 @@ footer {
     font-size: 0.6rem;
 }
 
-/*  --------  Checkout template  --------  */
+/*  --------  Cart template  --------  */
 
-.checkout-img {
+.cart-img {
     height: 100px;
+    widows: 100px;
 }
 
 /*  --------  Product Management template  --------  */
