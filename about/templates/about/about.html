@@ -24,23 +24,25 @@
             </div>
             <div class="row w-100 m-1 m-md-3">
 
+                <!--  Left template navigation for medium+ screens  -->
                 <div class="col-3 d-none d-md-block">
                     <ul id="about-nav" class="list-unstyled mt-5">
                         <li class="mx-2 my-1">
-                            <a href="#" class="text-black"><u>About Us</u></a>
+                            <button type="button" class="scroll-about btn btn-wht btn-sm"><u>About Us</u></button>
                         </li>
                         <li class="mx-2 my-1">
-                            <a href="#" class="text-black"><u>Contact</u></a>
+                            <button type="button" class="scroll-contact btn btn-wht btn-sm"><u>Contact</u></button>
                         </li>
                         <li class="mx-2 my-1">
-                            <a href="#" class="text-black"><u>FAQ</u></a>
+                            <button type="button" class="scroll-faq btn btn-wht btn-sm"><u>FAQ</u></button>
                         </li>
                         <li class="mx-2 my-1">
-                            <a href="#" class="text-black"><u>Terms & Conditions</u></a>
+                            <button type="button" class="scroll-terms btn btn-wht btn-sm"><u>Terms & Conditions</u></button>
                         </li>
                     </ul>
                 </div>
 
+                <!--  Top template navigation for small devices  -->
                 <div class="col-12 d-md-none text-center">
                     <ul class="navbar list-unstyled py-0 justify-content-center">
                         <li class="nav-item dropdown">
@@ -48,17 +50,17 @@
                             Navigate
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">About Us</a>
-                            <a class="dropdown-item" href="#">Contact</a>
-                            <a class="dropdown-item" href="#">FAQ</a>
-                            <a class="dropdown-item" href="#">Terms & Conditions</a>
+                            <button type="button" class="scroll-about dropdown-item btn btn-wht btn-sm">About Us</a>
+                            <button type="button" class="scroll-contact dropdown-item btn btn-wht btn-sm">Contact</a>
+                            <button type="button" class="scroll-faq dropdown-item btn btn-wht btn-sm">FAQ</a>
+                            <button type="button" class="scroll-terms dropdown-item btn btn-wht btn-sm">Terms & Conditions</a>
                             </div>
                         </li>
                     </ul>
                 </div>
-
                 <div class="col-12 col-md-9 p-0">
-                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify">
+                    <!--  About section  -->
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify" id="about">
                         <h5 class="mb-4">About MyFitness and the people behind</h5>
                         <h6>OUR CORE VALUES</h6>
                         <p>
@@ -99,13 +101,12 @@
                                 <p>Alex has a nearly 30-year background as a professional writer in various guises, and for the past 18 years has specifically covered the global fitness and fitness industry. Alex is Tyngre's editor-in-chief.</p>
                             </div>
                         </div>
-
-
                     </div>
-
-                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3">
+                    <hr>
+                    <!--  Contact section  -->
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3" id="contact">
                         <h5 class="mb-4">Contact Us</h5>
-                        <form>
+                        <form class="mb-3">
                             <div class="form-group">
                                 <label for="contact-name"><small>Full Name:</small></label>
                                 <input type="text" class="form-control border-black rounded-0" id="contact-name" placeholder="Enter your full name">
@@ -131,8 +132,9 @@
                             <button class="btn btn-black rounded-0" type="submit">Send</button>
                         </form>
                     </div>
-
-                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3">
+                    <hr>
+                    <!--  FAQ section  -->
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3" id="faq">
                         <h5 class="mb-4">Frequently asked questions</h5>
                         <h6>Are Your Products Safe For Athletes?</h6>
                         <p>
@@ -155,8 +157,9 @@
                             Go to 'My Account' / 'My Profile', and look under Order History.
                         </p>
                     </div>
-
-                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify">
+                    <hr>
+                    <!--  Terms and agreements section  -->
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify" id="terms">
                         <h5 class="mb-4">Terms and Conditions</h5>
                         <h6>
                             1. MyFitness
@@ -241,5 +244,29 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}">
+    </script>
+
+    <script type="text/javascript">
+
+        {% if scroll %}
+            $(function() {
+                var scrollTo = "{{ scroll }}";
+                document.getElementById(scrollTo).scrollIntoView( {behavior: "smooth" });
+            });
+        {% endif %}
+
+        $('.scroll-about').click(function() {
+            document.getElementById("about").scrollIntoView( {behavior: "smooth" });
+        });
+        $('.scroll-contact').click(function() {
+            document.getElementById("contact").scrollIntoView( {behavior: "smooth" });
+        });
+        $('.scroll-faq').click(function() {
+            document.getElementById("faq").scrollIntoView( {behavior: "smooth" });
+        });
+        $('.scroll-terms').click(function() {
+            document.getElementById("terms").scrollIntoView( {behavior: "smooth" });
+        });
+
     </script>
 {% endblock %}
