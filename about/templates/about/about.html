@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="body-container container-fluid px-1 px-sm-3 mt-1 mb-3 my-sm-3">
+    <div class="body-container container-fluid px-1 px-sm-3 my-1 my-sm-3">
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
@@ -22,9 +22,9 @@
                     <hr class="w-75 mb-3">
                 </div>
             </div>
-            <div class="row w-100 m-3">
+            <div class="row w-100 m-1 m-md-3">
 
-                <div class="col-3">
+                <div class="col-3 d-none d-md-block">
                     <ul id="about-nav" class="list-unstyled mt-5">
                         <li class="mx-2 my-1">
                             <a href="#" class="text-black"><u>About Us</u></a>
@@ -41,8 +41,24 @@
                     </ul>
                 </div>
 
-                <div class="col-9 p-0">
-                    <div class="col-8 mt-5 mb-3 text-justify">
+                <div class="col-12 d-md-none text-center">
+                    <ul class="navbar list-unstyled py-0 justify-content-center">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle btn btn-wht border-black btn-sm py-1 rounded-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Navigate
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">About Us</a>
+                            <a class="dropdown-item" href="#">Contact</a>
+                            <a class="dropdown-item" href="#">FAQ</a>
+                            <a class="dropdown-item" href="#">Terms & Conditions</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-md-9 p-0">
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify">
                         <h5 class="mb-4">About MyFitness and the people behind</h5>
                         <h6>OUR CORE VALUES</h6>
                         <p>
@@ -71,13 +87,13 @@
                             We empower and hold each other accountable to deliver on commitments and trust each other's positive intent.
                         </p>
                         <hr>
-                        <div class="row p-0">
-                            <div class="col-12 col-md-6 p-2">
+                        <div class="row w-100 m-0">
+                            <div class="col-12 col-md-6 p-0 p-md-2">
                                 <img src="{{ MEDIA_URL }}andreas-740x900.png" class="img-fluid mb-2" alt="Andreas">
                                 <h5>Andreas Eriksson</h5>
                                 <p>Andreas is MyFitness's CEO, specializing in business development and communication. Educated at the Stockholm School of Economics, and then as an entrepreneur in a number of capacities, which in 2014 led to MyFitness.</p>
                             </div>
-                            <div class="col-12 col-md-6 p-2">
+                            <div class="col-12 col-md-6 p-0 p-md-2">
                                 <img src="{{ MEDIA_URL }}alex-740x900.png" class="img-fluid mb-2" alt="Alex">
                                 <h5>Alex Andresson</h5>
                                 <p>Alex has a nearly 30-year background as a professional writer in various guises, and for the past 18 years has specifically covered the global fitness and fitness industry. Alex is Tyngre's editor-in-chief.</p>
@@ -87,7 +103,7 @@
 
                     </div>
 
-                    <div class="col-8 mt-5 mb-3">
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3">
                         <h5 class="mb-4">Contact Us</h5>
                         <form>
                             <div class="form-group">
@@ -116,7 +132,7 @@
                         </form>
                     </div>
 
-                    <div class="col-8 mt-5 mb-3">
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3">
                         <h5 class="mb-4">Frequently asked questions</h5>
                         <h6>Are Your Products Safe For Athletes?</h6>
                         <p>
@@ -140,7 +156,7 @@
                         </p>
                     </div>
 
-                    <div class="col-8 mt-5 mb-3 text-justify">
+                    <div class="col-12 col-md-11 p-0 mt-md-5 mb-md-3 text-justify">
                         <h5 class="mb-4">Terms and Conditions</h5>
                         <h6>
                             1. MyFitness
