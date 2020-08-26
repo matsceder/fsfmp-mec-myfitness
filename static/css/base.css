@@ -314,6 +314,12 @@ div.django-ckeditor-widget {
 
 /*  --------  Allauth formatting  --------  */
 
+#about-nav {
+    position: fixed;
+}
+
+/*  --------  Allauth formatting  --------  */
+
 #allauth-content input {
     border-color: #232323;
     border-radius: 0;
