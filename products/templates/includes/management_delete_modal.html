@@ -1,0 +1,30 @@
+<!--  Modal snippet from Bootstrap  -->
+{% if request.user.is_superuser %}
+    <div class="modal fade" id="modalDeleteId" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0 border-black">
+            <div class="modal-header row border-0">
+                <div class="col-8 offset-2 text-center">
+                    <h5 class="modal-title" id="modalDeleteTitle"></h5>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body text-center p-0">
+                <p id="modalPrompt" class="m-1"></p>
+                <p id="modalPrompt2" class="m-1"></p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-wht border-black rounded-0 mx-2" data-dismiss="modal">Cancel</button>
+                <a id="modalDelete" href="" class="btn btn-danger rounded-0 mx-2">Delete</a>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+    <!--  Button code  -->
+<!-- <button type="button" class="btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#deleteBrand">Delete brand</button> -->

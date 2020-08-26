@@ -19,28 +19,114 @@
                 </div>
             </div>
             <div class="row w-100 m-3 justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <h5 class="ml-2">Select your option:</h5>
-                    <ul class="list-group border border-black rounded-0">
-                        <li class="list-group-item border-0">
-                            <a href="{% url 'add_producer' %}" class="management-link">
-                                <h6 class="mb-1">Producer</h6>
-                                <p class="text-muted small m-0">Producer refers to manufacturer of a brand and products</p>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0">
-                            <a href="{% url 'add_brand' %}" class="management-link">
-                                <h6 class="mb-1">Brand</h6>
-                                <p class="text-muted small m-0">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0">
-                            <a href="{% url 'add_product' %}" class="management-link">
-                                <h6 class="mb-1">Product</h6>
-                                <p class="text-muted small m-0">New product refers to new flavor, size or other variation for one brand.</p>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="col-12 col-md-10 col-lg-8 p-0">
+                    <div id="accordion" class="p-0 profile-accordion border-black rounded-0">
+                        <div class="card border-0">
+                            <div class="card-header p-0" id="headingProducer">
+                                <button class="btn btn-wht btn-lg px-0 w-100 text-center" data-toggle="collapse" data-target="#collapseProducer" aria-expanded="true" aria-controls="collapseProducer">
+                                    <h6 class="mb-1">Producer</h6>
+                                    <p class="text-muted small m-0 px-3">Producer refers to manufacturer of a brand and products</p>
+                                </button>
+                            </div>
+                            <div id="collapseProducer" class="collapse" aria-labelledby="headingProducer" data-parent="#accordion">
+                                <div class="card-body p-3 border border-top-0 rounded-0">
+                                    <p class="small d-md-none">
+                                        <a href="{% url 'add_producer' %}" class="btn btn-wht border-0 btn-small"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <br>
+                                        <span>or select below to edit or delete an existing producer</span>
+                                    </p>
+                                    <p class="d-none d-md-block">
+                                        <a href="{% url 'add_producer' %}" class="btn btn-wht border-0"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <span>or select below to edit or delete an existing producer</span>
+                                    </p>
+                                    <select class="border-black rounded-0 select form-control" name="selectProducer" id="select-producer">
+                                        <option value="0">---------</option>
+                                        {% for p in producers %}
+                                            <option value="{% url 'delete_producer' p.id %}" info="{{ p.friendly_name }}" edit="{% url 'edit_producer' p.id %}">{{ p.friendly_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="col-12 p-0 mt-3">
+                                        <a id="producerEdit" href="" class="btn btn-wht border-black rounded-0 btn-sm">Edit</a>
+                                        <button type="button" class="ml-2 btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#modalDeleteId">Delete Producer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0">
+                            <div class="card-header p-0" id="headingBrand">
+                                <button class="btn btn-wht btn-lg px-0 w-100 text-center" data-toggle="collapse" data-target="#collapseBrand" aria-expanded="true" aria-controls="collapseBrand">
+                                    <h6 class="mb-1">Brand</h6>
+                                    <p class="text-muted small m-0 px-3">Brand refers to the product brand, which can have product variations in flavors, sizes and so on.</p>
+                                </button>
+                            </div>
+                            <div id="collapseBrand" class="collapse" aria-labelledby="headingBrand" data-parent="#accordion">
+                                <div class="card-body p-3 border border-top-0 rounded-0">
+                                    <p class="small d-md-none">
+                                        <a href="{% url 'add_brand' %}" class="btn btn-wht border-0 btn-small"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <br>
+                                        <span>or select below to edit or delete an existing brand</span>
+                                    </p>
+                                    <p class="d-none d-md-block">
+                                        <a href="{% url 'add_brand' %}" class="btn btn-wht border-0"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <span>or select below to edit or delete an existing brand</span>
+                                    </p>
+                                    <select class="border-black rounded-0 select form-control" name="selectBrand" id="select-brand">
+                                        <option value="0">---------</option>
+                                        {% for b in brands %}
+                                            <option value="{% url 'delete_brand' b.id %}" info="{{ b.friendly_name }}" edit="{% url 'edit_brand' b.id %}">{{ b.producer.friendly_name }} - {{ b.friendly_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="col-12 p-0 mt-3">
+                                        <a id="brandEdit" href="" class="btn btn-wht border-black rounded-0 btn-sm">Edit</a>
+                                        <button type="button" class="ml-2 btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#modalDeleteId">Delete Brand</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0">
+                            <div class="card-header p-0" id="headingProduct">
+                                <button class="btn btn-wht btn-lg px-0 w-100 text-center" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true" aria-controls="collapseProduct">
+                                    <h6 class="mb-1">Product</h6>
+                                    <p class="text-muted small m-0 px-3">New product refers to new flavor, size or other variation for one brand.</p>
+                                </button>
+                            </div>
+                            <div id="collapseProduct" class="collapse" aria-labelledby="headingProduct" data-parent="#accordion">
+                                <div class="card-body p-3 border border-top-0 rounded-0">
+                                    <p class="small d-md-none">
+                                        <a href="{% url 'add_product' %}" class="btn btn-wht border-0 btn-small"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <br>
+                                        <span>or select below to edit or delete an existing product</span>
+                                    </p>
+                                    <p class="d-none d-md-block">
+                                        <a href="{% url 'add_product' %}" class="btn btn-wht border-0"><u>
+                                            <i class="fas fa-edit"></i><strong>Add new</strong>
+                                        </u></a>
+                                        <span>or select below to edit or delete an existing product</span>
+                                    </p>
+                                    <select class="border-black rounded-0 select form-control" name="selectProduct" id="select-product">
+                                        <option value="0">---------</option>
+                                        {% for prod in products %}
+                                            <option value="{% url 'delete_product' prod.id %}" info="{{ prod.friendly_name }}" edit="{% url 'edit_product' prod.id %}">{{ prod.brand.friendly_name }} - {{ prod.friendly_name }} - {{ prod.brand.spec }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="col-12 p-0 mt-3">
+                                        <a id="productEdit" href="" class="btn btn-wht border-black rounded-0 btn-sm">Edit</a>
+                                        <button type="button" class="ml-2 btn btn-wht border-black rounded-0 btn-sm" data-toggle="modal" data-target="#modalDeleteId">DeleteProducer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row w-100">
@@ -50,6 +136,7 @@
             </div>
         </div>
     </div>
+    {% include 'includes/management_delete_modal.html' %}
 {% endblock %}
 
 {% block page_footer %}
@@ -58,4 +145,42 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            $('#select-producer').change(function() {
+                var producerDelete = $(this).val();
+                var producerEdit = $(this).find(':selected').attr('edit');
+                var producerName = $(this).find(':selected').attr('info');
+                $('#modalDelete').attr('href', producerDelete);
+                $('#producerEdit').attr('href', producerEdit);
+                $('#modalDeleteTitle').html('Delete producer')
+                $('#modalPrompt').html('Are you sure you want to remove producer ' + producerName + '?');
+                $('#modalPrompt2').html("Removing a producer is permanent and it can't be restored.");
+            });
+            $('#select-brand').change(function() {
+                var brandDelete = $(this).val();
+                var brandEdit = $(this).find(':selected').attr('edit');
+                var brandName = $(this).find(':selected').attr('info');
+                $('#modalDelete').attr('href', brandDelete);
+                $('#brandEdit').attr('href', brandEdit);
+                $('#modalDeleteTitle').html('Delete brand')
+                $('#modalPrompt').html('Are you sure you want to remove brand ' + brandName + '?');
+                $('#modalPrompt2').html("Removing a brand is permanent and it can't be restored.");
+            });
+            $('#select-product').change(function() {
+                var productDelete = $(this).val();
+                var productEdit = $(this).find(':selected').attr('edit');
+                var productName = $(this).find(':selected').attr('info');
+                $('#modalDelete').attr('href', productDelete);
+                $('#productEdit').attr('href', productEdit);
+                $('#modalDeleteTitle').html('Delete product')
+                $('#modalPrompt').html('Are you sure you want to remove product ' + productName + '?');
+                $('#modalPrompt2').html("Removing a product is permanent and it can't be restored.");
+            });
+        });
+    </script>
 {% endblock %}

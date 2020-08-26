@@ -22,7 +22,7 @@
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Add a new brand</h5>
                     <p class="text-muted small">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
-                    <form id="brand-form" method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
+                    <form id="brand-form" method="POST" action="{% url 'add_brand' %}" class="form m-0" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ brand_form | crispy }}
                         <a href="{% url 'product_management' %}" class="btn btn-black rounded-0">Cancel</a>
@@ -45,4 +45,18 @@
             <div class="col"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        $('#id_category').prepend('<option value="0" selected disabled>---------</option>');
+
+        $(function() {
+            $('#id_rating').attr({step:"0.5", max:"5", min:"1"});
+            $('#id_price').attr({min:"0"});
+        });
+
+    </script>
 {% endblock %}

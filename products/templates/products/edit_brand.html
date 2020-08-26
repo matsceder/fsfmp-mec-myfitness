@@ -45,3 +45,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            $('#id_rating').attr({step:"0.5", max:"5", min:"1"});
+            $('#id_price').attr({min:"0"});
+        });
+    </script>
+
+{% endblock %}

@@ -91,9 +91,24 @@ def product(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
+@login_required
 def product_management(request):
+    """ Managing products, brands and producer objects """
+    if not request.user.is_superuser:
+        messages.error(request, "You're not authorized to do this")
+        return redirect(reverse('home'))
 
-    return render(request, 'products/product_management.html')
+    products = Product.objects.all()
+    brands = Brand.objects.all()
+    producers = Producer.objects.all()
+
+    context = {
+        'products': products,
+        'brands': brands,
+        'producers': producers,
+    }
+
+    return render(request, 'products/product_management.html', context)
 
 
 @login_required
@@ -218,7 +233,7 @@ def edit_brand(request, brand_id):
         if brand_form.is_valid:
             brand_form.save()
             messages.success(request, 'Successfully updated')
-            return redirect(reverse('product_management'))
+            return redirect(reverse('products'))
         else:
             messages.error(request, 'Failed to update brand. Make sure the form is vaild.')
     else:

@@ -22,7 +22,7 @@
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Add a new product</h5>
                     <p class="text-muted small">New product refers to new flavor, size or other variation for one brand.</p>
-                    <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-2" enctype="multipart/form-data">
+                    <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-0" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% for field in product_form %}
                             {% if field.name == 'thumbnail' %}
@@ -58,26 +58,25 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
-    $("#new-image").change(function() {
-        var file = $("#new-image")[0].files[0];
-        $("#filename").text(`Image will be set to: ${file.name}`);
-    });
-
-
-    // Displaying only the brands connected to the selected producer
-    $("#id_producer").change(function () {
-        var url = $("#product-form").attr("data-brands-url");
-        var producerId = $(this).val();
-
-        $.ajax({
-            url: url,
-            data: {
-                'producer': producerId
-            },
-            success: function (data) {
-                $("#id_brand").html(data);
-            }
+        $("#new-image").change(function() {
+            var file = $("#new-image")[0].files[0];
+            $("#filename").text(`Image will be set to: ${file.name}`);
         });
-    });
+
+        // Displaying only the brands connected to the selected producer
+        $("#id_producer").change(function () {
+            var url = $("#product-form").attr("data-brands-url");
+            var producerId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'producer': producerId
+                },
+                success: function (data) {
+                    $("#id_brand").html(data);
+                }
+            });
+        });
     </script>
 {% endblock %}
