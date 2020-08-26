@@ -150,7 +150,7 @@ def edit_product(request, product_id):
         if product_form.is_valid:
             product_form.save()
             messages.success(request, 'Successfully updated')
-            return redirect(reverse('product', args=[product.id]))
+            return redirect(reverse('product_management', args=[product.id]))
         else:
             messages.error(request, 'Failed to update product. Make sure the form is vaild.')
     else:
@@ -191,7 +191,7 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
-    return redirect(reverse('products'))
+    return redirect(reverse('product_management'))
 
 
 @login_required
@@ -233,7 +233,7 @@ def edit_brand(request, brand_id):
         if brand_form.is_valid:
             brand_form.save()
             messages.success(request, 'Successfully updated')
-            return redirect(reverse('products'))
+            return redirect(reverse('product_management'))
         else:
             messages.error(request, 'Failed to update brand. Make sure the form is vaild.')
     else:
@@ -259,7 +259,7 @@ def delete_brand(request, brand_id):
     brand = get_object_or_404(Brand, pk=brand_id)
     brand.delete()
     messages.success(request, 'Brand deleted!')
-    return redirect(reverse('products'))
+    return redirect(reverse('product_management'))
 
 
 @login_required
