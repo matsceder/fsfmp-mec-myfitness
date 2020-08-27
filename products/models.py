@@ -55,6 +55,10 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
+
+    class Meta:
+        ordering = ('pk',)
+
     producer = models.ForeignKey(
         'Producer',
         null=True,
