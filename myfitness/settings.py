@@ -26,7 +26,7 @@ SECRET_KEY = 'f52a27_4*lt+rro#+@ze^t5$c742fu%h96#0h9x#=pa42s+aw4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meceder-myfitness.herokuapp.com', 'localhost']
 
 
 # Application definition
