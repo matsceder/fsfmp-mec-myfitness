@@ -80,7 +80,7 @@
                             <span>{{ product.friendly_name }}</span>
                         </button>
                         <div id="flavors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonselect">
-                            {% for prod in products %}
+                            {% for prod in products|dictsort:"id" %}
                                 {% if prod.brand == product.brand %}
                                     <a class="dropdown-item" href="{% url 'product' prod.id %}">{{ prod.friendly_name }}</a>
                                 {% endif %}
