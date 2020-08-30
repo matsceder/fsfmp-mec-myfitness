@@ -9,7 +9,7 @@
     <div class="col-4 pb-1 my-auto">
         <form method="GET" action="{% url 'products' %}">
             <div class="input-group w-100">
-                <input class="form-control border border-white rounded-0" type="text" name="q" placeholder="Search our products">
+                <input class="form-control border border-white rounded-0" type="text" name="q" placeholder="Search our products" />
                 <div class="input-group-append">
                     <button class="form-control border-white rounded-0 btn btn-wht" type="submit">
                         <span class="icon">
@@ -32,17 +32,21 @@
                     </div>
                 </a>
                 <div class="dropdown-menu border border-white text-center rounded-0 p-1" aria-labelledby="user-options">
-                {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
-                        <a href="{% url 'product_management' %}" class="text-black"><p class="my-2">Product<br>Management</p></a>
+                    {% if request.user.is_authenticated %} {% if request.user.is_superuser %}
+                    <a href="{% url 'product_management' %}" class="text-black">
+                        <p class="my-2">
+                            Product<br />
+                            Management
+                        </p>
+                    </a>
                     {% endif %}
                     <a href="{% url 'profile' %}" class="text-black"><p class="my-2">My Profile</p></a>
                     <a href="{% url 'account_logout' %}" class="text-black"><p class="my-2">Logout</p></a>
-                {% else %}
+                    {% else %}
                     <a href="{% url 'account_signup' %}" class="text-black"><p class="my-2">Sign Up</p></a>
                     <a href="{% url 'account_login' %}" class="text-black"><p class="my-2">Login</p></a>
-                {% endif %}
-            </div>
+                    {% endif %}
+                </div>
             </li>
             <!-- Shopping Cart -->
             <li class="list-inline-item align-middle px-1">
@@ -50,11 +54,7 @@
                     <div class="text-center">
                         <div><i class="fas fa-shopping-cart fa-lg"></i></div>
                         <p class="my-0">
-                            {% if grand_total %}
-                                ${{ grand_total|floatformat:2 }}
-                            {% else %}
-                                $0.00
-                            {% endif %}
+                            {% if grand_total %} ${{ grand_total|floatformat:2 }} {% else %} $0.00 {% endif %}
                         </p>
                     </div>
                 </a>

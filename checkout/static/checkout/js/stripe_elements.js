@@ -1,3 +1,4 @@
+// Code structure form Stripe, initial settings to handle the payment
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -19,7 +20,6 @@ var style = {
 };
 var card = elements.create('card', {style: style});
 card.mount('#card-element');
-
 
 // Handle validation errors on the card element
 card.addEventListener('change', function (event) {
@@ -106,8 +106,7 @@ form.addEventListener('submit', function(ev) {
             }
         });
     }).fail(function() {
-        // Just reload the page. The message will show in django messages
+        // If it fails, reload the page and a message will show in django messages
         location.reload()
     })
 });
-

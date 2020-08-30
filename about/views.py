@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def about(request):
-    """ A view to return index page """
+    """ A view to return about page and scroll to wanted section """
     context = {}
     if 'scroll' in request.GET:
         scroll = request.GET['scroll']

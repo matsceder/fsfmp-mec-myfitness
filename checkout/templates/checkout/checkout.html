@@ -19,11 +19,13 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">Checkout</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div class="row w-100 justify-content-center mt-3 px-1 px-md-3">
+                <!--  Order summary / Cart items and prices  -->
                 <div class="col-12 col-md-10 col-lg-6 order-lg-last px-0 pb-3 pl-lg-2">
                     <p class="mb-1 mb-md-3">Order Summary - <strong>{{ product_count }} item{% if product_count > 1 %}s{% endif %}</strong></p>
                     <div class="col order-summary border border-black rounded-0 pt-3 pb-2 pb-md-3">
@@ -65,6 +67,7 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <!--  Info on total cost and shipping  -->
                         <div class="row m-0">
                             <div class="col-8 border-top border-muted rounded-0 p-0 d-none d-md-block">
                                 <p class="my-1"><strong>Order Total:</strong></p>
@@ -89,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-
+                <!--  Order form for making purchase  -->
                 <div class="col-12 col-md-10 col-lg-6 px-0 pr-lg-2">
                     <p class="mb-1 d-none d-md-block">Please fill out the form to complete your order</p>
                     <div class="col-12 d-md-none p-0 m-0 text-center">
@@ -134,29 +137,22 @@
                             <!-- Pass the client secret to the view, to get the payment intent id -->
                             <input type="hidden" value="{{ client_secret }}" name="client_secret">
                         </fieldset>
+                        <!--  Total summary, submit or go back. For small, and for large screens  -->
                         <div class="row w-100 m-0 pb-3">
                             <div class="col-8 p-0 d-md-none">
                                 <span class="ml-1"><small><i class="fas fa-exclamation"></i> <u>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></u></small></span>
-                                <br>
+                                <br />
                                 <a href="{% url 'cart' %}">
-                                    <span>
-                                        <small><i class="fa fa-shopping-cart"></i><strong> Make changes to your cart</strong></small>
-                                    </span>
+                                    <span><small><i class="fa fa-shopping-cart"></i><strong> Make changes to your cart</strong></small></span>
                                 </a>
                             </div>
                             <div class="col-8 p-0 d-none d-md-block">
-                                <span class="icon mx-2">
-                                    <i class="fas fa-exclamation"></i>
-                                </span>
+                                <span class="icon mx-2"><i class="fas fa-exclamation"></i></span>
                                 <span><u>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></u></span>
-                                <br>
+                                <br />
                                 <a href="{% url 'cart' %}" class="mx-1">
-                                    <span class="icon">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span>
-                                    <span>
-                                        <strong>Make changes to your cart</strong>
-                                    </span>
+                                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                                    <span><strong>Make changes to your cart</strong></span>
                                 </a>
                             </div>
                             <div class="col-4 p-0">
@@ -177,9 +173,7 @@
     </div>
     <div id="loading-overlay">
         <h1 class="text-dark logo-font loading-spinner">
-            <span class="icon">
-                <i class="fas fa-sync-alt fa-spin"></i>
-            </span>
+            <span class="icon"><i class="fas fa-sync-alt fa-spin"></i></span>
         </h1>
     </div>
 {% endblock %}
@@ -210,5 +204,4 @@
             {% endif %}
         </script>
     {% endif %}
-
 {% endblock %}

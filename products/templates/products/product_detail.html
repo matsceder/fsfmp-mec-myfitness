@@ -14,26 +14,25 @@
         <div class="row body-products justify-content-center mx-0">
             <div id="product-top" class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">{{ product.brand }} - {{ product.friendly_name }}</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div id="product-info" class="row w-100 justify-content-center">
                 <div class="col-12 col-md-5">
+                    <!--  Display of where you are in navigation  -->
                     <div class="col p-0 d-md-none">
                         <p class="text-muted small mb-1">
-                            <a href="{% url 'products' %}">
-                                <u>Products</u>
-                            </a> > 
-                            <a href="{% url 'products' %}?category={{ product.brand.category }}">
-                                <u>{{ product.brand.category.friendly_name }}</u>
-                            </a> > 
+                            <a href="{% url 'products' %}"><u>Products</u></a> > 
+                            <a href="{% url 'products' %}?category={{ product.brand.category }}"><u>{{ product.brand.category.friendly_name }}</u></a> > 
                             <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
                         </p>
                     </div>
                     <a href="{% url 'products' %}">
                         <p class="mb-0 small d-inline"><i class="fa fa-arrow-left"></i> <strong><u>Back to products page</u></strong></p>
                     </a>
+                    <!--  Edit or Delete buttons for Admin  -->
                     {% if request.user.is_superuser %}
                         <div class="px-0 py-3 d-md-none text-center">
                             <a class="btn btn-wht border-black rounded-0 btn-sm mr-2" href="{% url 'edit_product' product.id %}">Edit product</a>
@@ -56,12 +55,8 @@
                     </div>
                     <div class="col p-0 d-none d-md-block">
                         <p class="text-muted small ">
-                            <a href="{% url 'products' %}">
-                                <u>Products</u>
-                            </a> > 
-                            <a href="{% url 'products' %}?category={{ product.brand.category }}">
-                                <u>{{ product.brand.category.friendly_name }}</u>
-                            </a> > 
+                            <a href="{% url 'products' %}"><u>Products</u></a> > 
+                            <a href="{% url 'products' %}?category={{ product.brand.category }}"><u>{{ product.brand.category.friendly_name }}</u></a> > 
                             <u>{{ product.brand.friendly_name }} - {{ product.brand.spec }}</u> > <u>{{ product.friendly_name }}</u>
                         </p>
                     </div>
@@ -79,6 +74,7 @@
                         <button class="btn border border-black rounded-0 dropdown-toggle" type="button" id="dropdownMenuButtonselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ product.friendly_name }}</span>
                         </button>
+                        <!--  Dropdown with different options for products  -->
                         <div id="flavors-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonselect">
                             {% for prod in products|dictsort:"id" %}
                                 {% if prod.brand == product.brand %}
@@ -87,6 +83,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                    <!--  Quantity form to select and add products to cart  -->
                     <form class="form mb-3" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
@@ -96,17 +93,13 @@
                                     <div class="input-group">
                                         <div class="input-group-append">
                                             <button class="decrement-qty btn btn-black rounded-0" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-minus"></i>
-                                                </span>
+                                                <span class="icon"><i class="fas fa-minus"></i></span>
                                             </button>
                                         </div>
                                         <input type="number" class="form-control qty_input" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                         <div class="input-group-prepend">
                                             <button class="increment-qty btn btn-black rounded-0" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-plus"></i>
-                                                </span>
+                                                <span class="icon"><i class="fas fa-plus"></i></span>
                                             </button>
                                         </div>
                                     </div>
@@ -118,6 +111,7 @@
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </div>
                     </form>
+                    <!--  If description or ingredients  -->
                     <div class="col p-0">
                         {% if product.brand.description %}
                             <button class="btn btn-white border border-bottom-0 border-muted btn-sm rounded-0" type="button" id="descToggle"><u>Description</u></button>
@@ -132,6 +126,7 @@
                             <p id="descInfo" class="small my-2 mx-3">{{ product.brand.description }}</p>
                         </div>
                     </div>
+                    <!--  If clothes category and similar products other colors  -->
                     {% if product.brand.category.id == 5 %}
                         <p class="py-2 small text-muted mb-0">Also availiable in:</p>
                         {% for color in products %}
@@ -139,9 +134,7 @@
                                 <a href="{% url 'product' color.id %}">
                                     <div class="d-inline-block">
                                         <img class="img-thumbnail avail-color" src="{{ color.image.url }}" alt="{{ color.friendly_name }}">
-                                        <p class="text-muted color-text">
-                                            {{ color.brand.spec }}
-                                        </p>
+                                        <p class="text-muted color-text">{{ color.brand.spec }}</p>
                                     </div>
                                 </a>
                             {% endif %}
@@ -156,9 +149,7 @@
             </div>
         </div>
     </div>
-
     {% include 'includes/delete_product_modal.html' %}
-
 {% endblock %}
 
 {% block page_footer %}
@@ -172,8 +163,8 @@
 {% block postloadjs %}
     {{ block.super }}
     {% include 'includes/quantity_input_script.html' %}
-
     <script>
+        // Toggling if description or information should be displayed
         $(function() {
             $("#descInfo").hide();
         });
@@ -186,5 +177,4 @@
             $("#ingInfo").hide();
         });
     </script>
-
 {% endblock %}

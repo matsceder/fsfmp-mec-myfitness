@@ -1,6 +1,7 @@
-<!-- Styled with bootstrap and inline styling, so it can easier be
-used in other pages or projects without specific CSS styling -->
+<!-- Styled inline and using Bootstrap for so it's easy to copy
+and use for other pages or projects without specific CSS styling -->
 <div class="p-0 m-0">
+    <!--  Gray stars in the bottom  -->
     <p class="star-rating m-0" style="display: inline-block;position: absolute;">
         <small>
             <i class="fas fa-star text-muted"></i>
@@ -10,6 +11,7 @@ used in other pages or projects without specific CSS styling -->
             <i class="fas fa-star text-muted"></i>
         </small>
     </p>
+    <!--  Yellow stars overlaying the gray stars  -->
     <p class="star-rating m-0" style="display: inline-block;position: sticky;">
         <small>
             {% if product.brand.rating == .5 %}

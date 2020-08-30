@@ -40,7 +40,8 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+    image = forms.ImageField(label='Image',
+                             required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,11 +50,14 @@ class ProductForm(forms.ModelForm):
         if 'producer' in self.data:
             try:
                 producer_id = int(self.data.get('producer'))
-                self.fields['brand'].queryset = Brand.objects.filter(producer_id=producer_id).order_by('friendly_name')
+                self.fields['brand'].queryset = Brand.objects.filter(
+                        producer_id=producer_id
+                    ).order_by('friendly_name')
             except (ValueError, TypeError):
                 pass
         elif self.instance.pk:
-            self.fields['brand'].queryset = self.instance.producer.brand_set.order_by('friendly_name')
+            self.fields['brand'].queryset = (
+                self.instance.producer.brand_set.order_by('friendly_name'))
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'

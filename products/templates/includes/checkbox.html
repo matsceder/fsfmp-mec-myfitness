@@ -1,17 +1,8 @@
-{% if field.value == False %}
-    <div class="form-group">
-        <div id="div_id_thumbnail" class="form-check custom-control custom-checkbox">
-            <input type="checkbox" name="thumbnail" class="custom-control-input border-black rounded-0 checkboxinput form-check-input" id="id_thumbnail">
-            <label for="id_thumbnail" class="form-check-label custom-control-label">Thumbnail</label>
-            <p class="text-muted small">Selecting this will display this brand and product in the shop list</p>
-        </div>
+<!--  Making checkbox look the same as on the rest of the page  -->
+<div class="form-group">
+    <div id="div_id_thumbnail" class="form-check custom-control custom-checkbox">
+        <input type="checkbox" name="thumbnail" class="custom-control-input border-black rounded-0 checkboxinput form-check-input" id="id_thumbnail"{% if field.value != False %} checked{% endif %}>
+        <label for="id_thumbnail" class="form-check-label custom-control-label">Thumbnail</label>
+        <p class="text-muted small">Selecting this will display this brand and product in the shop list</p>
     </div>
-{% else %}
-    <div class="form-group">
-        <div id="div_id_thumbnail" class="form-check custom-control custom-checkbox">
-            <input type="checkbox" name="thumbnail" class="custom-control-input border-black rounded-0 checkboxinput form-check-input" id="id_thumbnail" checked>
-            <label for="id_thumbnail" class="form-check-label custom-control-label">Thumbnail</label>
-            <p class="text-muted small">Selecting this will display this brand and product in the shop list</p>
-        </div>
-    </div>
-{% endif %}
+</div>

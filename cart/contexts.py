@@ -5,6 +5,9 @@ from products.models import Product
 
 
 def cart_contents(request):
+    """
+    Handling the cart and make it accessible on all pages
+    """
 
     cart_items = []
     total = 0

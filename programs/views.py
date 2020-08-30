@@ -56,7 +56,9 @@ def add_program(request):
             messages.success(request, "Program post was saved successfully")
             return redirect(reverse('programs'))
         else:
-            messages.error(request, "Failed to save post. Make sure it it's valid")
+            messages.error(
+                request, "Failed to save post. Make sure it it's valid"
+            )
     else:
         programs_form = ProgramsForm()
 
@@ -77,16 +79,23 @@ def edit_program(request, program_id):
 
     program = get_object_or_404(Programs, pk=program_id)
     if request.method == 'POST':
-        programs_form = ProgramsForm(request.POST, request.FILES, instance=program)
+        programs_form = ProgramsForm(
+            request.POST, request.FILES, instance=program
+        )
         if programs_form.is_valid():
             programs_form.save()
             messages.success(request, "Post successfully updated")
             return redirect(reverse('program', args=[program.id]))
         else:
-            messages.error(request, "Failed to save post. Make sure form is valid")
+            messages.error(
+                request, "Failed to save post. Make sure form is valid"
+            )
     else:
         programs_form = ProgramsForm(instance=program)
-        messages.info(request, f"You're now making changes to {program.title} by {program.author}")
+        messages.info(
+            request,
+            f"You're now making changes to {program.title} by {program.author}"
+        )
 
     template = 'programs/edit_program.html'
     context = {

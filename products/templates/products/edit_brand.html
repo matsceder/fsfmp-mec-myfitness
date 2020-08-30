@@ -14,6 +14,7 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
                 </div>
@@ -21,6 +22,7 @@
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Edit brand</h5>
+                    <!--  Form to edit brand  -->
                     <form method="POST" action="{% url 'edit_brand' brand.id %}" class="form m-2">
                         {% csrf_token %}
                         {{ brand_form | crispy }}
@@ -49,10 +51,10 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
+        // handling max, min and step values for rating and price
         $(function() {
             $('#id_rating').attr({step:"0.5", max:"5", min:"1"});
             $('#id_price').attr({min:"0"});
         });
     </script>
-
 {% endblock %}

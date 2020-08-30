@@ -2,8 +2,6 @@ from django.shortcuts import render
 from products.models import Product
 from programs.models import Programs
 
-# Create your views here.
-
 
 def index(request):
     """ A view to return index page """

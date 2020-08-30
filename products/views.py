@@ -125,7 +125,9 @@ def add_product(request):
             messages.success(request, "Product was added successfully")
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to add product. Ensure all fields are filled in properly')
+            messages.error(
+                request,
+                'Failed to add product. Ensure fields are filled in properly')
     else:
         product_form = ProductForm()
 
@@ -146,16 +148,20 @@ def edit_product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
-        product_form = ProductForm(request.POST, request.FILES, instance=product)
+        product_form = ProductForm(
+            request.POST, request.FILES, instance=product)
         if product_form.is_valid:
             product_form.save()
             messages.success(request, 'Successfully updated')
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to update product. Make sure the form is vaild.')
+            messages.error(
+                request,
+                'Failed to update product. Make sure the form is vaild.')
     else:
         product_form = ProductForm(instance=product)
-        messages.info(request, f"You're now making changes to {product.brand} - {product.friendly_name}")
+        messages.info(request, f"You're now making changes to \
+            {product.brand} - {product.friendly_name}")
 
     template = 'products/edit_product.html'
     context = {
@@ -172,7 +178,8 @@ def load_brands(request):
     producer when creating a new product
     """
     producer_id = request.GET.get('producer')
-    brands = Brand.objects.filter(producer_id=producer_id).order_by('friendly_name')
+    brands = Brand.objects.filter(
+        producer_id=producer_id).order_by('friendly_name')
 
     template = 'includes/brands_dropdown_options.html'
     context = {
@@ -208,7 +215,9 @@ def add_brand(request):
             messages.success(request, "Brand was added successfully")
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to add brand. Ensure all fields are filled in properly')
+            messages.error(
+                request,
+                'Failed to add brand. Ensure fields are filled in properly')
     else:
         brand_form = BrandForm()
 
@@ -235,10 +244,13 @@ def edit_brand(request, brand_id):
             messages.success(request, 'Successfully updated')
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to update brand. Make sure the form is vaild.')
+            messages.error(
+                request,
+                'Failed to update brand. Make sure the form is vaild.')
     else:
         brand_form = BrandForm(instance=brand)
-        messages.info(request, f"You're now making changes to {brand.friendly_name}")
+        messages.info(
+            request, f"You're now making changes to {brand.friendly_name}")
 
     template = 'products/edit_brand.html'
     context = {
@@ -276,7 +288,10 @@ def add_producer(request):
             messages.success(request, "Producer was added successfully")
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to add producer. Ensure all fields are filled in properly')
+            messages.error(
+                request,
+                'Failed to add producer. Ensure fields are filled in properly',
+            )
     else:
         producer_form = ProducerForm()
 
@@ -297,16 +312,21 @@ def edit_producer(request, producer_id):
 
     producer = get_object_or_404(Producer, pk=producer_id)
     if request.method == 'POST':
-        producer_form = ProducerForm(request.POST, request.FILES, instance=producer)
+        producer_form = ProducerForm(
+            request.POST, request.FILES, instance=producer)
         if producer_form.is_valid:
             producer_form.save()
             messages.success(request, 'Successfully updated')
             return redirect(reverse('product_management'))
         else:
-            messages.error(request, 'Failed to update producer. Make sure the form is vaild.')
+            messages.error(
+                request,
+                'Failed to update producer. Make sure the form is vaild.',
+            )
     else:
         producer_form = ProducerForm(instance=producer)
-        messages.info(request, f"You're now making changes to {producer.friendly_name}")
+        messages.info(request,
+                      f"You're now making changes to {producer.friendly_name}")
 
     template = 'products/edit_producer.html'
     context = {

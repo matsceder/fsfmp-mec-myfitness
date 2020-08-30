@@ -15,11 +15,13 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">Shopping Cart</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             {% if cart_items %}
+                <!--  If cart exists it'll be displayed  -->
                 <div class="row w-100 justify-content-center mt-3 px-1 px-md-3">
                     <div class="col col-md-2 d-none d-md-block px-0"></div>
                     <div class="col-4 col-md-4 col-lg-2 px-0">
@@ -38,6 +40,7 @@
                 <div class="row w-100 justify-content-center px-3 d-none d-md-flex">
                     <div class="col-10 col-lg-8 border-top border-muted rounded-0 p-0 m-0"></div>
                 </div>
+                <!--  Cart items displayed  -->
                 {% for item in cart_items %}
                     <div class="row w-100 justify-content-center px-1 px-md-3">
                         <div class="col col-md-2 d-none d-md-block text-right px-0">
@@ -65,17 +68,13 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <button class="decrement-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
-                                                    <span>
-                                                        <i class="fas fa-minus fa-sm"></i>
-                                                    </span>
+                                                    <span><i class="fas fa-minus fa-sm"></i></span>
                                                 </button>
                                             </div>
                                             <input type="number" class="form-control text-center form-control-sm qty_input quantity-input-value" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                             <div class="input-group-append">
                                                 <button class="increment-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
-                                                    <span>
-                                                        <i class="fas fa-plus fa-sm"></i>
-                                                    </span>
+                                                    <span><i class="fas fa-plus fa-sm"></i></span>
                                                 </button>
                                             </div>
                                         </div>
@@ -83,7 +82,7 @@
                                 </form>
                                 <div class="col p-0 text-center">
                                     <a class="update-link text-dark"><small><i class="fas fa-redo"></i> <u>Update qty</u></small></a>
-                                    <br>
+                                    <br />
                                     <a class="remove-item text-danger" id="remove_{{ item.item_id }}"><small><i class="fas fa-trash-alt"></i> <u>Remove item</u></small></a>
                                 </div>
                             </p>
@@ -97,6 +96,7 @@
                 <div class="row w-100 justify-content-center mt-3 px-3 d-none d-md-flex">
                     <div class="col-10 col-lg-8 border-top border-muted rounded-0 p-0 m-0"></div>
                 </div>
+                <!--  Cart total section  -->
                 <div class="row w-100 justify-content-center px-1 px-md-3">
                     <div class="col-12 col-md-4 p-0 pt-3 px-md-3">
                         <h6>Bag total: ${{ total|floatformat:2 }}</h6>
@@ -117,10 +117,9 @@
                     </div>
                 </div>
             {% else %}
+                <!--  If Cart is empty this is displayed  -->
                 <p class="">Your cart is empty</p>
-                <a href="{% url 'products' %}">
-                    <span>Keep shopping</span>
-                </a>
+                <a href="{% url 'products' %}"><span>Keep shopping</span></a>
             {% endif %}
             <div class="row w-100 mt-5">
                 <div class="col text-center">
@@ -129,7 +128,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block page_footer %}
@@ -143,19 +141,18 @@
 {% block postloadjs %}
     {{ block.super }}
     {% include 'includes/quantity_input_script.html' %}
-
     <script type="text/javascript">
-        // Update quantity in cart
+        // Update quantity in cart on click
         $('.update-link').click(function(e) {
             var form = $(this).prev('.update-form');
             form.submit();
         });
-
+        // Update quantity on 3sek from user clicked button
         $('button').click(function(e) {
             var form = $(this).closest('.update-form');
             var timerUpdate = setTimeout(function(){
                 form.submit();
-            }, 5000);
+            }, 3000);
         });
 
         // Remove item from cart

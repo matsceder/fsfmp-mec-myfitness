@@ -1,20 +1,18 @@
+/* -------- General -------- */
+
 html {
     height: 100%;
 }
 
 body {
     color: #232323;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     display: block;
     position: relative;
     min-height: calc(100vh + 146px - 1rem);
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
+a,
 a:hover {
     text-decoration: none;
     color: inherit;
@@ -23,7 +21,7 @@ a:hover {
 /* From CSS-tricks */
 body::after {
     content: "";
-    background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; 
+    background: url("/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg") no-repeat center center;
     background-size: cover;
     min-height: 100vh;
     opacity: 0.8;
@@ -32,7 +30,7 @@ body::after {
     bottom: 0;
     right: 0;
     position: fixed;
-    z-index: -1;   
+    z-index: -1;
 }
 
 /* From Bulma */
@@ -40,13 +38,13 @@ body::after {
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    height: 1,5rem;
-    width: 1,5rem;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 /* Header */
 header {
-    background-color: #E63946;
+    background-color: #e63946;
 }
 
 .header-container {
@@ -91,7 +89,7 @@ header {
     background-color: #232323;
 }
 
-input[name='q']::placeholder {
+input[name="q"]::placeholder {
     color: #aab7c4;
 }
 
@@ -133,44 +131,44 @@ footer {
 }
 
 .toast-message {
-    border-bottom: 1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Colors for text, buttons and other objects */
 .btn-red {
-    background: #E63946;
-    color: #FFFFFF;
+    background: #e63946;
+    color: #ffffff;
 }
 
 .btn-black {
     background: #232323;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
     text-decoration: none !important;
 }
 
 .btn-wht {
-    background: #FFFFFF;
+    background: #ffffff;
     color: #232323;
 }
 
 .btn-red:active,
 .btn-red:focus,
 .btn-red:hover {
-    background: #E63946;
-    color: #FFFFFF;
+    background: #e63946;
+    color: #ffffff;
 }
 
 .btn-black:active,
 .btn-black:focus,
 .btn-black:hover {
     background: #404040;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .btn-wht:active,
 .btn-wht:focus,
 .btn-wht:hover {
-    background: #FFFFFF;
+    background: #ffffff;
     color: #232323;
 }
 
@@ -179,7 +177,7 @@ footer {
 }
 
 .text-red {
-    color: #E63946 !important;/* ta bort om inte används */
+    color: #e63946 !important;
 }
 
 .border-black {
@@ -187,13 +185,13 @@ footer {
 }
 
 .border-red {
-    border: 1px solid #E63946 !important;/* ta bort om inte används */
+    border: 1px solid #e63946 !important;
 }
 
 /* -------- Index Template -------- */
 
 #index-img {
-  transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 #index-speakout {
@@ -243,7 +241,7 @@ footer {
 #colors-dropdown > .active,
 #flavors-dropdown > .active {
     color: #232323;
-    background-color: rgba(0, 0, 0, 0.1)
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .avail-color {
@@ -259,7 +257,7 @@ footer {
 
 .cart-img {
     height: 100px;
-    widows: 100px;
+    width: 100px;
 }
 
 /*  --------  Product Management template  --------  */
@@ -291,7 +289,7 @@ footer {
     border-color: #232323;
 }
 
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color: #232323;
     border-color: #232323;
     border-radius: 0;
@@ -312,7 +310,7 @@ div.django-ckeditor-widget {
     width: 100% !important;
 }
 
-/*  --------  Allauth formatting  --------  */
+/*  --------  About template  --------  */
 
 #about-nav {
     position: fixed;
@@ -325,7 +323,7 @@ div.django-ckeditor-widget {
     border-radius: 0;
 }
 
-#allauth-content label:not([for='id_remember']) {
+#allauth-content label:not([for="id_remember"]) {
     display: none;
 }
 
@@ -334,7 +332,7 @@ div.django-ckeditor-widget {
 }
 
 #allauth-content a {
-	color: #232323;
+    color: #232323;
     text-decoration: underline;
 }
 
@@ -352,10 +350,10 @@ div.django-ckeditor-widget {
 
 /* Big tablets and desktop */
 @media (min-width: 768px) {
-
+    /* Body, header and footer */
     body {
         color: #232323;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
         display: block;
         position: relative;
         min-height: 100vh;
@@ -363,7 +361,7 @@ div.django-ckeditor-widget {
 
     body::after {
         content: "";
-        background: url('/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg') no-repeat center center; /* sätt som en egen media query med align left på mindre skärmar? */
+        background: url("/media/dylan-nolte-ITDjGji__6Y-unsplash.jpg") no-repeat center center;
         background-size: cover;
         min-height: 100vh;
         opacity: 0.8;
@@ -372,7 +370,7 @@ div.django-ckeditor-widget {
         bottom: 0;
         right: 0;
         position: fixed;
-        z-index: -1;   
+        z-index: -1;
     }
 
     .header-container {
@@ -422,14 +420,13 @@ div.django-ckeditor-widget {
 
     #colors-dropdown,
     #flavors-dropdown {
-    max-height: 80vh;
-    overflow: scroll;
-    z-index: 1040;
+        max-height: 80vh;
+        overflow: scroll;
+        z-index: 1040;
     }
 }
 
 /* Medium tablets and desktop */
-/* Padding around body changes from 5px tp 15px */
 @media (min-width: 576px) {
     /* Message containers */
     .toast {
@@ -440,6 +437,7 @@ div.django-ckeditor-widget {
 
 /* Very small mobile devices */
 @media (max-width: 399.98px) {
+    /* Header and Nav */
     #main-logo-link-small {
         display: none;
     }

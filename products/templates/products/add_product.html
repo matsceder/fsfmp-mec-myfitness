@@ -14,12 +14,14 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
+                    <!--  Form to add info for creating new product  -->
                     <h5>Add a new product</h5>
                     <p class="text-muted small">New product refers to new flavor, size or other variation for one brand.</p>
                     <form id="product-form" data-brands-url="{% url 'load_brands' %}" method="POST" action="{% url 'add_product' %}" class="form m-0" enctype="multipart/form-data">
@@ -58,16 +60,15 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
+        // Handling look of upload image
         $("#new-image").change(function() {
             var file = $("#new-image")[0].files[0];
             $("#filename").text(`Image will be set to: ${file.name}`);
         });
-
         // Displaying only the brands connected to the selected producer
         $("#id_producer").change(function () {
             var url = $("#product-form").attr("data-brands-url");
             var producerId = $(this).val();
-
             $.ajax({
                 url: url,
                 data: {

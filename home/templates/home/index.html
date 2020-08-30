@@ -14,16 +14,18 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
-                        <h3 class="text-muted">Welcome</h3>
+                    <!--  Header text  -->
+                    <h3 class="text-muted">Welcome</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div class="row w-100 mt-3 mx-3 m-mb-3 justify-content-center">
+                <!--  Large screen left section. Hero image, big header, motivation and link to shop  -->
                 <div class="col-12 col-md-6 p-0 pr-md-2">
                     <h1 id="index-speakout" class="text-black text-uppercase">
                         Health and training is for everyone
                     </h1>
-                    <img src="{{ MEDIA_URL }}crossfit-3.jpg" class="w-100 mb-3" id="index-img">
+                    <img src="{{ MEDIA_URL }}crossfit-3.jpg" class="w-100 mb-3" id="index-img" alt="Strong woman">
                     <h5 class="text-black my-0 xs-screen">
                         We deliver weekly articles on training and nutrition. Get inspired and take control over your health!
                     </h5>
@@ -37,32 +39,33 @@
                         </h2>
                     </div>
                 </div>
+                <!--  Large screen right section. Latest items in the shop and latest articles/programs written  -->
                 <div class="col-12 col-md-6 p-0 pl-md-2">
                     <div class="row mb-3 mx-0 mx-md-0">
                         <div class="col-12 text-center mb-1">
+                            <!--  Shop section  -->
                             <h4><u>Latest in the shop!</u></h4>
                         </div>
                         {% for p in products reversed %}
                             {% if forloop.counter <= 3 %}
-                            <div class="col-4 p-0">
-                                <div class="card mx-1 border-black rounded-0">
-                                    <a href="{% url 'product' p.id %}">
-                                        <img class="card-img-top px-1 pt-2" src="{{ p.image.url }}" alt="{{ p.friendly_name }}">
-                                        <div class="card-body text-center pb-1">
-                                            <p class="card-text small"><strong>
-                                                {{ p.brand.friendly_name }}<br>
-                                            </strong></p>
-                                        </div>
-                                        <button class="btn btn-block btn-black rounded-0 py-0"><small>More info</small></button>
-                                    </a>
+                                <div class="col-4 p-0">
+                                    <div class="card mx-1 border-black rounded-0">
+                                        <a href="{% url 'product' p.id %}">
+                                            <img class="card-img-top px-1 pt-2" src="{{ p.image.url }}" alt="{{ p.friendly_name }}">
+                                            <div class="card-body text-center pb-1">
+                                                <p class="card-text small"><strong>{{ p.brand.friendly_name }}<br></strong></p>
+                                            </div>
+                                            <div class="btn btn-block btn-black rounded-0 py-0"><small>More info</small></div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div class="row w-100 m-0">
                         <div class="col-12 px-0">
                             <hr class="w-75">
+                            <!--  Article section  -->
                             <h3 class="m-0">Newest articles:</h3>
                         </div>
                         {% for prog in programs %}
@@ -74,9 +77,7 @@
                                         </h5>
                                     </a>
                                     <hr class="my-1">
-                                    <p class="m-0 small">
-                                        {{ prog.snippet }}
-                                    </p>
+                                    <p class="m-0 small">{{ prog.snippet }}</p>
                                 </div>
                             {% endif %}
                         {% endfor %}

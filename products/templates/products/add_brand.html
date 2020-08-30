@@ -14,6 +14,7 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
                 </div>
@@ -21,6 +22,7 @@
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Add a new brand</h5>
+                    <!--  Form to add info for creating new brand  -->
                     <p class="text-muted small">Brand refers to the different type of product brand, which can have more flavors, sizes or other variations.</p>
                     <form id="brand-form" method="POST" action="{% url 'add_brand' %}" class="form m-0" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -50,13 +52,12 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
-
+        // Adding a "blank" first option to give same look as on rest of page
         $('#id_category').prepend('<option value="0" selected disabled>---------</option>');
-
+        // Setting max, min and steps to rating and price inputs
         $(function() {
             $('#id_rating').attr({step:"0.5", max:"5", min:"1"});
             $('#id_price').attr({min:"0"});
         });
-
     </script>
 {% endblock %}

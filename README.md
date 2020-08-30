@@ -1,39 +1,124 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
+# Online Baking - Recipe Database
 
-Welcome matsceder,
+URL - https://meceder-myfitness.herokuapp.com/
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project.
+Introduction/Info text
+-
+-
+-
+-
+-
 
-## Gitpod Reminders
+The project is hosted on [Github](https://github.com/matsceder/fsfmp-mec-myfitness/), deployed with [Heroku](https://www.heroku.com/), and [AWS](https://aws.amazon.com/) is used for cloud storage.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## UX
+### Design, Mockups and Responsiveness
+[Display of responsive design on different devices](documentation/L-Laptop-1024-768.png)
 
-`python3 -m http.server`
+Describe thoughts about design and responsiveness
+-
+-
+-
+-
+-
 
-A blue button should appear to click: *Make Public*,
+#### Wireframes for the different devices: 
+- [Mobile](https://www.figma.com/)
+- [Tablet](https://www.figma.com/)
+- [Desktop](https://www.figma.com/)
 
-Another blue button should appear to click: *Open Browser*.
+### User Stories
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+Purpose / idea
 
-A blue button should appear to click: *Make Public*,
+- Examples
+- Examples
 
-Another blue button should appear to click: *Open Browser*.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the backend lessons.
+## Features
+-
 
-## Updates Since The Instructional Video
+### Existing features
+- Documentation - README.md and Mockups
+- Responsive design - Mobile first application
+- Bootstrap - HTML, CSS and Javascript library
+- Heroku - App deployment
+- AWS - Cloud storage
+- Git - Version control
+- Github - Remote repository
+- Allauth - Authentication / User profiles
+- Stripe - Payments
+- G-Mail - Mail service for user and order emails
+- CKEditor - Creating nice blog posts
 
-We continually tweak and adjust this template to help give you the best experience. Here are the updates since the original video was made:
+### Planned features and improvements
+- 
+- 
+- 
+- 
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+## Deployment
+#### This page is deployed using [Heroku](https://www.heroku.com/). Following steps describes the process of deployment.
+-
+-
+-
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Testing
+-
+-
+-
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### First Part - Manual testing
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+- Responsiveness
+    - Mobile - 
+    - Tablet - 
+    - Desktop - 
+    - Browsers first test - 
+    - Browsers second test -
+- Navigation
+    - 
+- Database
+    - 
+### Second Part - Standardizing code.
+- HTML and CSS
+    - 
+- Python3 - 
 
---------
+### Third Part - Routes and CRUD
+- 
+    - Create - 
+    - Read - 
+    - Update - 
+    - Delete - 
 
-Happy coding!
+## Credits
+### Technologies and sources used
+
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Basic structure is built using simple HTML
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Is used for styling
+- [Python3](https://www.python.org/) - Connecting database with user
+
+- [JQuery](https://jquery.com) - Simplifying DOM manipulation.
+- [GitHub](https://github.com/) - Hosting repository
+- [GitPod Workspaces](ttps://www.gitpod.io/) - Real time development in browser
+- [Google Chrome](https://www.google.com/chrome/) - Using Dev tools, manual testing while developing
+- [Google](https://www.google.com/) - Research and troubleshooting
+- [Google Fonts](https://fonts.google.com/) - Library for all fonts in the app
+- [Font Awesome](https://fontawesome.com/) - Used to complement icon library
+- [W3C Markup Validation Service](https://validator.w3.org/) - Validation of HTML and CSS
+- [Heroku](https://www.heroku.com/) - Deployment of app
+- [SchemeColor](https://www.schemecolor.com/sneaky-peaky.php) - Color theme
+- [Figma](https://www.figma.com/) - Making of wireframes / mockups
+- [WebFormatter](https://webformatter.com/html) - Formatting code
+- [PowerMapper](https://www.powermapper.com) - Website testing
+
+### Content
+- []() - 
+- []() - 
+- Articles
+    - []() - 
+
+### Acknowledgements
+- 
+- 

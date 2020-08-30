@@ -14,6 +14,7 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Heading Text  -->
                     <h3 class="text-muted">Product Management</h3>
                     <hr class="w-75 mb-3">
                 </div>
@@ -21,6 +22,7 @@
             <div class="row w-100 m-3 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h5>Edit producer</h5>
+                    <!--  Form to edit producer  -->
                     <form method="POST" action="{% url 'edit_producer' producer.id %}" class="form m-2">
                         {% csrf_token %}
                         {{ producer_form | crispy }}

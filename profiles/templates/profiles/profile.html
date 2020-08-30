@@ -18,12 +18,14 @@
         <div class="row body-products justify-content-center mx-0">
             <div class="row w-100">
                 <div class="col text-center mt-3">
+                    <!--  Header Text  -->
                     <h3 class="text-muted">My Profile</h3>
                     <hr class="w-75 mb-3">
                 </div>
             </div>
             <div id="profile-info" class="row w-100 m-1 m-md-3 justify-content-center">
-                <!-- Accordion structure from Bootstrap -->
+                <!--  Accordion for personal info and order history. Structure from Bootstrap  -->
+                <!--  Automaticly showing personal information.  -->
                 <div id="accordion" class="col-12 col-md-10 col-lg-7 p-0 profile-accordion">
                     <div class="card border-0">
                         <div class="card-header p-0" id="headingOne">
@@ -41,6 +43,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--  Order history  -->
                     <div class="card border-0">
                         <div class="card-header p-0" id="headingTwo">
                             <button class="btn btn-wht btn-lg collapsed px-0 w-100 text-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -110,11 +113,14 @@
     <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}">
     </script>
     {% if user.is_authenticated %}
-        <script type="text/javascript">
-            var fullName = "{{ user.first_name }} {{ user.last_name }}";
-            $('#id_default_full_name').val(fullName);
-            var userEmail = "{{ user.email }}";
-            $('#id_default_email').val(userEmail);
-        </script>
+        {% if user.first_name %}
+            <script type="text/javascript">
+                // Automatically add users name to form
+                var fullName = "{{ user.first_name }} {{ user.last_name }}";
+                $('#id_default_full_name').val(fullName);
+                var userEmail = "{{ user.email }}";
+                $('#id_default_email').val(userEmail);
+            </script>
+        {% endif %}
     {% endif %}
 {% endblock %}

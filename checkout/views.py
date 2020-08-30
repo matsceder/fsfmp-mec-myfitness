@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from .forms import OrderForm
@@ -17,6 +17,7 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    """ A view to handle cache checkout data """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -33,6 +34,9 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    A view to handle the collect the cart if it exists and set up a checkout.
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
