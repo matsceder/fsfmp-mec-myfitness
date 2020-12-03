@@ -1,4 +1,4 @@
-# Online Baking - Recipe Database
+# MyFitness
 
 URL - https://meceder-myfitness.herokuapp.com/
 
